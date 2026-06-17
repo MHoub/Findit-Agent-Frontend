@@ -5,6 +5,7 @@ Availble start of july - with complete Downloads and code
 ---------------------------------------------------------
 
 **Freeware Beta / Open Source**
+Sorry: Windows only. No Linux. No macOS.
 
 Findit Agent Frontend is released as open-source software.
 Findit 6.3 Beta is available free of charge for private and experimental use.
