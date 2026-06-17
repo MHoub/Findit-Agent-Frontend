@@ -1,8 +1,8 @@
 🚧 Work in Progress
 
 This repository is currently under active development.
-Availble start of july - with complete Donloads and code
-------------------------------------------------------
+Availble start of july - with complete Downloads and code
+---------------------------------------------------------
 
 **Freeware Beta / Open Source**
 
