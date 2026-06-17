@@ -18,10 +18,11 @@ Findit Agent uses Findit6 as a live retrieval engine.
 
 Findit6 can search local document collections directly:
 
-* no indexing required
-* no vector database required
-* no preprocessing required
-* immediate access to newly added documents
+- no indexing required
+- no vector database required
+- no preprocessing required
+- immediate access to newly added documents
+- search performance comparable to indexed systems
 
 Supported sources include:
 
