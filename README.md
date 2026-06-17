@@ -45,7 +45,7 @@ The agent can therefore not only locate documents, but also:
 
 Every search step remains fully documented and auditable.
 
-![Findit Agent Screenshot](images/screenshot1.png)
+![Findit Agent Screenshot](images/Screenshot1.png)
 
 ## How it works
 
