@@ -1,22 +1,20 @@
 🚧 Work in Progress
 
 This repository is currently under active development.
-Availble start of july - with complete Downloads and code
+Availble start of october - with complete Downloads and code
 ---------------------------------------------------------
 
 **Freeware Beta / Open Source**
 Sorry: Windows only. No Linux. No macOS.
 
-Findit Agent Frontend is released as open-source software.
+Findit Agent Frontend is released as available-source software.
 Findit 6.3 Beta is available free of charge for private and experimental use.
 Commercial, professional or business use requires a valid commercial license.
 
 ## Why Findit Agent?
 
 Most AI agents rely on indexing, embeddings or vector databases.
-
 Findit Agent uses Findit6 as a live retrieval engine.
-
 Findit6 can search local document collections directly:
 
 - no indexing required
