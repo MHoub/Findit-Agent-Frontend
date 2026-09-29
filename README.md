@@ -52,7 +52,21 @@ The AI agent can use these search results to:
 
 Relevant documents or excerpts are converted into machine-readable text only when needed and passed to the AI for analysis.
 
-Every research step remains visible, documented and auditable.
+## Fully traceable research
+
+Findit Agent is designed so that its research can be checked step by step.
+
+Every factual statement in the final answer is linked directly to the original source file and can be opened with a single click.
+
+The complete research process is documented:
+
+- every Findit search performed by the agent
+- every result list produced by these searches
+- every document or excerpt the agent actually read
+- the conclusions it drew from that material
+- the source files used for the final answer
+
+Searches and result lists can be reopened and inspected by the user at any time. This makes the research process reproducible, transparent and directly verifiable — instead of producing an answer whose origin remains hidden.
 
 ![Findit Agent Screenshot](images/Screenshot1.png)
 
