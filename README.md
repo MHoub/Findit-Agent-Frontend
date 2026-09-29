@@ -2,118 +2,57 @@
 
 👉 **[Program description and documentation](https://mhoub.github.io/Findit-Agent-Frontend/Findit6Agent_Start.html)**
 
-🚧 Work in Progress
+🚧 **Work in Progress**
 
-This repository is currently under active development.
-Availble start of october - with complete Downloads and code
----------------------------------------------------------
+This repository is currently under active development.  
+Available from early October with complete downloads and source code.
 
-**Freeware Beta / Open Source**
-Sorry: Windows only. No Linux. No macOS.
+---
 
-Findit Agent Frontend is released as available-source software.
-Findit 6.3 Beta is available free of charge for private and experimental use.
-Commercial, professional or business use requires a valid commercial license.
+## What is Findit Agent?
+
+**Findit Agent brings agentic AI research to your own local document collections.**
+
+It can search for a single fact hidden somewhere in thousands of files, or research information across many documents and turn the findings into an evidence-based report.
+The research itself is performed by an AI agent using a wide range of supported LLMs and providers — or, with suitable hardware, completely local models.
+Instead of requiring a prepared AI knowledge base, Findit Agent uses **Findit6 as a kind of “grep on steroids”**:
+
+- no indexing required
+- no vectorization or embeddings required
+- no vector database required
+- no preprocessing of the archive
+- newly added or changed files are immediately searchable
+
+### The archivist principle
+
+Findit6Agent acts like an **archivist between your files and the AI**.
+
+The AI does not receive direct access to your archive. It asks Findit6Agent to search, receives search results, and can request selected documents, text copies or excerpts for further analysis.
+Only the text required for the current research task is passed to an external AI provider.
+With a sufficiently powerful computer and a local LLM, even this processing can remain completely local: the archive, searches, extracted text and AI analysis never have to leave your machine.
+
+
+---
+
+**Freeware Beta / Source-available · Windows only**
+
+Findit Agent Frontend and Findit 6a are available free of charge for private and experimental use. Commercial, professional or business use requires a valid commercial license.
 
 ## Why Findit Agent?
 
-Most AI agents rely on indexing, embeddings or vector databases.
-Findit Agent uses Findit6 as a live retrieval engine.
-Findit6 can search local document collections directly:
+Findit6 searches existing local archives directly — without indexing, embeddings, vector databases or preprocessing. New or changed files are immediately available for research.
+It works with many common file types, including Office documents, PDFs, emails, archives, source code and OCR-processed documents.
+The AI agent can use these search results to:
 
-- no indexing required
-- no vector database required
-- no preprocessing required
-- immediate access to newly added documents
-- search performance comparable to indexed systems
+- find individual facts
+- read and compare relevant documents
+- identify relationships and patterns
+- combine evidence from multiple sources
+- produce source-based research reports
 
-Supported sources include:
+Relevant documents or excerpts are converted into machine-readable text only when needed and passed to the AI for analysis.
 
-* Office documents
-* PDF files
-* emails
-* archives
-* source code
-* OCR processed documents
-* and many other file formats
-
-Relevant documents are exported as UTF-8 text and made directly available to the AI agent for analysis.
-
-The agent can therefore not only locate documents, but also:
-
-* analyze document contents
-* compare information across sources
-* identify patterns and relationships
-* produce evidence-based research results
-
-Every search step remains fully documented and auditable.
+Every research step remains visible, documented and auditable.
 
 ![Findit Agent Screenshot](images/Screenshot1.png)
 
-## How it works
-
-User Question
-
-↓
-
-Agent Search Strategy
-
-↓
-
-Findit6 Retrieval
-
-↓
-
-Document Analysis
-
-↓
-
-Evidence Verification
-
-↓
-
-Answer + Session Archive
-
-Every session creates its own archive directory containing:
-
-* protocol
-* session log
-* Findit search files
-* retrieved evidence
-
----
-
-## Current Features
-
-* Anthropic support
-* Ollama support (coming soon)
-* Local document research
-* Session archives
-* Evidence-based retrieval
-* UTF-8 document export
-* Complete audit trail
-* No indexing required
-
----
-
-## Documentation
-
-The complete retrieval workflow is documented in:
-
-* Search Strategy
-* Retrieval Rules
-* Communication Rules
-* Example Search Files
-
----
-
-## Downloads
-
-Coming soon.
-
-The first public release will include:
-
-* Findit 6.3 Beta Setup
-* Open Source Agent Frontend
-* Example configurations
-* Demo videos
