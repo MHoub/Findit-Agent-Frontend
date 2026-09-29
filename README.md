@@ -1,74 +1,76 @@
-# Findit Agent 
+# Findit Agent 🕵️‍♂️
+> **Agentic AI research for your local document collections – without the RAG overhead.**
 
-👉 **[Program description and documentation](https://mhoub.github.io/Findit-Agent-Frontend/)**
+Findit Agent brings advanced agentic AI research directly to your local files. It can find a single fact hidden inside thousands of files or research complex topics across multiple documents to generate an evidence-based report. 
 
-**Findit Agent brings agentic AI research to your own local document collections.**
+The research is performed by an AI agent using a wide range of supported LLMs (cloud providers or completely local models via Ollama). Instead of requiring a prepared AI knowledge base, Findit Agent uses **Findit6** as a "grep on steroids":
 
-It can search for a single fact hidden somewhere in thousands of files, or research information across many documents and turn the findings into an evidence-based report.
-The research itself is performed by an AI agent using a wide range of supported LLMs and providers — or, with suitable hardware, completely local models.
-Instead of requiring a prepared AI knowledge base, Findit Agent uses **Findit6 as a kind of “grep on steroids”**:
-
-- no indexing required
-- no vectorization or embeddings required
-- no vector database required
-- no preprocessing of the archive
-- newly added or changed files are immediately searchable
-
-### The archivist principle
-
-Findit6Agent acts like an **archivist between your files and the AI**.
-
-The AI does not receive direct access to your archive. It asks Findit6Agent to search, receives search results, and can request selected documents, text copies or excerpts for further analysis.
-Only the text required for the current research task is passed to an external AI provider.
-With a sufficiently powerful computer and a local LLM, even this processing can remain completely local: the archive, searches, extracted text and AI analysis never have to leave your machine.
-
+* 🚫 **No indexing** required
+* 🚫 **No vectorization** or embeddings required
+* 🚫 **No vector database** setup needed
+* 🚫 **No preprocessing** of your archives
+* ⚡ **Immediate search** for newly added or changed files
 
 ---
 
-**Freeware Beta / Source-available · Windows only**
+## 🏛️ The Archivist Principle
 
-Findit Agent Frontend and Findit 6a are available free of charge for private and experimental use. Commercial, professional or business use requires a valid commercial license.
+Findit Agent acts as a smart archivist between your files and the AI:
 
-## Download, install, run
+1. **Privacy First:** The AI never gets direct or full access to your archive.
+2. **On-Demand Access:** The AI asks Findit Agent to search, receives a list of results, and requests only specific documents or excerpts for deeper analysis.
+3. **Local Sovereignty:** Only the text required for the current task is sent to an external AI provider. With a powerful machine and a local LLM (via Ollama), **the entire process stays 100% local** – your archive, searches, and analysis never leave your computer.
 
-👉 **[Download the complete Windows installer](https://github.com/MHoub/Findit-Agent-Frontend/releases/tag/v1.00.01)**
+---
 
-The installer contains all required Findit6Agent components, including the local reranker and its runtime environment. No manual setup is required.
-You only need an API key for a supported AI provider — or a working Ollama installation for local use.
+## 🚀 Quick Start (Windows only)
 
-## Why Findit Agent?
+### 1. Download & Install
+👉 **[Download the complete Windows installer](https://github.com/MHoub/Findit-Agent-Frontend/releases/tag/v1.00.01)**  
+*The installer contains all required components, including the local reranker and its runtime environment. No manual setup required.*
 
-Findit6 searches existing local archives directly — without indexing, embeddings, vector databases or preprocessing. New or changed files are immediately available for research.
-It works with many common file types, including Office documents, PDFs, emails, archives, source code and OCR-processed documents.
-The AI agent can use these search results to:
+### 2. Prerequisites
+You only need one of the following:
+* An **API key** for a supported cloud AI provider (e.g., OpenAI, Anthropic, Gemini)
+* A working **Ollama** installation for 100% local execution
 
-- find individual facts
-- read and compare relevant documents
-- identify relationships and patterns
-- combine evidence from multiple sources
-- produce source-based research reports
+---
 
-Relevant documents or excerpts are converted into machine-readable text only when needed and passed to the AI for analysis.
+## 💡 Why Findit Agent?
 
-## Fully traceable research
+Traditional AI document assistants require time-consuming indexing and vector databases. Findit Agent queries your existing local archives directly. It supports **Office documents, PDFs, emails, ZIP/tar archives, source code, and OCR-processed documents**. 
 
-Findit Agent is designed so that its research can be checked step by step.
+The AI agent uses these direct search results to:
+* **Find individual facts** ("needle in a haystack")
+* **Compare** multiple relevant documents
+* **Identify relationships** and hidden patterns
+* **Synthesize evidence** into a comprehensive, source-based research report
 
-Every factual statement in the final answer is linked directly to the original source file and can be opened with a single click.
+---
 
-The complete research process is documented:
+## 🔍 Fully Traceable & Verifiable Research
 
-- every Findit search performed by the agent
-- every result list produced by these searches
-- every document or excerpt the agent actually read
-- the conclusions it drew from that material
-- the source files used for the final answer
+No more AI hallucinations without proof. Findit Agent is designed to make every step of the research process transparent:
 
-Searches and result lists can be reopened and inspected by the user at any time. This makes the research process reproducible, transparent and directly verifiable — instead of producing an answer whose origin remains hidden.
+* **Direct Citations:** Every factual statement in the final report is linked directly to the original source file. Open it with a single click.
+* **Complete Audit Trail:** The tool logs every single search query performed by the agent, every result list generated, every excerpt the agent actually read, and the exact conclusions drawn.
+
+You can reopen and inspect the agent's search history at any time, making the results **reproducible, transparent, and directly verifiable**.
+
+---
+
+## 📸 Screenshot & Example
 
 ![Findit Agent Screenshot](images/FINDIT6AGENT-Results.png)
 
-Example: a short “needle in the haystack” lookup performed by Gemini Flash. The Agent automatically works in the language used by the user and dominant in the archive. In this case, it found the private mobile number of the director of a major economic research institute in my archive — of course, the number is hidden here.
+*Example: A short "needle in a haystack" lookup performed by Gemini Flash. The agent automatically works in the language used by the user and dominant in the archive. In this case, it successfully located a hidden private mobile number inside a large archive.*
+
+---
+
+## ⚖️ License & Terms
+
+**Freeware Beta / Source-available**  
+Findit Agent Frontend and the underlying Findit engine are available **free of charge for private and experimental use**. Commercial, professional, or business use requires a valid commercial license.
 
 👉 **[Full documentation and first steps](https://mhoub.github.io/Findit-Agent-Frontend/)**
 
