@@ -1,6 +1,6 @@
 # Findit Agent Frontend
 
-👉 **[Program description and documentation](https://mhoub.github.io/Findit-Agent-Frontend/Findit6Agent_Start.html)**
+👉 **[Program description and documentation](https://mhoub.github.io/Findit-Agent-Frontend/)**
 
 🚧 **Work in Progress**
 
