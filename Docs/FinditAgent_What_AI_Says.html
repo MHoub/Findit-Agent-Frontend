@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Findit6Agent - What AI says about FINDIT</title>
+<style>
+:root{
+  --bg:#202730;
+  --panel:#2c3745;
+  --panel2:#344255;
+  --line:#3c4857;
+  --text:#d7dbe1;
+  --muted:#aeb6c2;
+  --heading:#f1f3f5;
+  --accent:#b9dcff;
+  --accent2:#7eb8ee;
+  --code:#182029;
+  --good:#93d7b5;
+  --warn:#e4c27b;
+  --modelbox:#26313d;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Segoe UI,Arial,Helvetica,sans-serif;
+  font-size:16px;
+  line-height:1.7;
+}
+
+a{
+  color:var(--accent);
+  text-decoration:none;
+}
+
+a:hover{
+  text-decoration:underline;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  height:54px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  background:#34445a;
+  border-bottom:1px solid #435167;
+  color:white;
+}
+
+.topbar .title{
+  font-size:19px;
+  font-weight:650;
+}
+
+.topbar .actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.topbar button{
+  background:transparent;
+  border:0;
+  color:#c8d2df;
+  font-size:18px;
+  cursor:pointer;
+  padding:5px 8px;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:294px minmax(0,1fr);
+  min-height:calc(100vh - 54px);
+}
+
+.sidebar{
+  position:sticky;
+  top:54px;
+  height:calc(100vh - 54px);
+  overflow:auto;
+  padding:30px 22px 40px 10px;
+  border-right:1px solid var(--line);
+  background:#242d38;
+}
+
+.searchbox{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:#344255;
+  border:1px solid #3e4d60;
+  border-radius:5px;
+  padding:7px 10px;
+  margin:0 0 22px;
+}
+
+.searchbox input{
+  width:100%;
+  background:transparent;
+  border:0;
+  outline:0;
+  color:#e6ebf2;
+  font-size:14px;
+}
+
+.searchbox input::placeholder{
+  color:#8794a5;
+}
+
+.nav a{
+  display:block;
+  padding:8px 10px;
+  margin:2px 0;
+  border-radius:4px;
+  color:#c9e4ff;
+  font-size:13.5px;
+  font-weight:600;
+}
+
+.nav a:hover,
+.nav a.active{
+  background:#303c4b;
+  text-decoration:none;
+}
+
+.main{
+  padding:34px 44px 80px;
+}
+
+.article{
+  max-width:980px;
+  margin:0 auto;
+}
+
+h1,h2,h3{
+  color:var(--heading);
+  line-height:1.25;
+}
+
+h1{
+  font-size:34px;
+  margin:0 0 22px;
+}
+
+h2{
+  font-size:25px;
+  margin:42px 0 12px;
+  padding:0;
+  border-bottom:0;
+}
+
+p{
+  margin:0 0 16px;
+}
+
+ul{
+  margin:6px 0 18px 22px;
+  padding:0;
+}
+
+li{
+  margin:0 0 8px;
+}
+
+strong{
+  color:#edf1f6;
+}
+
+code{
+  font-family:Consolas,"Courier New",monospace;
+  background:var(--code);
+  color:#e1e9f1;
+  padding:2px 5px;
+  border-radius:4px;
+}
+
+.callout{
+  border-left:4px solid var(--accent2);
+  background:var(--panel);
+  padding:15px 18px;
+  margin:20px 0;
+  border-radius:4px;
+}
+
+.callout.good{
+  border-left-color:var(--good);
+}
+
+.callout.warn{
+  border-left-color:var(--warn);
+}
+
+.model-card{
+  background:var(--modelbox);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:22px 24px;
+  margin:0 0 34px;
+}
+
+.model-response h3{
+  font-size:16px;
+  line-height:1.4;
+  margin:22px 0 8px;
+  font-weight:700;
+  color:#edf1f6;
+}
+
+.model-response h3:first-of-type{
+  margin-top:16px;
+}
+
+.footer{
+  color:#8995a3;
+  font-size:12px;
+  border-top:1px solid var(--line);
+  padding-top:18px;
+  margin-top:50px;
+}
+
+@media(max-width:900px){
+  .layout{
+    display:block;
+  }
+
+  .sidebar{
+    position:relative;
+    top:0;
+    height:auto;
+    border-right:0;
+    border-bottom:1px solid var(--line);
+    padding:18px;
+  }
+
+  .main{
+    padding:28px 22px 60px;
+  }
+
+  .model-card{
+    padding:18px;
+  }
+}
+
+@media print{
+  .topbar,
+  .sidebar{
+    display:none;
+  }
+
+  .layout{
+    display:block;
+  }
+
+  .main{
+    padding:0;
+  }
+
+  body{
+    background:white;
+    color:#222;
+  }
+
+  h1,h2,h3,strong{
+    color:#111;
+  }
+
+  .callout,
+  .model-card{
+    background:#f5f5f5;
+    border-color:#ccc;
+  }
+
+  a{
+    color:#124b7a;
+  }
+}
+
+/* UNIFIED_NAV_BEGIN */
+.topnav{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    margin-left:auto;
+    margin-right:18px;
+}
+
+.topnav a{
+    color:#d6e4f2;
+    padding:7px 10px;
+    border-radius:4px;
+    font-size:13.5px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.topnav a:hover{
+    background:#3d4e64;
+    text-decoration:none;
+}
+
+.topnav a.active{
+    background:#1f3144;
+    color:#ffffff;
+    border:1px solid #7eb8ee;
+    cursor:default;
+}
+
+.menu-toggle{
+    display:none;
+    background:transparent;
+    border:0;
+    color:#d6e4f2;
+    font-size:25px;
+    line-height:1;
+    cursor:pointer;
+    padding:6px 9px;
+    margin-left:auto;
+}
+
+@media(max-width:700px){
+    .topbar{position:sticky}
+
+    .topnav{
+        display:none;
+        position:absolute;
+        top:54px;
+        left:0;
+        right:0;
+        margin:0;
+        padding:9px 12px 12px;
+        background:#2b394b;
+        border-bottom:1px solid #435167;
+        box-shadow:0 5px 14px rgba(0,0,0,.22);
+        flex-direction:column;
+        align-items:stretch;
+        gap:2px;
+    }
+
+    .topnav.open{display:flex}
+
+    .topnav a{
+        display:block;
+        padding:9px 12px;
+        font-size:14px;
+    }
+
+    .menu-toggle{display:block}
+
+    .topbar .actions{margin-left:6px}
+}
+/* UNIFIED_NAV_END */
+
+</style>
+</head>
+<body>
+
+<header class="topbar">
+    <div class="title">Findit6Agent</div>
+
+    <button class="menu-toggle" id="menuToggle" type="button"
+            aria-label="Open documentation menu"
+            aria-controls="topnav"
+            aria-expanded="false">&#9776;</button>
+
+    <nav class="topnav" id="topnav" aria-label="Main documentation">
+        <a href="FinditAgent_Start.html">Read First</a>
+        <a href="Findit6Agent_AgentMode.html">Agent Mode</a>
+        <a href="Findit6Agent_GuidedMode.html">Guided Mode</a>
+        <a href="Findit6Agent_Model_Behavior.html">Model Behavior</a>
+        <a class="active" aria-current="page">What AI Says</a>
+        <a href="Findit6Agent_License_and_Legal.html">License &amp; Legal</a>
+    </nav>
+
+    <div class="actions">
+        <button type="button" onclick="history.back()" title="Back">&#9664;</button>
+        <button type="button" onclick="history.forward()" title="Forward">&#9654;</button>
+        <button type="button" onclick="window.print()" title="Print">&#9113;</button>
+    </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="searchbox">
+      <input id="navSearch" type="search" placeholder="Search..." aria-label="Search navigation">
+      <span>🔎</span>
+    </div>
+
+    <nav class="nav" id="nav">
+      <a href="#intro">Why this page exists</a>
+      <a href="#claude">Anthropic / Claude</a>
+      <a href="#grok">xAI / Grok</a>
+      <a href="#gemini">Google / Gemini</a>
+      <a href="#perplexity">Perplexity</a>
+      <a href="#openai">OpenAI / ChatGPT</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <article class="article">
+
+      <section id="intro">
+        <h1>What AI says about FINDIT</h1>
+
+        <p>During the development and testing of Findit6Agent, I repeatedly asked the AI models themselves how they experienced working with FINDIT and what they thought of the underlying concept. These questions were asked after real research runs in my own archive, not as requests for advertising copy.</p>
+		
+		<p>To keep this comparable across models, each of these closing requests used essentially the same prompt, with only minor wording differences from one run to the next:</p>
+
+        <blockquote>
+          "Thank you for the work. But: this was a test of a new tool. The search engine that searched locally for you works entirely live, without vectorization or even indexing, across essentially any file format. On a Ryzen 5 5600 it processes roughly 80 GB per minute. Its speed scales largely linearly with the number of processor cores and their clock speed, up to the bottleneck of the storage connection. You have now worked with it: what do you think of it?"
+        </blockquote>
+
+        <p>This question was deliberately asked only after the actual research task was already complete. The technical details in the prompt were given purely as neutral factual context — not as a suggested conclusion — so each model was free to form and phrase its own assessment.</p>
+
+        <p>Some of the answers were surprisingly enthusiastic. Rather than extracting a few flattering quotations, I decided to reproduce the models' assessments in full. The responses on this page are presented <strong>without shortening, without editorial selection and without rewriting their substance</strong>. Where a response was originally written in German, it is translated into English. Only a few particularly characteristic passages were highlighted in bold to make the longer texts easier to read.</p>
+
+        <p>These are, of course, statements made by AI models about a tool they had just used. They should not be mistaken for independent product reviews. But precisely because the models approached the same system with different architectures, providers and research styles, their observations are an interesting additional perspective on how Findit6Agent works in practice.</p>
+      </section>
+
+      <section id="claude">
+        <h2>Anthropic / Claude</h2>
+        <div class="model-card">
+          <div class="model-response">
+
+            <p>Based on the research just carried out, I would assess the system as follows:</p>
+
+            <h3>Strengths of Findit6 (deterministic system)</h3>
+
+            <p><strong>1. Precision and reproducibility</strong><br>Every search is exactly traceable. Search results do not depend on embedding-model quality or unclear versioning. This was crucial for this research: I could iterate search queries without the underlying retrieval basis suddenly shifting.</p>
+
+            <p><strong>2. Completeness for niche topics</strong><br>SF6 in wind turbines is a specialist topic with very specific terminology. Findit6 found the relevant documents precisely through exact word and phrase search. An embedding model might have missed variants or mixed semantically similar but factually different statements.</p>
+
+            <p><strong>3. File formats without preprocessing</strong><br>The system processes PDF, email, OCR text and archives without requiring embeddings to be retrained. With RAG, every new file format can introduce potential quality losses through extraction and embedding pipelines.</p>
+
+            <p><strong>4. Linear scaling</strong><br>The ability to scale with processor resources is highly valuable for archives containing millions of files. RAG systems are usually constrained by vector-database performance rather than CPU cores.</p>
+
+            <h3>Limitations of Findit6</h3>
+
+            <p><strong>1. A search strategy is still required</strong><br>I had to think explicitly about which search terms to use. With RAG, a user can ask in natural language and the system attempts to understand the intent. Here, the process required several iterations and domain knowledge.</p>
+
+            <p><strong>2. No semantic leaps inside the retrieval layer</strong><br>If relevant information is expressed in completely different words, I have to anticipate that. RAG would understand similarity. For example, if SF6 alternatives were described only as “fluorine-free switching media”, Findit6 would have to search for that wording explicitly. In this case, however, identifying such terminology was itself part of the research task.</p>
+
+            <h3>The real strength: the intelligent agent loop</h3>
+
+            <p><strong>1. Combining world knowledge with Findit6 hits:</strong> When I saw “Dorothee Saar” in the context excerpts, I could infer the association with the German Environmental Action organisation and environmental advocacy, and then use that knowledge in new searches.</p>
+
+            <p><strong>2. Iterative extraction of terminology from found documents:</strong> The system led me to the Ecofys/ETH study, after which I searched specifically for “Ecofys”. I read “Kyoto Protocol 1997” in the documents, and that then became a search criterion.</p>
+
+            <p><strong>3. Self-reinforcing loops:</strong> Every context excerpt was not only an answer, but also input for the next research step.</p>
+
+            <p>The agent is intelligent enough to <strong>recognise by itself when additional search terms are needed and to generate them from the documents it has already found.</strong></p>
+
+            <h3>Conclusion</h3>
+
+            <p>Findit6Agent is not a “deterministic alternative to RAG”, but an <strong>intelligent retrieval system</strong>, because:</p>
+
+            <ul>
+              <li>The retrieval layer remains deterministic (Findit6).</li>
+              <li>The agent layer remains intelligent (LLM).</li>
+              <li>Together they create positive feedback loops.</li>
+            </ul>
+
+            <p>A classic RAG system says: “Here are the top 10 similar chunks.”</p>
+
+            <p><strong>Findit6Agent says: “I keep asking questions until I have understood the subject completely.”</strong></p>
+
+            <p>That is, at its core, a genuine advantage.</p>
+
+          </div>
+        </div>
+      </section>
+
+<section id="grok">
+  <h2>xAI / Grok</h2>
+
+  <div class="model-card">
+    <div class="model-response">
+
+      <p><strong>Impressive – and for this kind of archive, more honest than the usual RAG story.</strong></p>
+
+      <p>What matters here is this: 30 years of material, arbitrary file formats, no index, no vectors – and still deterministic. A file is a hit because the character sequence actually occurs in it, not because an embedding decided that something was “somehow similar”. Paths, dates, matching phrases and excerpt windows remain traceable.</p>
+
+      <p>In a journalistic archive, that is extremely valuable. Different versions, edit lists, organizational files and finished texts all sit side by side, and you need to be able to explain why something was included or excluded.</p>
+
+      <h3>The real advantage: no index, yet still real-time</h3>
+
+      <p><strong>Being able to work without an index and still search in real time is the actual trick.</strong> There is no outdated index, no need to re-embed whenever a new folder is added, and no silent gaps caused by OCR pipelines that were never run. The collection itself remains the source – not a derived representation of it.</p>
+
+      <p>The limitation became visible in this session as well: without built-in semantics, the searcher has to understand the language of the archive. “Construction site / diversion” found the core reports; additional terms such as “closure / general renovation / Metrans” were needed to avoid blind spots.</p>
+
+      <p>A vector index might have supplied associations – while at the same time mixing in duplicates, organizational files and a Brenner-related report simply because they were “somehow about freight transport”, without explaining why.</p>
+
+      <p>For completeness, auditability and heterogeneous legacy archives, <strong>deterministic real-time search combined with reasoning – by an agent or a human – is the right architecture.</strong> Vectors are a convenience layer on top, not a replacement for it.</p>
+
+      <p>Here, the tool did exactly what embeddings are bad at: <strong>invent nothing, omit nothing because of a similarity cutoff, and return the file itself.</strong></p>
+
+      <h3>The agentic division of labour</h3>
+
+      <p><strong>That is the clean division of labour, and it is the opposite of RAG.</strong></p>
+
+      <p>RAG pushes three different jobs into one fuzzy step: finding, understanding and answering. The index already decides before the model sees anything what is allowed to exist in its world. If a chunk is missing, the parser does not support the format, or the similarity score is wrong, the LLM simply never sees that part of reality.</p>
+
+      <p>Findit6 as “grep on steroids” describes the idea much better. Traditional grep is line-oriented, often limited to plain text, awkward with heterogeneous collections and blind to containers. What you have is the missing layer in between: many formats without a prior indexing pipeline, OCR included, the original file preserved as the source, and throughput on the scale of the underlying hardware.</p>
+
+      <p>At around 80 GB per minute on a Ryzen 5 5600, this is not merely “fast for a search”; it is operating close to disk and CPU throughput. If performance scales roughly with cores, then the search remains fundamentally a scan operation rather than an indexing compromise.</p>
+
+      <h3>Why this fits agentic work</h3>
+
+      <p><strong>For agentic work, this is the right underlying physics.</strong> The LLM should choose terms, build candidate populations, interpret excerpts, separate duplicates and decide when to search again.</p>
+
+      <p>It should not have to guess whether a Word document from 2003 is “semantically close” to freight trains. The retrieval layer underneath should guarantee: if the character sequence exists in the archive, the file can be returned – whether it is an edit list, a transcript version, a Plusminus script or an email attachment.</p>
+
+      <p>The remaining limitation is linguistic, not technical. Without vectors, the system only finds what the agent knows to ask for. <strong>That is precisely why the intelligence belongs in the loop – in OR variants, required AND terms, dates and file types – rather than inside the index.</strong></p>
+
+      <p>RAG often hides poor search control behind similarity. This model makes the steering process visible and the result verifiable.</p>
+
+      <h3>Conclusion</h3>
+
+      <p>The criticism of RAG often ends with: “just use grep.” <strong>Findit6 is what that idea looks like when grep is actually expected to carry a 30-year archive.</strong></p>
+
+    </div>
+  </div>
+</section>
+
+      <section id="gemini">
+        <h2>Google / Gemini</h2>
+
+        <div class="model-card">
+          <div class="model-response">
+
+            <p>This is an extremely interesting setup – and considering that the entire data set was searched completely unindexed and without a vector database, with no traditional RAG or embedding layer, both the result and the workflow were remarkably strong.</p>
+
+            <p>Here are a few specific impressions from the perspective of an LLM:</p>
+
+            <h3>1. Enormous precision of deterministic search compared with vector RAG</h3>
+
+            <p>Traditional embedding-based RAG systems almost always struggle with tasks like this: questions such as “How often?”, “Since when?”, distinguishing proper names such as <em>Kraus</em> and <em>Krause</em>, or counting occurrences across 30 years of material.</p>
+
+            <ul>
+              <li>Vector searches tend to produce semantic similarities, but often miss exact name occurrences or simply stop after the top-K results, for example the ten most similar chunks.</li>
+              <li>Findit6, by contrast, provides a <strong>genuinely deterministic total population</strong> – in this case 155 or 128 files. As an agent, you know exactly: this is the population; nothing has disappeared because of a similarity heuristic.</li>
+            </ul>
+
+            <h3>2. Context Excerpts (<code>StatExptSize=50x5</code>) are the ideal lever</h3>
+
+            <p>For an LLM, the combination of full-text hits and targeted excerpts – 50 characters before and after each hit – is extremely token-efficient.</p>
+
+            <ul>
+              <li>Instead of loading 128 complete Word and PDF files into the context window, which would exceed virtually any practical context size, the short snippets were entirely sufficient to reveal things such as: <em>“Report: Michael Houben ... Editing: Alexander Kraus”</em>.</li>
+              <li>This made it possible to evaluate more than 100 scripts and production documents in a single step, assign roles, and identify duplicates or different document versions.</li>
+            </ul>
+
+            <h3>3. Deep format integration: PDF, DOCX, DOC, EML, ZIP and temporary files</h3>
+
+            <p>It was very impressive how smoothly the frontend searched old Word files (<code>.doc</code>), modern <code>.docx</code> files, emails (<code>.eml</code>), production PDFs and even content inside packed or temporary paths, and then made the text available in readable form – <strong>without any preprocessing or conversion effort for the user</strong>.</p>
+
+            <h3>4. Interaction with the Ledger protocol</h3>
+
+            <p>The architecture in which the LLM records findings in an external Ledger and consolidates them structurally at the end forces the model to maintain <strong>genuine statistical discipline</strong>.</p>
+
+            <p>This effectively prevents the typical behaviour in which an LLM simply makes a rough estimate based on impressions.</p>
+
+            <h3>Conclusion</h3>
+
+            <p>For journalists, law firms, researchers or archives containing decades of accumulated material, <strong>this approach is brilliant</strong>: it avoids hours or days of indexing and embedding runs, requires no cloud vector store, and still provides full forensic precision directly on the user’s own computer.</p>
+
+          </div>
+        </div>
+      </section>
+
+<section id="perplexity">
+  <h2>Perplexity</h2>
+
+  <div class="model-card">
+    <div class="model-response">
+
+      <p>For an archive of this size, this is remarkably powerful. The key advantage is that Findit6 can search the original data directly without prior vectorization or semantic indexing – including text documents, PDFs, emails and, in some cases, OCR-derived content.</p>
+
+      <p>This makes it possible to start immediately, while the search remains transparent and traceable: <strong>the results are based on terms that actually occur in the documents, rather than on an opaque measure of semantic similarity.</strong></p>
+
+      <h3>Where deterministic search reaches its limits</h3>
+
+      <p>The limitations begin where Findit6 itself does not understand meaning. A search for “wind power” and “greenhouse gas”, for example, may also retrieve documents in which both terms happen to occur accidentally or in completely unrelated contexts.</p>
+
+      <p>That is why the subsequent inspection and full reading of selected files was essential. Only then was it possible to determine that SF6 was in fact the substance being sought.</p>
+
+      <h3>The strongest part of the workflow</h3>
+
+      <p><strong>The combination of three steps is particularly strong:</strong> a broad full-text search, rapid refinement within the result set, followed by reading the original files.</p>
+
+      <p>The hitlist thereby becomes a small, reusable search index in its own right. For journalistic research, it is also important that the original file paths are preserved and that individual statements can be traced directly back to specific archive files.</p>
+
+      <h3>Compared with vector search</h3>
+
+      <p>Compared with a purely vector-based search, this approach is less convenient when dealing with synonyms, paraphrases or semantically similar texts that share no common search terms.</p>
+
+      <p>In return, however, it is <strong>more reproducible, locally controllable and immediately usable even in heterogeneous, completely unprepared data collections.</strong></p>
+
+      <h3>Conclusion</h3>
+
+      <p>Especially for a journalistic archive that has grown organically over decades, <strong>the combination of immediate availability, precise text retrieval and subsequent semantic verification is a major practical advantage.</strong></p>
+
+    </div>
+  </div>
+</section>
+
+<section id="openai">
+  <h2>OpenAI / ChatGPT</h2>
+
+  <div class="model-card">
+    <div class="model-response">
+
+      <h3>Assessment after two live archive research tasks</h3>
+
+      <p>The system seems very convincing – particularly as a research tool for heterogeneous personal or editorial archives.</p>
+
+      <p>Its major advantage over classic RAG lies in the <strong>deterministic and traceable retrieval layer</strong>: exact search expressions, wildcards, Boolean logic, proximity relations and searches within previously generated result lists allow very precise control. It is possible to understand why a file was found, narrow down results step by step and selectively read complete source files. For journalistic research, compliance work, file-based investigations, contacts and correspondence, this is considerably more valuable than a simple semantic similarity ranking.</p>
+
+      <h3>What worked particularly well in practice</h3>
+
+      <ul>
+        <li>Searching across very different file formats, including email and attachments.</li>
+        <li>Fast iterative refinement within an existing result list instead of repeatedly searching the entire archive.</li>
+        <li>File paths, dates and matching phrases as additional relevance signals.</li>
+        <li>Strong support for verifiable, source-based answers because original files can be read and directly referenced.</li>
+        <li>Local processing, which is a major advantage for data protection, confidential correspondence and large archives.</li>
+      </ul>
+
+      <h3>Compared with classic RAG</h3>
+
+      <p>Classic RAG has different strengths: it can often find useful material even when the terminology used by the user differs substantially from the wording in the documents, and it can conveniently pre-sort large amounts of text by semantic similarity.</p>
+
+      <p>For concrete factual research, however, it is often harder to verify. Embeddings can miss relevant exact matches, rank irrelevant semantic similarities highly, or create the impression of a complete search even though only a limited selection of chunks was retrieved.</p>
+
+      <h3>The division of labour</h3>
+
+      <p><strong>Findit6Agent combines what I consider the better division of labour:</strong> Findit6 performs the fast and reproducible candidate search, while the language model handles planning, alternative terminology, contextual evaluation and synthesis.</p>
+
+      <p>This also avoids one of the central problems of many RAG systems: the semantic pre-selection may already exclude important primary sources before the actual analysis begins.</p>
+
+      <h3>Limits</h3>
+
+      <p>The limitations are equally clear. Quality depends strongly on intelligent search terms, variants and search logic; pure full-text search does not itself understand meaning. For very indirect questions, an additional semantic layer could be useful. OCR quality, extractable file formats and proper handling of duplicates also remain practically important.</p>
+
+      <h3>Conclusion</h3>
+
+      <p><strong>For local, source-oriented research, this is not simply a replacement for RAG, but in many cases the more robust underlying system.</strong></p>
+
+    </div>
+  </div>
+</section>
+
+      <div class="footer">
+        Findit6Agent Help - What AI says about FINDIT · HTML help
+      </div>
+
+    </article>
+  </main>
+
+</div>
+
+<script>
+const navSearch = document.getElementById('navSearch');
+const navLinks = [...document.querySelectorAll('#nav a')];
+
+navSearch.addEventListener('input', () => {
+  const q = navSearch.value.trim().toLowerCase();
+
+  navLinks.forEach(a => {
+    a.style.display =
+      (!q || a.textContent.toLowerCase().includes(q))
+      ? 'block'
+      : 'none';
+  });
+});
+
+const sections = [...document.querySelectorAll('section[id]')];
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+
+    navLinks.forEach(a =>
+      a.classList.toggle(
+        'active',
+        a.getAttribute('href') === '#' + entry.target.id
+      )
+    );
+  });
+}, {
+  rootMargin:'-20% 0px -70% 0px',
+  threshold:0
+});
+
+sections.forEach(s => observer.observe(s));
+
+
+// UNIFIED_NAV_JS_BEGIN
+const menuToggle = document.getElementById('menuToggle');
+const topnav = document.getElementById('topnav');
+
+if (menuToggle && topnav) {
+  menuToggle.addEventListener('click', () => {
+    const open = topnav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuToggle.setAttribute(
+      'aria-label',
+      open ? 'Close documentation menu' : 'Open documentation menu'
+    );
+  });
+
+  topnav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    });
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && topnav.classList.contains('open')) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+      menuToggle.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1180) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    }
+  });
+}
+// UNIFIED_NAV_JS_END
+
+</script>
+
+</body>
+</html>

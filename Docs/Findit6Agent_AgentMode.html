@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Findit6Agent Help - Agent Mode</title>
+<style>
+:root{--bg:#202730;--panel:#2c3745;--panel2:#344255;--line:#3c4857;--text:#d7dbe1;--muted:#aeb6c2;--heading:#f1f3f5;--accent:#b9dcff;--accent2:#7eb8ee;--code:#182029;--good:#93d7b5;--warn:#e4c27b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.topbar{position:sticky;top:0;z-index:20;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#34445a;border-bottom:1px solid #435167;color:white}.topbar .title{font-size:19px;font-weight:650}.topbar .actions{display:flex;gap:10px;align-items:center}.topbar button{background:transparent;border:0;color:#c8d2df;font-size:18px;cursor:pointer;padding:5px 8px}.layout{display:grid;grid-template-columns:294px minmax(0,1fr);min-height:calc(100vh - 54px)}.sidebar{position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto;padding:30px 22px 40px 10px;border-right:1px solid var(--line);background:#242d38}.searchbox{display:flex;align-items:center;gap:8px;background:#344255;border:1px solid #3e4d60;border-radius:5px;padding:7px 10px;margin:0 0 22px}.searchbox input{width:100%;background:transparent;border:0;outline:0;color:#e6ebf2;font-size:14px}.searchbox input::placeholder{color:#8794a5}.nav a{display:block;padding:8px 10px;margin:2px 0;border-radius:4px;color:#c9e4ff;font-size:13.5px;font-weight:600}.nav a:hover,.nav a.active{background:#303c4b;text-decoration:none}.nav .sub{padding-left:22px;font-weight:500;color:#abc2d8}.main{padding:34px 44px 80px}.article{max-width:980px;margin:0 auto}h1,h2,h3{color:var(--heading);line-height:1.25}h1{font-size:34px;margin:0 0 22px}h2{font-size:25px;margin:38px 0 15px;padding-bottom:7px;border-bottom:1px solid var(--line)}h3{font-size:19px;margin:28px 0 8px}p{margin:0 0 16px}ul,ol{margin-top:7px}strong{color:#edf1f6}.callout{border-left:4px solid var(--accent2);background:var(--panel);padding:15px 18px;margin:20px 0;border-radius:4px}.callout.good{border-left-color:var(--good)}.callout.warn{border-left-color:var(--warn)}.modegrid,.linkgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:18px}.card h3{margin-top:0}.tag{display:inline-block;padding:2px 8px;border-radius:999px;background:#3b4a5d;color:#d9ebfb;font-size:12px;font-weight:700}.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:20px 0;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:7px}.flow .step{background:#303c4b;border:1px solid #435267;border-radius:5px;padding:7px 11px;font-weight:600}.flow .arrow{color:#91a7bc}code{font-family:Consolas,"Courier New",monospace;background:var(--code);color:#e1e9f1;padding:2px 5px;border-radius:4px}.filelink{display:block;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:9px 0}.filelink small{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}
+.filelink span{display:block;color:var(--text);font-size:13.5px;line-height:1.5;font-weight:400}.footer{color:#8995a3;font-size:12px;border-top:1px solid var(--line);padding-top:18px;margin-top:50px}@media(max-width:900px){.layout{display:block}.sidebar{position:relative;top:0;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:18px}.main{padding:28px 22px 60px}.modegrid,.linkgrid{grid-template-columns:1fr}}@media print{.topbar,.sidebar{display:none}.layout{display:block}.main{padding:0}body{background:white;color:#222}h1,h2,h3,strong{color:#111}.card,.callout,.flow,.filelink{background:#f5f5f5;border-color:#ccc}a{color:#124b7a}}
+
+.doclinks{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.doclinks a{display:inline-block;background:#303c4b;border:1px solid #435267;border-radius:5px;padding:8px 12px;font-weight:600}
+.doclinks a:hover{background:#374557;text-decoration:none}
+.smallnote{color:var(--muted);font-size:13.5px}
+
+.topnav{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    margin-left:auto;
+    margin-right:18px;
+}
+
+.topnav a{
+    color:#d6e4f2;
+    padding:7px 11px;
+    border-radius:4px;
+    font-size:14px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.topnav a:hover{
+    background:#3d4e64;
+    text-decoration:none;
+}
+
+.topnav a.active{
+    background:#1f3144;
+    color:#ffffff;
+    border:1px solid #7eb8ee;
+    cursor:default;
+}
+
+/* UNIFIED_NAV_BEGIN */
+.topnav{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    margin-left:auto;
+    margin-right:18px;
+}
+
+.topnav a{
+    color:#d6e4f2;
+    padding:7px 10px;
+    border-radius:4px;
+    font-size:13.5px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.topnav a:hover{
+    background:#3d4e64;
+    text-decoration:none;
+}
+
+.topnav a.active{
+    background:#1f3144;
+    color:#ffffff;
+    border:1px solid #7eb8ee;
+    cursor:default;
+}
+
+.menu-toggle{
+    display:none;
+    background:transparent;
+    border:0;
+    color:#d6e4f2;
+    font-size:25px;
+    line-height:1;
+    cursor:pointer;
+    padding:6px 9px;
+    margin-left:auto;
+}
+
+@media(max-width:700px){
+    .topbar{position:sticky}
+
+    .topnav{
+        display:none;
+        position:absolute;
+        top:54px;
+        left:0;
+        right:0;
+        margin:0;
+        padding:9px 12px 12px;
+        background:#2b394b;
+        border-bottom:1px solid #435167;
+        box-shadow:0 5px 14px rgba(0,0,0,.22);
+        flex-direction:column;
+        align-items:stretch;
+        gap:2px;
+    }
+
+    .topnav.open{display:flex}
+
+    .topnav a{
+        display:block;
+        padding:9px 12px;
+        font-size:14px;
+    }
+
+    .menu-toggle{display:block}
+
+    .topbar .actions{margin-left:6px}
+}
+/* UNIFIED_NAV_END */
+
+
+/* Contextual Markdown references */
+.mdref{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:7px;
+    margin:12px 0 18px;
+}
+.mdref a{
+    display:inline-block;
+    background:#303c4b;
+    border:1px solid #435267;
+    border-radius:4px;
+    padding:4px 9px;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.2px;
+}
+.mdref a:hover{
+    background:#374557;
+    text-decoration:none;
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+    <div class="title">Findit6Agent</div>
+
+    <button class="menu-toggle" id="menuToggle" type="button"
+            aria-label="Open documentation menu"
+            aria-controls="topnav"
+            aria-expanded="false">&#9776;</button>
+
+    <nav class="topnav" id="topnav" aria-label="Main documentation">
+        <a href="FinditAgent_Start.html">Read First</a>
+        <a class="active" aria-current="page">Agent Mode</a>
+        <a href="Findit6Agent_GuidedMode.html">Guided Mode</a>
+        <a href="Findit6Agent_Model_Behavior.html">Model Behavior</a>
+        <a href="FinditAgent_What_AI_Says.html">What AI Says</a>
+        <a href="Findit6Agent_License_and_Legal.html">License &amp; Legal</a>
+    </nav>
+
+    <div class="actions">
+        <button type="button" onclick="history.back()" title="Back">&#9664;</button>
+        <button type="button" onclick="history.forward()" title="Forward">&#9654;</button>
+        <button type="button" onclick="window.print()" title="Print">&#9113;</button>
+    </div>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<div class="searchbox"><input id="navSearch" type="search" placeholder="Search..." aria-label="Search navigation"><span>&#128269;</span></div>
+<nav class="nav" id="nav">
+<a href="#welcome">Welcome</a><a href="#getting-started">Getting started</a><a href="#questions">Writing a good question</a><a href="#agentmode">How Agent Mode works</a><a class="sub" href="#research-mode">Knowledge or Statistic?</a><a class="sub" href="#knowledge">Knowledge research</a><a class="sub" href="#statistic">Statistic research</a><a href="#user-rules">User-specific archive rules</a><a href="#ledger">Research Ledger</a><a href="#workspace">Session Workspace</a><a href="#search">Search and source handling</a><a href="#guided-vs-agent">Guided Mode vs. Agent Mode</a><a href="#local-ai">Agent Mode and local AI</a>
+</nav>
+</aside>
+<main class="main"><article class="article">
+<section id="welcome"><h1>Agent Mode </h1><p><strong>AI-driven information retrieval from large data collections - without prior indexing or vectorization.</strong> Agent Mode is primarily intended for supported external AI providers or exceptionally large local models running on correspondingly powerful hardware. Your original files remain local; only material selected for AI analysis is transmitted as machine-readable text when an external provider is used.</p>
+
+<div class="callout">
+  <strong>This page is more than documentation.</strong><br>
+  It also serves as a direct reference to the instruction files that control Agent Mode. The linked Markdown files are the actual working instructions used by Findit6Agent during research. You can open them directly from this page and, where appropriate, adapt them to your own archive and workflow.<br><br>
+  Most core instruction files should normally remain unchanged; <code>Agent_User_Rules.md</code> is specifically intended for your own archive-specific rules and additions.<br><br><strong>To edit a Markdown file, copy its link and open the file with your preferred text editor.</strong>
+</div>
+</section>
+
+<section id="agentmode"><h2>How Agent Mode works</h2><p>In Agent Mode, a capable AI model controls the research process autonomously. It receives the Findit6 search capabilities, the configured search space and detailed operating instructions.</p><p>The Agent can perform searches across the complete configured data collection, refine previous result lists, request Context Excerpts, read complete documents, preserve findings in a Ledger and continue researching until it considers the evidence sufficient.</p><div class="flow"><span class="step">User question</span><span class="arrow">&#8594;</span><span class="step">Research mode</span><span class="arrow">&#8594;</span><span class="step">Findit6 searches</span><span class="arrow">&#8594;</span><span class="step">Evidence</span><span class="arrow">&#8594;</span><span class="step">Ledger</span><span class="arrow">&#8594;</span><span class="step">Final synthesis</span></div><p>The general operating rules and communication rules apply throughout Agent Mode research.</p><div class="mdref"><a href="Agent_04_Rules.md"><code>Agent_04_Rules.md</code></a></div><div class="mdref"><a href="Agent_03_Communication.md"><code>Agent_03_Communication.md</code></a></div></section>
+
+<section id="research-mode"><h2>Knowledge or Statistic? The Agent decides</h2><p>At the beginning of every Agent Mode research task, the AI determines which type of research the user's question requires. The decision is made automatically and then activates one of two dedicated research briefings.</p><div class="modegrid"><div class="card" id="knowledge"><span class="tag">KNOWLEDGE</span><h3>Knowledge research</h3><p>Used when the goal is to find, understand, compare and synthesize information from the most relevant documents.</p><p>The Agent may follow several research branches, inspect source documents in detail and combine evidence into a supported narrative answer.</p><div class="mdref"><a href="Agent_01_Briefing.md"><code>Agent_01_Briefing.md</code></a></div></div><div class="card" id="statistic"><span class="tag">STATISTIC</span><h3>Statistic research</h3><p>Used when the task requires systematic evaluation of a document population - for example counting, classifying, grouping, comparing or aggregating cases.</p><p>The workflow emphasizes completeness, explicit handling of unresolved cases, deduplication and deterministic arithmetic where numerical results are required.</p><div class="mdref"><a href="Agent_01_StatisticBriefing.md"><code>Agent_01_StatisticBriefing.md</code></a></div></div></div><p>Both modes use the same Findit6 search engine. The difference is the research contract: <strong>Knowledge</strong> aims at a well-supported synthesis; <strong>Statistic</strong> aims at a systematic evaluation of an explicitly defined population.</p></section>
+<section id="user-rules"><h2>User-specific archive rules</h2><p>After the research mode has been selected and the matching briefing is active, the Agent also receives your archive-specific rules. These rules can describe patterns that only you know - for example naming conventions, recurring project structures, characteristic document types, abbreviations or ways in which particular information can be recognized.</p><div class="callout"><strong>This is the instruction file intended for customization.</strong><br>Unlike the supplied core instructions, <code>Agent_User_Rules.md</code> is specifically intended for your own additions and adaptations.</div><div class="mdref"><a href="Agent_User_Rules.md"><code>Agent_User_Rules.md</code></a></div></section>
+
+<section id="ledger"><h2>Research Ledger</h2><p>During Agent Mode research, Findit6Agent maintains a compact external <strong>Ledger</strong> containing the task-relevant information already established from the documents examined by the AI.</p><p>A Ledger entry is tied to the complete original file path. It preserves a compact record of the facts extracted from that file. If the same source is encountered again later, newly established information can be added to the existing entry.</p><div class="callout"><strong>The Ledger is not hidden AI memory.</strong><br>Every Ledger maintained by Findit6Agent is also written to the current Session Workspace as a normal text file ending in <code>.ledger.txt</code>. It can be opened and inspected after the research has finished.</div><p>In Knowledge research, the Ledger acts as persistent research memory. In Statistic research, the same structure additionally provides the systematic basis for classification, deduplication, aggregation and exact numerical evaluation.</p><p>Large source texts or Context Excerpts do not need to remain permanently in the AI conversation after their useful information has been preserved. If a removed source later becomes important again, the Agent can request the complete document again or recreate Context Excerpts with another search.</p></section>
+<section id="workspace"><h2>Transparent and reproducible: the Session Workspace</h2><p>For every research session, Findit6Agent creates a dedicated Session Workspace. Depending on the workflow, it contains:</p><ul><li>Findit6 <code>.fil</code> result lists;</li><li>generated Context Excerpts;</li><li>files or machine-readable exports examined by the Agent;</li><li>Ledger files ending in <code>.ledger.txt</code>;</li><li>and a detailed software log.</li></ul><p>The visible protocol and the Session Workspace together make the research process inspectable and reproducible. Previous hitlists remain useful search populations and can be reused during the same research session.</p>
+
+<p>After a search has started, the current Session Workspace can be opened directly by clicking the small folder icon on the right below the large text box. By default, Session Workspaces are deleted automatically after two weeks. This retention period can be changed, and workspaces that should remain available permanently can be preserved.</p></section>
+<section id="search"><h2>Search and source handling</h2><p>The complete Findit6 search syntax available to the Agent is defined in the search syntax instruction.</p><div class="mdref"><a href="Agent_02_Syntax.md"><code>Agent_02_Syntax.md</code></a></div><p>Findit6 performs deterministic retrieval. The Agent decides which population to search and how to interpret the results.</p><h3>FullSearch</h3><p>A FullSearch scans the complete configured search scope and is normally used to establish a new candidate population.</p><h3>HitlistSearch</h3><p>A HitlistSearch searches only inside the files contained in an existing Findit6 result list. It is therefore usually extremely fast and can be used for narrowing, filtering or investigating another aspect of an already established population.</p><h3>Context Excerpts and complete files</h3><p>Context Excerpts expose compact passages around actual search occurrences across many files. Complete documents are requested when the Agent needs fuller context or must resolve a specific uncertainty.</p></section>
+<section id="guided-vs-agent"><h2>Guided Mode and Agent Mode</h2><div class="modegrid"><div class="card"><h3>Guided Mode</h3><p>The research process is divided into controlled individual steps. Query construction, semantic reranking, document evaluation and synthesis are guided by dedicated Markdown instructions.</p><p>This is especially useful for local AI models with limited context windows and for users who want maximum control over each stage.</p></div><div class="card"><h3>Agent Mode</h3><p>The AI controls the complete research loop autonomously. It decides which searches to perform, which result lists to refine, which sources to inspect and when the available evidence is sufficient.</p><p>The automatic Knowledge/Statistic decision and the persistent Ledger allow much longer and more structured autonomous investigations.</p></div></div></section>
+
+<section id="local-ai">
+        <h2>Agent Mode, local AI and Guided Mode</h2>
+
+        <p>Agent Mode is currently intended primarily for very capable non-local AI models. The Agent must independently plan retrieval strategies, operate Findit6 iteratively, evaluate search populations and decide when further research is required. Local models - even in the approximate 70B size range - are generally not yet reliable enough to perform this complete strategic workflow autonomously.</p>
+
+        <p>Running Agent Mode locally may therefore become practical only with exceptionally large language models on correspondingly powerful local hardware.</p>
+
+        <p>For local research, Findit6Agent provides <strong>Guided Mode</strong>. Instead of asking one model to control the complete research process autonomously, Guided Mode divides the task into many smaller, clearly defined processing steps. It additionally uses a local semantic reranker and Python-based processing where required.</p>
+
+        <div class="callout">
+          <strong>Guided Mode requires the complete Findit6Agent Suite.</strong><br>
+          The Guided workflow is available only when the additional components required for it - including the reranker and Python environment - are installed. Agent Mode can be used independently with supported external providers.
+        </div>
+
+        <p>For details about the local step-by-step workflow, see <a href="Findit6AgentGuidedMode.html">Findit6AgentGuidedMode.html</a>.</p>
+      </section>
+<div class="footer">Findit6Agent Help - Agent Mode - standalone HTML draft</div>
+</article></main></div>
+<script>
+const navSearch=document.getElementById('navSearch');const navLinks=[...document.querySelectorAll('#nav a')];navSearch.addEventListener('input',()=>{const q=navSearch.value.trim().toLowerCase();navLinks.forEach(a=>{a.style.display=(!q||a.textContent.toLowerCase().includes(q))?'block':'none'})});const sections=[...document.querySelectorAll('section[id]')];const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id))})},{rootMargin:'-20% 0px -70% 0px',threshold:0});sections.forEach(s=>observer.observe(s));
+
+
+// UNIFIED_NAV_JS_BEGIN
+const menuToggle = document.getElementById('menuToggle');
+const topnav = document.getElementById('topnav');
+
+if (menuToggle && topnav) {
+  menuToggle.addEventListener('click', () => {
+    const open = topnav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuToggle.setAttribute(
+      'aria-label',
+      open ? 'Close documentation menu' : 'Open documentation menu'
+    );
+  });
+
+  topnav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    });
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && topnav.classList.contains('open')) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+      menuToggle.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1180) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    }
+  });
+}
+// UNIFIED_NAV_JS_END
+
+</script>
+</body>
+</html>

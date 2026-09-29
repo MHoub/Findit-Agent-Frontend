@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Findit6Agent - License, Usage Terms & Third-Party Notices</title>
+<style>
+:root{
+  --bg:#202730; --panel:#2c3745; --panel2:#344255; --line:#3c4857;
+  --text:#d7dbe1; --muted:#aeb6c2; --heading:#f1f3f5; --accent:#b9dcff;
+  --accent2:#7eb8ee; --code:#182029; --good:#93d7b5; --warn:#e4c27b;
+  --modelbox:#26313d;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.topbar{position:sticky;top:0;z-index:20;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#34445a;border-bottom:1px solid #435167;color:white}
+.topbar .title{font-size:19px;font-weight:650}
+.topbar .actions{display:flex;gap:10px;align-items:center}
+.topbar button{background:transparent;border:0;color:#c8d2df;font-size:18px;cursor:pointer;padding:5px 8px}
+.layout{display:grid;grid-template-columns:294px minmax(0,1fr);min-height:calc(100vh - 54px)}
+.sidebar{position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto;padding:30px 22px 40px 10px;border-right:1px solid var(--line);background:#242d38}
+.searchbox{display:flex;align-items:center;gap:8px;background:#344255;border:1px solid #3e4d60;border-radius:5px;padding:7px 10px;margin:0 0 22px}
+.searchbox input{width:100%;background:transparent;border:0;outline:0;color:#e6ebf2;font-size:14px}
+.searchbox input::placeholder{color:#8794a5}
+.nav a{display:block;padding:8px 10px;margin:2px 0;border-radius:4px;color:#c9e4ff;font-size:13.5px;font-weight:600}
+.nav a:hover,.nav a.active{background:#303c4b;text-decoration:none}
+.main{padding:34px 44px 80px}
+.article{max-width:980px;margin:0 auto}
+h1,h2,h3{color:var(--heading);line-height:1.25}
+h1{font-size:34px;margin:0 0 22px}
+h2{font-size:25px;margin:42px 0 12px}
+h3{font-size:17px;margin:24px 0 8px}
+p{margin:0 0 16px}
+ul{margin:6px 0 18px 22px;padding:0}
+li{margin:0 0 8px}
+strong{color:#edf1f6}
+code{font-family:Consolas,"Courier New",monospace;background:var(--code);color:#e1e9f1;padding:2px 5px;border-radius:4px}
+.callout{border-left:4px solid var(--accent2);background:var(--panel);padding:15px 18px;margin:20px 0;border-radius:4px}
+.callout.good{border-left-color:var(--good)}
+.callout.warn{border-left-color:var(--warn)}
+.card{background:var(--modelbox);border:1px solid var(--line);border-radius:8px;padding:22px 24px;margin:0 0 28px}
+table{width:100%;border-collapse:collapse;margin:14px 0 24px;background:#26313d;border:1px solid var(--line)}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{background:#303c4b;color:#edf1f6}
+.small{font-size:13px;color:var(--muted)}
+.footer{color:#8995a3;font-size:12px;border-top:1px solid var(--line);padding-top:18px;margin-top:50px}
+@media(max-width:900px){
+  .layout{display:block}
+  .sidebar{position:relative;top:0;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:18px}
+  .main{padding:28px 22px 60px}
+  .card{padding:18px}
+}
+@media print{
+  .topbar,.sidebar{display:none}
+  .layout{display:block}
+  .main{padding:0}
+  body{background:white;color:#222}
+  h1,h2,h3,strong{color:#111}
+  .callout,.card,table{background:#f5f5f5;border-color:#ccc}
+  a{color:#124b7a}
+}
+
+/* UNIFIED_NAV_BEGIN */
+.topnav{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    margin-left:auto;
+    margin-right:18px;
+}
+
+.topnav a{
+    color:#d6e4f2;
+    padding:7px 10px;
+    border-radius:4px;
+    font-size:13.5px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.topnav a:hover{
+    background:#3d4e64;
+    text-decoration:none;
+}
+
+.topnav a.active{
+    background:#1f3144;
+    color:#ffffff;
+    border:1px solid #7eb8ee;
+    cursor:default;
+}
+
+.menu-toggle{
+    display:none;
+    background:transparent;
+    border:0;
+    color:#d6e4f2;
+    font-size:25px;
+    line-height:1;
+    cursor:pointer;
+    padding:6px 9px;
+    margin-left:auto;
+}
+
+@media(max-width:700px){
+    .topbar{position:sticky}
+
+    .topnav{
+        display:none;
+        position:absolute;
+        top:54px;
+        left:0;
+        right:0;
+        margin:0;
+        padding:9px 12px 12px;
+        background:#2b394b;
+        border-bottom:1px solid #435167;
+        box-shadow:0 5px 14px rgba(0,0,0,.22);
+        flex-direction:column;
+        align-items:stretch;
+        gap:2px;
+    }
+
+    .topnav.open{display:flex}
+
+    .topnav a{
+        display:block;
+        padding:9px 12px;
+        font-size:14px;
+    }
+
+    .menu-toggle{display:block}
+
+    .topbar .actions{margin-left:6px}
+}
+/* UNIFIED_NAV_END */
+
+</style>
+</head>
+<body>
+
+<header class="topbar">
+    <div class="title">Findit6Agent </div>
+
+    <button class="menu-toggle" id="menuToggle" type="button"
+            aria-label="Open documentation menu"
+            aria-controls="topnav"
+            aria-expanded="false">&#9776;</button>
+
+    <nav class="topnav" id="topnav" aria-label="Main documentation">
+        <a href="FinditAgent_Start.html">Read First</a>
+        <a href="Findit6Agent_AgentMode.html">Agent Mode</a>
+        <a href="Findit6Agent_GuidedMode.html">Guided Mode</a>
+        <a href="Findit6Agent_Model_Behavior.html">Model Behavior</a>
+        <a href="FinditAgent_What_AI_Says.html">What AI Says</a>
+        <a class="active" aria-current="page">License &amp; Legal</a>
+    </nav>
+
+    <div class="actions">
+        <button type="button" onclick="history.back()" title="Back">&#9664;</button>
+        <button type="button" onclick="history.forward()" title="Forward">&#9654;</button>
+        <button type="button" onclick="window.print()" title="Print">&#9113;</button>
+    </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="searchbox">
+      <input id="navSearch" type="search" placeholder="Search..." aria-label="Search navigation">
+      <span>🔎</span>
+    </div>
+    <nav class="nav" id="nav">
+      <a href="#overview">Overview</a>
+      <a href="#beta">Findit6Agent</a>
+      <a href="#commercial">Commercial license</a>
+      <a href="#source">Source-available code</a>
+      <a href="#providers">AI providers & data</a>
+      <a href="#disclaimer">Warranty & liability</a>
+      <a href="#thirdparty">Third-party components</a>
+      <a href="#notices">Preserving license notices</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <article class="article">
+
+      <section id="overview">
+        <h1>License, Usage Terms & Third-Party Notices</h1>
+        <p>This document describes the usage rights for Findit6Agent and the Findit6Agent, the relationship to the commercial Findit6 product, and the principal third-party software and model licenses used by the packaged reranking runtime.</p>
+
+        <div class="callout good">
+          <strong>Short version:</strong> Findit6Agent may be used without a time limit for private and non-commercial experimental use. Commercial use requires a commercial Findit6 license. The Findit6Agent source code is source-available and may be inspected and modified, but it may not be used to create or support a competing product or service.
+        </div>
+
+        <p class="small">Copyright © 2026 Michael Houben / Mhouben. All rights reserved except for the rights expressly granted in this document and in the applicable third-party licenses.</p>
+      </section>
+
+      <section id="beta">
+        <h2>Findit6Agent</h2>
+        <div class="card">
+          <h3>Permitted use</h3>
+          <ul>
+            <li>Private use.</li>
+            <li>Non-commercial experimental and evaluation use.</li>
+            <li>Use without a fixed expiration date.</li>
+          </ul>
+
+          <h3>Not included</h3>
+          <ul>
+            <li>No right to commercial or productive business use.</li>
+            <li>No contractual right to free updates, upgrades, maintenance or support.</li>
+            <li>No guarantee that a particular feature, model integration or interface will remain unchanged.</li>
+          </ul>
+
+          <p>Commercial use requires an appropriate commercial Findit6 license.</p>
+        </div>
+      </section>
+
+      <section id="commercial">
+        <h2>Commercial Findit6 license</h2>
+        <p>The commercial product line is currently <strong>Findit6.3</strong>. At the time of this release, the license price is <strong>EUR 55 per user</strong>. Findit6Agent is included with the commercial Findit6 package.</p>
+
+        <div class="card">
+          <ul>
+            <li>The purchased license is permanent; it does not expire merely because a newer minor release becomes available.</li>
+            <li>Updates within the Findit6.x product line and updates to Findit6Agent are included without an additional update fee.</li>
+            <li>Very occasional major-version changes, for example a future <strong>Findit7</strong>, may require a paid upgrade.</li>
+            <li>Charges from external AI providers, API subscriptions, cloud services or other third parties are not included in the Findit6 license.</li>
+          </ul>
+        </div>
+
+        <p class="small">Prices and commercial terms may be changed for future purchases. A previously granted perpetual license remains subject to the terms under which it was acquired.</p>
+      </section>
+
+      <section id="source">
+        <h2>Findit6Agent source-available terms</h2>
+
+        <div class="callout warn">
+          <strong>Findit6Agent source code is licensed under the PolyForm Perimeter License 1.0.1.</strong>
+          This is a standardized source-available license. It permits use, modification and redistribution,
+          but excludes providing a product that competes with Findit6Agent.
+        </div>
+
+        <p>The PolyForm Perimeter License 1.0.1 is adopted <strong>without modification</strong>.
+        The official license text is available at
+        <a href="https://polyformproject.org/licenses/perimeter/1.0.1">polyformproject.org/licenses/perimeter/1.0.1</a>.
+        That official text is controlling.</p>
+
+        <div class="card">
+          <p><strong>Required Notice:</strong> Copyright © 2026 Michael Houben / Mhouben. Findit6Agent.</p>
+        </div>
+
+        <h3>What this means in practice</h3>
+        <p>You may inspect, study, modify and redistribute the Findit6Agent source code in accordance with
+        PolyForm Perimeter 1.0.1. You may not use it to provide a product that competes with Findit6Agent.</p>
+
+        <p>The source-code license does not grant a commercial Findit6 product license. Commercial use of
+        Findit6 remains subject to the applicable commercial Findit6 license terms described above.</p>
+
+        <h3>Not Open Source in the OSI sense</h3>
+        <p>Because PolyForm Perimeter contains a competition restriction, Findit6Agent is
+        <strong>source-available</strong>, not OSI-approved Open Source.</p>
+
+        <h3>Third-party code</h3>
+        <p>Third-party software, models and libraries included with or used by Findit6Agent are not relicensed
+        under PolyForm Perimeter. They remain governed by their respective licenses.</p>
+      </section>
+
+      <section id="providers">
+        <h2>AI providers, local models & data responsibility</h2>
+        <p>Findit6Agent can be configured to use local models and/or external AI providers. When an external provider is selected, prompts, excerpts or document content needed for the requested task may be transmitted to that provider.</p>
+        <ul>
+          <li>You are responsible for deciding whether the documents and information being processed may lawfully and appropriately be sent to the selected provider.</li>
+          <li>You are responsible for confidentiality, data-protection requirements, contractual restrictions and professional secrecy obligations that apply to your data.</li>
+          <li>Terms, privacy policies, retention rules and charges of external AI providers are governed by those providers and may change independently of Findit6Agent.</li>
+          <li>API keys, subscriptions and provider charges are the user's responsibility unless explicitly stated otherwise.</li>
+        </ul>
+      </section>
+
+      <section id="disclaimer">
+        <h2>Warranty, accuracy & limitation of liability</h2>
+        <div class="card">
+          <p><strong>Findit6Agent, Findit6Agent and all accompanying software are provided “as is” and “as available”.</strong> To the maximum extent permitted by applicable law, no warranty is given that the software will be error-free, uninterrupted, suitable for a particular purpose, or that every file, search result, ranking or AI-generated statement will be complete or correct.</p>
+
+          <p>AI-generated output may contain mistakes, omissions or unsupported conclusions. Reranking is a relevance estimate, not a factual verification. Search results can also be affected by damaged files, unsupported formats, encryption, OCR quality, access rights, malformed documents or other technical limitations.</p>
+
+          <p>Users remain responsible for reviewing important results, preserving appropriate backups, and independently verifying information before relying on it for consequential decisions.</p>
+
+          <p>To the maximum extent permitted by applicable law, the author and distributors shall not be liable for indirect, incidental, special or consequential loss, loss of data, lost profits or business interruption arising from use of the software.</p>
+
+          <p>Nothing in these terms excludes or limits liability or mandatory statutory rights where such exclusion or limitation is not permitted by applicable law.</p>
+        </div>
+      </section>
+
+      <section id="thirdparty">
+        <h2>Principal third-party components</h2>
+        <p>The packaged local reranker uses third-party software and model files. The following list identifies the principal components of the current release candidate. Their own licenses remain controlling.</p>
+
+        <table>
+          <thead>
+            <tr><th>Component</th><th>Current release</th><th>License</th><th>Project / notice</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Python Embedded Runtime</td>
+              <td>Python 3.12.10 x64</td>
+              <td>Python Software Foundation License Version 2; incorporated software may have additional notices</td>
+              <td><a href="https://docs.python.org/3.12/license.html">Python license</a></td>
+            </tr>
+            <tr>
+              <td>BAAI bge-reranker-v2-m3</td>
+              <td>Local reranking model</td>
+              <td>Apache License 2.0</td>
+              <td><a href="https://huggingface.co/BAAI/bge-reranker-v2-m3">BAAI model page</a></td>
+            </tr>
+            <tr>
+              <td>newtechstudio/bge-reranker-v2-m3-onnx</td>
+              <td>FP32 ONNX export used by Findit6Agent</td>
+              <td>Apache License 2.0 (inherits upstream license)</td>
+              <td><a href="https://huggingface.co/newtechstudio/bge-reranker-v2-m3-onnx">ONNX model page</a></td>
+            </tr>
+            <tr>
+              <td>ONNX Runtime / DirectML</td>
+              <td>onnxruntime-directml 1.24.4</td>
+              <td>MIT License; package also contains third-party notices</td>
+              <td><a href="https://github.com/microsoft/onnxruntime">Microsoft ONNX Runtime</a></td>
+            </tr>
+            <tr>
+              <td>Hugging Face Transformers</td>
+              <td>5.17.0</td>
+              <td>Apache License 2.0</td>
+              <td><a href="https://github.com/huggingface/transformers">Transformers</a></td>
+            </tr>
+            <tr>
+              <td>Hugging Face Tokenizers</td>
+              <td>0.23.2</td>
+              <td>Apache License 2.0</td>
+              <td><a href="https://github.com/huggingface/tokenizers">Tokenizers</a></td>
+            </tr>
+            <tr>
+              <td>SentencePiece</td>
+              <td>0.2.2</td>
+              <td>Apache License 2.0</td>
+              <td><a href="https://github.com/google/sentencepiece">SentencePiece</a></td>
+            </tr>
+            <tr>
+              <td>FastAPI</td>
+              <td>0.141.1</td>
+              <td>MIT License</td>
+              <td><a href="https://github.com/fastapi/fastapi">FastAPI</a></td>
+            </tr>
+            <tr>
+              <td>Uvicorn</td>
+              <td>0.53.0</td>
+              <td>BSD 3-Clause License</td>
+              <td><a href="https://github.com/encode/uvicorn">Uvicorn</a></td>
+            </tr>
+            <tr>
+              <td>Pydantic</td>
+              <td>2.13.5</td>
+              <td>MIT License</td>
+              <td><a href="https://github.com/pydantic/pydantic">Pydantic</a></td>
+            </tr>
+            <tr>
+              <td>NumPy</td>
+              <td>2.5.3</td>
+              <td>NumPy project: BSD 3-Clause; binary wheels may contain additional third-party components under their own licenses</td>
+              <td><a href="https://github.com/numpy/numpy">NumPy</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>The Python runtime contains further direct and transitive dependencies. Their copyright and license notices remain part of the installed package metadata and/or accompanying license files and are not replaced by this summary.</p>
+      </section>
+
+      <section id="notices">
+        <h2>Preserving third-party license notices</h2>
+
+        <div class="callout">
+          <strong>Distribution rule:</strong> Do not strip license, copyright or third-party notice files from the packaged <code>Python</code> runtime, the ONNX model directory or their package metadata. In particular, license files and third-party notices shipped with Python packages and ONNX Runtime must remain with redistributed copies.
+        </div>
+
+        <p>This HTML page is intended as a convenient top-level notice. It does not replace the full license texts or notices supplied by third-party projects. Where a third-party license requires preservation of a license text, copyright notice or NOTICE file, the original material included in the distribution remains controlling.</p>
+
+        <p>For future releases, the third-party component list should be reviewed whenever the Python runtime, model, ONNX export or dependency versions are changed.</p>
+      </section>
+
+      <div class="footer">
+        Findit6Agent Help - License, Usage Terms & Third-Party Notices · Release Candidate 1 · September 2026
+      </div>
+
+    </article>
+  </main>
+</div>
+
+<script>
+const navSearch = document.getElementById('navSearch');
+const navLinks = [...document.querySelectorAll('#nav a')];
+navSearch.addEventListener('input', () => {
+  const q = navSearch.value.trim().toLowerCase();
+  navLinks.forEach(a => {
+    a.style.display = (!q || a.textContent.toLowerCase().includes(q)) ? 'block' : 'none';
+  });
+});
+const sections = [...document.querySelectorAll('section[id]')];
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    navLinks.forEach(a =>
+      a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id)
+    );
+  });
+}, {rootMargin:'-20% 0px -70% 0px', threshold:0});
+sections.forEach(s => observer.observe(s));
+
+
+// UNIFIED_NAV_JS_BEGIN
+const menuToggle = document.getElementById('menuToggle');
+const topnav = document.getElementById('topnav');
+
+if (menuToggle && topnav) {
+  menuToggle.addEventListener('click', () => {
+    const open = topnav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuToggle.setAttribute(
+      'aria-label',
+      open ? 'Close documentation menu' : 'Open documentation menu'
+    );
+  });
+
+  topnav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    });
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && topnav.classList.contains('open')) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+      menuToggle.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1180) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    }
+  });
+}
+// UNIFIED_NAV_JS_END
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Findit6Agent - First Steps</title>
+<style>
+:root{--bg:#202730;--panel:#2c3745;--panel2:#344255;--line:#3c4857;--text:#d7dbe1;--muted:#aeb6c2;--heading:#f1f3f5;--accent:#b9dcff;--accent2:#7eb8ee;--code:#182029;--good:#93d7b5;--warn:#e4c27b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.topbar{position:sticky;top:0;z-index:20;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#34445a;border-bottom:1px solid #435167;color:white}.topbar .title{font-size:19px;font-weight:650}.topbar .actions{display:flex;gap:10px;align-items:center}.topbar button{background:transparent;border:0;color:#c8d2df;font-size:18px;cursor:pointer;padding:5px 8px}.layout{display:grid;grid-template-columns:294px minmax(0,1fr);min-height:calc(100vh - 54px)}.sidebar{position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto;padding:30px 22px 40px 10px;border-right:1px solid var(--line);background:#242d38}.searchbox{display:flex;align-items:center;gap:8px;background:#344255;border:1px solid #3e4d60;border-radius:5px;padding:7px 10px;margin:0 0 22px}.searchbox input{width:100%;background:transparent;border:0;outline:0;color:#e6ebf2;font-size:14px}.searchbox input::placeholder{color:#8794a5}.nav a{display:block;padding:8px 10px;margin:2px 0;border-radius:4px;color:#c9e4ff;font-size:13.5px;font-weight:600}.nav a:hover,.nav a.active{background:#303c4b;text-decoration:none}.nav .sub{padding-left:22px;font-weight:500;color:#abc2d8}.main{padding:34px 44px 80px}.article{max-width:980px;margin:0 auto}h1,h2,h3{color:var(--heading);line-height:1.25}h1{font-size:34px;margin:0 0 22px}h2{font-size:25px;margin:38px 0 15px;padding-bottom:7px;border-bottom:1px solid var(--line)}h3{font-size:19px;margin:28px 0 8px}p{margin:0 0 16px}ul,ol{margin-top:7px}strong{color:#edf1f6}.callout{border-left:4px solid var(--accent2);background:var(--panel);padding:15px 18px;margin:20px 0;border-radius:4px}.callout.good{border-left-color:var(--good)}.callout.warn{border-left-color:var(--warn)}.modegrid,.linkgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:18px}.card h3{margin-top:0}.tag{display:inline-block;padding:2px 8px;border-radius:999px;background:#3b4a5d;color:#d9ebfb;font-size:12px;font-weight:700}.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:20px 0;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:7px}.flow .step{background:#303c4b;border:1px solid #435267;border-radius:5px;padding:7px 11px;font-weight:600}.flow .arrow{color:#91a7bc}code{font-family:Consolas,"Courier New",monospace;background:var(--code);color:#e1e9f1;padding:2px 5px;border-radius:4px}.filelink{display:block;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:9px 0}.filelink small{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}
+.filelink span{display:block;color:var(--text);font-size:13.5px;line-height:1.5;font-weight:400}.footer{color:#8995a3;font-size:12px;border-top:1px solid var(--line);padding-top:18px;margin-top:50px}@media(max-width:900px){.layout{display:block}.sidebar{position:relative;top:0;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:18px}.main{padding:28px 22px 60px}.modegrid,.linkgrid{grid-template-columns:1fr}}@media print{.topbar,.sidebar{display:none}.layout{display:block}.main{padding:0}body{background:white;color:#222}h1,h2,h3,strong{color:#111}.card,.callout,.flow,.filelink{background:#f5f5f5;border-color:#ccc}a{color:#124b7a}}
+
+.doclinks{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.doclinks a{display:inline-block;background:#303c4b;border:1px solid #435267;border-radius:5px;padding:8px 12px;font-weight:600}
+.doclinks a:hover{background:#374557;text-decoration:none}
+.smallnote{color:var(--muted);font-size:13.5px}
+.modegrid{clear:both}
+
+.product-title{display:flex;align-items:center;gap:12px}
+.product-title img{width:46px;height:46px;flex:0 0 46px}
+.findit-title{display:flex;align-items:center;gap:9px}
+.findit-title img{width:38px;height:38px;flex:0 0 38px}
+
+.api-note{float:right;width:58%;background:var(--panel2);border:1px solid var(--line);border-left:4px solid var(--accent2);border-radius:6px;padding:14px 18px;margin:4px 0 18px 24px}
+.api-note p{margin:0 0 10px}.api-note p:last-child{margin-bottom:0}.api-note .api-title{font-weight:700;color:var(--heading)}
+#overview::after{content:"";display:block;clear:both}
+@media(max-width:900px){.api-note{float:none;width:100%;margin:20px 0 24px}}
+
+
+/* UNIFIED_NAV_BEGIN */
+.topnav{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    margin-left:auto;
+    margin-right:18px;
+}
+
+.topnav a{
+    color:#d6e4f2;
+    padding:7px 10px;
+    border-radius:4px;
+    font-size:13.5px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.topnav a:hover{
+    background:#3d4e64;
+    text-decoration:none;
+}
+
+.topnav a.active{
+    background:#1f3144;
+    color:#ffffff;
+    border:1px solid #7eb8ee;
+    cursor:default;
+}
+
+.menu-toggle{
+    display:none;
+    background:transparent;
+    border:0;
+    color:#d6e4f2;
+    font-size:25px;
+    line-height:1;
+    cursor:pointer;
+    padding:6px 9px;
+    margin-left:auto;
+}
+
+@media(max-width:700px){
+    .topbar{position:sticky}
+
+    .topnav{
+        display:none;
+        position:absolute;
+        top:54px;
+        left:0;
+        right:0;
+        margin:0;
+        padding:9px 12px 12px;
+        background:#2b394b;
+        border-bottom:1px solid #435167;
+        box-shadow:0 5px 14px rgba(0,0,0,.22);
+        flex-direction:column;
+        align-items:stretch;
+        gap:2px;
+    }
+
+    .topnav.open{display:flex}
+
+    .topnav a{
+        display:block;
+        padding:9px 12px;
+        font-size:14px;
+    }
+
+    .menu-toggle{display:block}
+
+    .topbar .actions{margin-left:6px}
+}
+/* UNIFIED_NAV_END */
+
+</style>
+</head>
+<body>
+
+<header class="topbar">
+    <div class="title">Findit6Agent</div>
+
+    <button class="menu-toggle" id="menuToggle" type="button"
+            aria-label="Open documentation menu"
+            aria-controls="topnav"
+            aria-expanded="false">&#9776;</button>
+
+    <nav class="topnav" id="topnav" aria-label="Main documentation">
+        <a class="active" aria-current="page">Read First</a>
+        <a href="Findit6Agent_AgentMode.html">Agent Mode</a>
+        <a href="Findit6Agent_GuidedMode.html">Guided Mode</a>
+        <a href="Findit6Agent_Model_Behavior.html">Model Behavior</a>
+        <a href="FinditAgent_What_AI_Says.html">What AI Says</a>
+        <a href="Findit6Agent_License_and_Legal.html">License &amp; Legal</a>
+    </nav>
+
+    <div class="actions">
+        <button type="button" onclick="history.back()" title="Back">&#9664;</button>
+        <button type="button" onclick="history.forward()" title="Forward">&#9654;</button>
+        <button type="button" onclick="window.print()" title="Print">&#9113;</button>
+    </div>
+</header>
+
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="searchbox">
+      <input id="navSearch" type="search" placeholder="Search..." aria-label="Search navigation">
+      <span>🔎</span>
+    </div>
+    <nav class="nav" id="nav">
+      <a href="#overview">What Findit6Agent does</a>
+      <a href="#first-steps">First steps</a>
+      <a href="#where">1. Define where to search</a>
+      <a href="#connect">2. Connect an AI model</a>
+      <a href="#userinfo">Tell the Agent about you</a>
+      <a href="#question">3. Ask your first question</a>
+      <a href="#start">4. Start the search</a>
+      <a href="#example">Example workflow</a>
+      <a href="#next">That's it</a>
+      <a href="#hardware">Hardware requirements</a>
+      <a href="#technical-appendix">Technical Appendix</a>
+      <a href="#support">Troubleshooting &amp; Support</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <article class="article">
+
+      <section id="overview">
+        <h1 class="product-title"><img src="FiKiIcon.gif" alt="Findit6Agent icon">Findit6Agent</h1>
+        <p><strong>An AI-assisted research tool for your existing file archive.</strong></p>
+
+        <p><b>The goal is familiar from RAG: let AI work with your own data. The difference is that Findit6Agent works directly on the original archive - without prior indexing, vectorization or reorganization, and without giving the AI uncontrolled access to your files.</b></p>
+
+	  
+	          <div class="api-note">
+			    <p class="api-title findit-title"><img src="FI-icon.gif" alt="Findit6 icon"><span>&#128161; Discover Findit6!</span></p>
+
+  The search engine that allows an AI to find almost any file content for you in a very short time can also be extremely useful on its own — for humans, including you.
+
+  Findit6 searches your existing files directly, without prior indexing, is exceptionally fast and is designed to be simple to use. Give it a try: <strong>Findit6 was installed together with Findit6Agent</strong> and can be recognized by its turquoise icon.<br><br>
+
+  <strong>P.S.:</strong> If you have many scanned documents that you want to search using OCR, we recommend running the potentially time-consuming initial OCR scan directly from Findit6 anyway. Once OCR text has been cached, subsequent searches — including Findit6Agent searches — can be considerably faster.
+</div>
+		
+		        <p>Findit6Agent remains in control of the local archive. The AI receives search results and only machine-readable text from documents or excerpts selected for the current research task.</p>
+
+
+        <p>If your work involves searching large collections of documents, Findit6Agent can turn archive research that would otherwise require manual searching, specialized retrieval software or considerable staff time into an interactive, source-based research process.</p>
+
+        <p>Its particular strength is that it works directly with the archive you already have. New or recently changed files are immediately searchable, and the original data remains under your control.</p>
+      </section>
+
+      <section id="first-steps">
+        <h2>Findit6Agent - First Steps</h2>
+        <p>For your first search, only a few steps are required.</p>
+      </section>
+
+      <section id="where">
+        <h2>1. Define where Findit6Agent may search</h2>
+
+        <p>Open <strong>Where to search</strong> and create or select a search path group. A path group defines the drives and folders Findit6Agent is allowed to search. Check the locations you want to include and confirm your selection with OK.</p>
+
+        <p>You can create several groups for different purposes - for example one for your main archive, another for current projects, or separate groups for private and professional data.</p>
+
+        <p>Findit6Agent and the AI work strictly within the locations included in the currently selected path group. A path group can contain folders from several drives; there is no need to reorganize your existing archive.</p>
+
+        <p class="smallnote">If you want Findit6Agent to search scanned documents using OCR, please also read the <a href="#ocr">OCR note in the Technical Appendix</a> at the end of this page.</p>
+      </section>
+	  
+	          <div class="api-note">
+          <p class="api-title">&#128161; Chat subscription or API access?</p>
+          <p>A regular ChatGPT, Claude or similar monthly subscription normally covers chatting on the provider's website. <strong>Findit6Agent needs separate API access</strong> so the AI can work automatically in the background. API usage is billed by the amount of text processed; a typical search usually costs only a few cents. How to enable API access is explained on the website of the respective provider.</p>
+          <p><strong>No API is required for local use:</strong> Guided Mode can run completely on your own computer with Ollama and a suitable local model. This requires Ollama and sufficiently capable hardware (typically <strong>12 GB VRAM or more</strong>).</p>
+        </div>
+		
+      <section id="connect">
+        <h2>2. Connect an AI model</h2>
+
+        <h2>Choose Guided Mode or Agent Mode</h2>
+
+        <p>Depending on the provider and type of model you use, Findit6Agent can work in different ways.</p>
+
+        <p><strong>Large, high-capability models accessed through an API</strong> can plan and carry out a complex research process largely on their own. They can use Findit much like a human researcher would: decide what to search for, inspect the results, refine the search, read relevant sources and continue until they can produce a final answer. This is what <strong>Agent Mode</strong> is designed for.</p>
+
+        <p><strong>Smaller language models</strong> - especially models that can run locally on your own computer - can also use Findit, but they benefit from a less complex workflow. In <strong>Guided Mode</strong>, Findit6Agent leads the model through a series of predefined research steps and supports the process with a local semantic reranker.</p>
+
+        <div class="modegrid">
+          <div class="card">
+            <h3>Agent Mode</h3>
+            <p>For capable models that can plan searches, evaluate results, read selected sources and refine their own research strategy until they have enough evidence to answer. <br> You can chat with the Agent while it works, guide the research at any time, or simply let it work autonomously.</p>
+            <div class="doclinks">
+              <a href="Findit6Agent_AgentMode.html">Agent Mode details</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Guided Mode</h3>
+            <p>For smaller and local models. Findit6Agent breaks the research into controlled stages and uses a local semantic reranker to help select relevant material.<br>
+			There is no interactive chat during a Guided Mode search; the individual processing steps do not share a continuous conversational memory..</p>
+            <div class="doclinks">
+              <a href="Findit6Agent_GuidedMode.html">Guided Mode details</a>
+            </div>
+          </div>
+        </div>
+
+        <p>After choosing the working mode, select the provider and model you want to use.</p>
+
+        <p>When using an external provider, enter the required connection information and API key. With Ollama in Guided Mode, the AI processing itself can remain completely local.</p>
+
+        <div class="callout">
+          <strong>Guided Mode is included with Findit6Agent.</strong><br>
+          The local Python environment and semantic reranker required by the Guided workflow are installed together with Findit6Agent. Ollama and a suitable local language model are only required if you want the AI processing itself to run locally.
+        </div>
+      </section>
+
+
+      <section id="userinfo">
+        <h2>Tell the Agent something about you</h2>
+
+        <p>The <strong>Name of User</strong> and <strong>Basic information about User</strong> fields are especially useful in Agent Mode.</p>
+
+        <p>You can provide a short description of yourself, your work or the kind of archive you are searching. For example:</p>
+
+        <div class="callout">
+          German TV journalist specializing in environmental and economic topics, with an archive growing since 1995.
+        </div>
+
+        <p>This helps the Agent interpret otherwise ambiguous references. It may understand what you mean by “my reports”, recognize recurring project structures or understand why certain people, organizations or document types are likely to matter.</p>
+
+        <p>Keep this description short. It is useful background information, not a complete biography.</p>
+      </section>
+
+
+      <section id="question">
+        <h2>3. Ask your first question</h2>
+
+        <p>Enter a question whose answer can reasonably be expected to exist somewhere in the selected archive. You do not need to write a Findit6 search expression yourself.</p>
+
+        <h3>Guided Mode</h3>
+        <p>Keep the question short, precise and focused on the information you want to find. Avoid telling the AI how to perform the search; the Guided workflow determines the individual processing steps automatically.</p>
+
+        <p>Multi-word technical terms and known synonyms can still be supplied explicitly when useful, for example <code>"combustion engine"</code> or <code>car ((automobile, vehicle))</code>.</p>
+
+        <h3>Agent Mode</h3>
+        <p>You can formulate the request more freely and provide additional information that may help the Agent understand your archive or develop a better search strategy. Useful hints about folder structures, naming conventions, document types, people, projects or other archive-specific knowledge can significantly improve the research.</p>
+      </section>
+
+<div class="api-note">
+  <p class="api-title">&#128274; The AI never has access to your files</p>
+
+  <p><strong>The connected AI never has access to your file system or your files - in any form.</strong>
+  It cannot open, read, create, write, modify, copy, move or delete files on your computer.</p>
+
+  <p>Think of the AI as a visitor standing in front of the secure archive. It cannot see what is stored in the stacks and cannot open a single drawer itself. The archivist - <strong>Findit6Agent</strong> - performs all searches and file access, selects material relevant to the current task and hands the AI only a working copy of the required text or text excerpts.</p>
+
+  <p><strong>Your original files remain untouched on your drives at all times.</strong></p>
+
+  <p>When you use an external AI provider, only text explicitly supplied by Findit6Agent is transmitted to that provider for processing. With a fully local setup, even this copies of text remain on your computer as well.</p>
+</div>
+
+      <section id="start">
+        <h2>4. Start the search</h2>
+
+        <p>Press <strong>Start / Send</strong>.</p>
+
+        <p>Findit6Agent now performs the required processing steps and shows them in the visible protocol.</p>
+
+        <p>A search may take several minutes, especially when AI reasoning or many documents have to be evaluated. The Findit6 full-text search itself is usually very fast even across large archives; much of the remaining time is spent constructing searches, evaluating results and reading relevant material.</p>
+
+        <p>You can watch the individual steps while they happen - or simply return a few minutes later and read the result. Whenever possible, the final answer includes references to the source files from which the information was derived.</p>
+      </section>
+
+      <section id="example">
+        <h2>Example workflow</h2>
+
+        <p>In a typical Agent Mode research run, the Agent may search more than 50,000 files, reduce hundreds of initial matches to a manageable set of candidates, inspect selected source documents and produce a referenced answer within a few minutes.</p>
+
+        <p class="smallnote">The exact duration depends on archive size, hardware, model, provider and the amount of evidence the question requires.</p>
+      </section>
+
+      <section id="next">
+        <h2>That's it</h2>
+
+        <p>You are now ready to use Findit6Agent. There is no need to import your archive, build a database or wait for an indexing process. Select where to search, connect an AI model and ask a question.</p>
+
+        <p>As you become more familiar with the system, the detailed documentation explains how Guided Mode and Agent Mode work, how local and external AI models differ and how the individual workflows can be customized.</p>
+
+        <div class="doclinks">
+          <a href="Findit6Agent_AgentMode.html">Open Agent Mode help</a>
+          <a href="Findit6Agent_GuidedMode.html">Open Guided Mode help</a>
+        </div>
+      </section>
+
+
+      <section id="hardware">
+        <h2>Hardware requirements</h2>
+
+        <h3>Agent Mode with external AI</h3>
+        <p>Agent Mode with an external AI provider can be used on practically any reasonably current Windows computer. No dedicated GPU is required. Findit6 itself benefits from more CPU cores, higher clock speeds and fast storage, so older laptops will generally search more slowly than modern desktop systems. In normal use, however, archives up to around 100 GB can still remain practical on older hardware.</p>
+
+        <h3>Guided Mode with external AI</h3>
+        <p>Guided Mode also works well with external AI providers, but adds a local semantic reranker. Whenever possible, the reranker uses the graphics processor through DirectML. On systems with limited graphics hardware - especially integrated graphics and smaller or older laptops - DirectML may not be usable reliably. Findit6Agent then automatically falls back to CPU-based reranking.</p>
+        <p>CPU reranking produces the same full-length reranking workflow, but can be considerably slower. Depending on the hardware, the number and length of candidate documents and the complexity of the search, reranking time can increase substantially and may become impractical for some workloads.</p>
+
+        <h3>Fully local operation with Ollama</h3>
+        <p>Running the AI itself locally through Ollama requires significantly more capable hardware. Findit6Agent is designed for local models starting at roughly the 14B class. For models around this lower end, at least <strong>12 GB of VRAM</strong> should be available, with <strong>16 GB or more recommended</strong>. Larger models may require correspondingly more VRAM. A GPU in this class will normally also provide sufficient performance for the local semantic reranker.</p>
+
+        <div class="callout">
+          <strong>Performance varies with the workload.</strong><br>
+          Search speed depends on archive size, CPU performance and storage speed. Guided Mode additionally depends on reranker performance, while fully local AI also depends heavily on GPU speed and available VRAM.
+        </div>
+      </section>
+
+      <section id="technical-appendix">
+        <h2>Technical Appendix</h2>
+
+        <h3>System requirements</h3>
+        <ul>
+          <li>Windows 10 or Windows 11, 64-bit.</li>
+          <li>Sufficient free disk space for Findit6Agent, local AI models and temporary Session Workspace data.</li>
+          <li>An Internet connection is required when external AI providers are used and when models or components are downloaded. A fully local Guided Mode workflow can operate without sending archive content to an external AI provider.</li>
+        </ul>
+
+<h3 id="ocr">OCR and scanned documents</h3>
+
+<p>Findit6Agent can also read and search scanned documents using OCR. Enable OCR when required using the checkbox at the top of the application.</p>
+
+<p>OCR processing can take considerably more time than normal text extraction. Once text has been extracted from a document, Findit6 stores the result in a small local cache so that the same document normally does not have to be processed again.</p>
+
+<p>Before using OCR extensively with Findit6Agent, it is therefore recommended to start Findit6 itself once and run an arbitrary search across the relevant data collection with OCR enabled. This allows the OCR cache to be built in advance and can make subsequent Agent searches significantly faster.</p>
+
+        <h3>Guided Mode and local AI</h3>
+        <ul>
+          <li>Findit6Agent includes the local Python runtime and semantic reranker required by Guided Mode.</li>
+          <li>A DirectML-compatible GPU is recommended for semantic reranking.</li>
+          <li>Local AI through Ollama requires Ollama and a suitable local language model.</li>
+          <li>For local operation, models starting at roughly the 14B class are recommended. Around 12 GB of VRAM is a practical minimum for models near this lower end; 16 GB or more is recommended, and larger models may require correspondingly more VRAM.</li>
+        </ul>
+
+        <div class="callout good">
+          <strong>No archive preparation is required.</strong><br>
+          Findit6Agent does not require prior indexing, vectorization or import of your archive. It works directly with the configured files and folders.
+        </div>
+      </section>
+
+
+      <section id="support">
+        <h2>Troubleshooting and Support</h2>
+
+        <p><strong>Findit6Agent is the first release of a new kind of research tool.</strong> We have tested it with great care and expect it to work directly after installation on the vast majority of systems. However, the number of possible combinations of Windows systems, hardware configurations, AI providers and models makes it impossible to test every environment in advance.</p>
+
+        <p>If you encounter a problem, please contact us at <a href="mailto:findit@dateisuche.de"><strong>findit@dateisuche.de</strong></a>. We will try to identify and resolve the issue as quickly as possible.</p>
+
+        <p>Findit6Agent creates a log file for every research run. As soon as you connect to an AI provider, a <strong>folder icon appears in the lower-right corner</strong> of the application. It opens the session folder containing the corresponding <code>*.log</code> file.</p>
+
+        <p>If possible, please attach this log file to your support request. It contains information about the individual processing steps, provider responses and errors and can make it considerably easier to identify the cause of a problem.</p>
+
+        <p class="smallnote">Before sending a log file, please review it if your research involves confidential file names, paths or document content. Depending on the search, such information may be included in the log.</p>
+      </section>
+
+
+      <div class="footer">
+        Findit6Agent Help - First Steps · HTML help
+      </div>
+
+    </article>
+  </main>
+</div>
+
+<script>
+const navSearch = document.getElementById('navSearch');
+const navLinks = [...document.querySelectorAll('#nav a')];
+
+navSearch.addEventListener('input', () => {
+  const q = navSearch.value.trim().toLowerCase();
+  navLinks.forEach(a => {
+    a.style.display = (!q || a.textContent.toLowerCase().includes(q)) ? 'block' : 'none';
+  });
+});
+
+const sections = [...document.querySelectorAll('section[id]')];
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+  });
+}, {rootMargin:'-20% 0px -70% 0px', threshold:0});
+
+sections.forEach(s => observer.observe(s));
+
+
+
+
+
+// UNIFIED_NAV_JS_BEGIN
+const menuToggle = document.getElementById('menuToggle');
+const topnav = document.getElementById('topnav');
+
+if (menuToggle && topnav) {
+  menuToggle.addEventListener('click', () => {
+    const open = topnav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuToggle.setAttribute(
+      'aria-label',
+      open ? 'Close documentation menu' : 'Open documentation menu'
+    );
+  });
+
+  topnav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    });
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && topnav.classList.contains('open')) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+      menuToggle.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1180) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    }
+  });
+}
+// UNIFIED_NAV_JS_END
+
+</script>
+</body>
+</html>

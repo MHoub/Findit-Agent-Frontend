@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Findit6Agent Help - Guided Mode</title>
+<style>
+:root{--bg:#202730;--panel:#2c3745;--panel2:#344255;--line:#3c4857;--text:#d7dbe1;--muted:#aeb6c2;--heading:#f1f3f5;--accent:#b9dcff;--accent2:#7eb8ee;--code:#182029;--good:#93d7b5;--warn:#e4c27b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.topbar{position:sticky;top:0;z-index:20;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#34445a;border-bottom:1px solid #435167;color:white}.topbar .title{font-size:19px;font-weight:650}.topbar .actions{display:flex;gap:10px;align-items:center}.topbar button{background:transparent;border:0;color:#c8d2df;font-size:18px;cursor:pointer;padding:5px 8px}.layout{display:grid;grid-template-columns:294px minmax(0,1fr);min-height:calc(100vh - 54px)}.sidebar{position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto;padding:30px 22px 40px 10px;border-right:1px solid var(--line);background:#242d38}.searchbox{display:flex;align-items:center;gap:8px;background:#344255;border:1px solid #3e4d60;border-radius:5px;padding:7px 10px;margin:0 0 22px}.searchbox input{width:100%;background:transparent;border:0;outline:0;color:#e6ebf2;font-size:14px}.searchbox input::placeholder{color:#8794a5}.nav a{display:block;padding:8px 10px;margin:2px 0;border-radius:4px;color:#c9e4ff;font-size:13.5px;font-weight:600}.nav a:hover,.nav a.active{background:#303c4b;text-decoration:none}.nav .sub{padding-left:22px;font-weight:500;color:#abc2d8}.main{padding:34px 44px 80px}.article{max-width:980px;margin:0 auto}h1,h2,h3{color:var(--heading);line-height:1.25}h1{font-size:34px;margin:0 0 22px}h2{font-size:25px;margin:38px 0 15px;padding-bottom:7px;border-bottom:1px solid var(--line)}h3{font-size:19px;margin:28px 0 8px}p{margin:0 0 16px}ul,ol{margin-top:7px}strong{color:#edf1f6}.callout{border-left:4px solid var(--accent2);background:var(--panel);padding:15px 18px;margin:20px 0;border-radius:4px}.callout.good{border-left-color:var(--good)}.callout.warn{border-left-color:var(--warn)}.modegrid,.linkgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:18px}.card h3{margin-top:0}.tag{display:inline-block;padding:2px 8px;border-radius:999px;background:#3b4a5d;color:#d9ebfb;font-size:12px;font-weight:700}.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:20px 0;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:7px}.flow .step{background:#303c4b;border:1px solid #435267;border-radius:5px;padding:7px 11px;font-weight:600}.flow .arrow{color:#91a7bc}code{font-family:Consolas,"Courier New",monospace;background:var(--code);color:#e1e9f1;padding:2px 5px;border-radius:4px}.filelink{display:block;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:9px 0}.filelink small{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}
+.filelink span{display:block;color:var(--text);font-size:13.5px;line-height:1.5;font-weight:400}.footer{color:#8995a3;font-size:12px;border-top:1px solid var(--line);padding-top:18px;margin-top:50px}@media(max-width:700px){.layout{display:block}.sidebar{position:relative;top:0;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:18px}.main{padding:28px 22px 60px}.modegrid,.linkgrid{grid-template-columns:1fr}}@media print{.topbar,.sidebar{display:none}.layout{display:block}.main{padding:0}body{background:white;color:#222}h1,h2,h3,strong{color:#111}.card,.callout,.flow,.filelink{background:#f5f5f5;border-color:#ccc}a{color:#124b7a}}
+
+.doclinks{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.doclinks a{display:inline-block;background:#303c4b;border:1px solid #435267;border-radius:5px;padding:8px 12px;font-weight:600}
+.doclinks a:hover{background:#374557;text-decoration:none}
+.smallnote{color:var(--muted);font-size:13.5px}
+.mood{font-size:13px;font-weight:600;color:var(--muted);margin-left:10px;white-space:nowrap;vertical-align:middle}
+
+.settings-note{float:right;width:58%;background:var(--panel2);border:1px solid var(--line);border-left:4px solid var(--accent2);border-radius:6px;padding:14px 18px;margin:4px 0 18px 24px}
+.settings-note p{margin:0 0 10px}.settings-note p:last-child{margin-bottom:0}.settings-note .settings-title{font-weight:700;color:var(--heading)}
+@media(max-width:900px){.settings-note{float:none;width:100%;margin:20px 0 24px}}
+
+.topnav{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    margin-left:auto;
+    margin-right:18px;
+}
+
+.topnav a{
+    color:#d6e4f2;
+    padding:7px 11px;
+    border-radius:4px;
+    font-size:14px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.topnav a:hover{
+    background:#3d4e64;
+    text-decoration:none;
+}
+
+.topnav a.active{
+    background:#1f3144;
+    color:#ffffff;
+    border:1px solid #7eb8ee;
+    cursor:default;
+}
+
+/* UNIFIED_NAV_BEGIN */
+.topnav{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    margin-left:auto;
+    margin-right:18px;
+}
+
+.topnav a{
+    color:#d6e4f2;
+    padding:7px 10px;
+    border-radius:4px;
+    font-size:13.5px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.topnav a:hover{
+    background:#3d4e64;
+    text-decoration:none;
+}
+
+.topnav a.active{
+    background:#1f3144;
+    color:#ffffff;
+    border:1px solid #7eb8ee;
+    cursor:default;
+}
+
+.menu-toggle{
+    display:none;
+    background:transparent;
+    border:0;
+    color:#d6e4f2;
+    font-size:25px;
+    line-height:1;
+    cursor:pointer;
+    padding:6px 9px;
+    margin-left:auto;
+}
+
+@media(max-width:700px){
+    .topbar{position:sticky}
+
+    .topnav{
+        display:none;
+        position:absolute;
+        top:54px;
+        left:0;
+        right:0;
+        margin:0;
+        padding:9px 12px 12px;
+        background:#2b394b;
+        border-bottom:1px solid #435167;
+        box-shadow:0 5px 14px rgba(0,0,0,.22);
+        flex-direction:column;
+        align-items:stretch;
+        gap:2px;
+    }
+
+    .topnav.open{display:flex}
+
+    .topnav a{
+        display:block;
+        padding:9px 12px;
+        font-size:14px;
+    }
+
+    .menu-toggle{display:block}
+
+    .topbar .actions{margin-left:6px}
+}
+/* UNIFIED_NAV_END */
+
+</style>
+</head>
+<body>
+
+<header class="topbar">
+    <div class="title">Findit6Agent</div>
+
+    <button class="menu-toggle" id="menuToggle" type="button"
+            aria-label="Open documentation menu"
+            aria-controls="topnav"
+            aria-expanded="false">&#9776;</button>
+
+    <nav class="topnav" id="topnav" aria-label="Main documentation">
+        <a href="FinditAgent_Start.html">Read First</a>
+        <a href="Findit6Agent_AgentMode.html">Agent Mode</a>
+        <a class="active" aria-current="page">Guided Mode</a>
+        <a href="Findit6Agent_Model_Behavior.html">Model Behavior</a>
+        <a href="FinditAgent_What_AI_Says.html">What AI Says</a>
+        <a href="Findit6Agent_License_and_Legal.html">License &amp; Legal</a>
+    </nav>
+
+    <div class="actions">
+        <button type="button" onclick="history.back()" title="Back">&#9664;</button>
+        <button type="button" onclick="history.forward()" title="Forward">&#9654;</button>
+        <button type="button" onclick="window.print()" title="Print">&#9113;</button>
+    </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="searchbox">
+      <input id="navSearch" type="search" placeholder="Search..." aria-label="Search navigation">
+      <span>🔎</span>
+    </div>
+
+    <nav class="nav" id="nav">
+      <a href="#overview">Guided Mode</a>
+      <a href="#why-steps">Why separate steps?</a>
+      <a href="#moods">Moods</a>
+      <a href="#markdown">Markdown instructions</a>
+      <a href="#step0">Step 0 - Prepare question</a>
+      <a href="#step1">Step 1 - Core entity</a>
+      <a href="#step1b">Step 1b - Entity relation</a>
+      <a href="#step2">Step 2 - Relevant aspects</a>
+      <a href="#step3">Step 3 - Aspect logic</a>
+      <a href="#step4">Step 4 - Remove soft aspects</a>
+      <a href="#step5">Step 5 - User rules</a>
+      <a href="#step6">Step 6 - Word stems</a>
+      <a href="#step7">Step 7 - Leading wildcard</a>
+      <a href="#step8">Step 8 - Synonym optimization</a>
+      <a href="#findit-search">Findit6 full-text search</a>
+      <a href="#reranker-question">Build reranker question</a>
+      <a href="#reranking">Reranking</a>
+      <a href="#reading">Read relevant files</a>
+      <a href="#synthesis">Synthesis</a>
+      <a href="#complete">Complete workflow</a>
+      <a href="#statistics">Statistical research</a>
+      <a href="#license">Source and license</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <article class="article">
+
+      <section id="overview">
+        <h1>Guided Mode</h1>
+
+        <p><strong>Guided Mode turns one user question into a controlled sequence of smaller AI tasks.</strong> It is designed especially for local or smaller language models that are not reliable enough to plan and execute a complete autonomous research strategy on their own.</p>
+
+        <p>Instead of asking one model to manage the entire research process, Guided Mode breaks query construction, semantic ranking, document evaluation and synthesis into carefully defined stages. Each stage receives only the information and instruction it needs.</p>
+
+<div class="callout">
+  <strong>This page is more than documentation.</strong><br>
+  It also serves as a direct reference to the instruction files that control Guided Mode. The linked Markdown files are the actual working instructions used by Findit6Agent during research. You can open them directly from this page and, where appropriate, adapt them to your own archive and workflow.<br><br>
+  Most core instruction files should normally remain unchanged; <code>Agent_User_Rules.md</code> is specifically intended for your own archive-specific rules and additions.
+</div>
+
+      <section id="why-steps">
+        <h2>Why Guided Mode works in separate steps</h2>
+
+        <p>Building a useful deterministic full-text query is more complex than it first appears. The goal is to retrieve as many relevant files as possible without producing an excessive number of irrelevant hits.</p>
+
+        <p>For this reason, query construction and later document evaluation are divided into separate AI tasks. Especially with local models, context windows may be limited while the documents to be evaluated can be large. Guided Mode therefore processes most stages independently and without conversation history unless a later stage explicitly requires memory.</p>
+
+        <div class="flow" aria-label="Guided Mode workflow">
+          <span class="step">User question</span><span class="arrow">→</span>
+          <span class="step">Query construction</span><span class="arrow">→</span>
+          <span class="step">Findit6</span><span class="arrow">→</span>
+          <span class="step">Reranker</span><span class="arrow">→</span>
+          <span class="step">Document excerpts</span><span class="arrow">→</span>
+          <span class="step">Synthesis</span>
+        </div>
+      </section>
+
+      <section id="moods">
+        <div class="settings-note">
+          <p class="settings-title">Guided Mode settings</p>
+          <p>When connecting a model, two preset values can be adjusted.</p>
+          <p><strong>Maximum Excerpt Length</strong> defines the maximum amount of text that may be supplied to the model in an individual excerpt-processing step. Models with smaller context windows may require a lower value.</p>
+          <p><strong>Duplicate Threshold</strong> defines how similar two files must be according to Findit6Agent's internal similarity calculation before one of them is treated as a duplicate and excluded from further evaluation. The default value of 80 is tuned to identify very close duplicates while preserving documents with substantial differences. The value is a similarity score, not a literal percentage of identical text.</p>
+        </div>
+
+        <h2>Moods: different settings for different tasks</h2>
+
+        <p>Local models can behave very differently depending on the task and on inference parameters. Findit6Agent calls these task-specific presets <strong>Moods</strong>.</p>
+
+        <p>A narrowly defined logical task may work best with little or no reasoning, low temperature and tightly constrained sampling. A broader or more creative task may benefit from more reasoning and a wider range of possible continuations.</p>
+
+        <p>Each Guided Mode step therefore selects an appropriate Mood. The selected Mood is defined in the corresponding Markdown instruction. The Mood settings themselves can be adjusted in <code>Findit6Agent.ini</code>.</p>
+        <div style="clear:both"></div>
+      </section>
+
+      <section id="markdown">
+        <h2>Markdown instructions</h2>
+
+        <p>For every processing step, the AI receives a dedicated Markdown instruction file into which Findit6Agent inserts the information required for that stage.</p>
+
+        <p>These Markdown files can be edited directly and are the main way to fine-tune Guided Mode. Small wording changes can have unexpectedly large effects, so modifications should be made carefully.</p>
+
+        <p>A clean copy of the original Markdown files is kept in the Findit6Agent program directory so the default behaviour can always be restored.</p>
+      </section>
+
+      <section id="step0">
+        <h2><span class="stepno">Step 0</span> Prepare the user question <span class="mood">Mood: LogicalSmall</span></h2>
+        <div class="stepfiles">
+          <a href="../AgentsWorkspace/chunk_Query_0.md">chunk_Query_0.md</a>
+        </div>
+
+        <p>If necessary, the AI performs a light spelling correction, determines the language used by the user and detects any time restriction requested in the question, for example documents from the last four years.</p>
+
+        <p class="workflow-note">This step normally takes only a few seconds.</p>
+      </section>
+
+      <section id="step1">
+        <h2><span class="stepno">Step 1</span> Identify the core entity or entities <span class="mood">Mood: LogicalLarge</span></h2>
+        <div class="stepfiles">
+          <a href="../AgentsWorkspace/chunk_Query_1.md">chunk_Query_1.md</a>
+        </div>
+
+        <p>Most questions contain one core entity that must appear in every document capable of answering the question. In rare cases there may be two equally important core entities that have to be treated separately.</p>
+
+        <div class="callout">
+          <strong>Example:</strong> For dogs and cats, what is documented about their paws and claws?<br>
+          The core entities are <strong>dogs OR cats</strong>. Relevant documents may concern either one.
+        </div>
+
+        <p>Depending on the complexity of the question, a smaller local model may need some time to make this decision reliably.</p>
+      </section>
+
+      <section id="step1b">
+        <h2><span class="stepno">Step 1b</span> Determine the logical relationship between multiple core entities <span class="mood">Mood: LogicalSmall</span></h2>
+        <div class="stepfiles">
+          <a href="../AgentsWorkspace/chunk_Query_1b.md">chunk_Query_1b.md</a>
+        </div>
+
+        <p>If two equally important core entities are found, the AI decides whether they are likely to occur in different documents or whether both must be discussed together in the same document.</p>
+
+        <p><strong>Alternative:</strong> “What do we know about the paws of dogs and cats?” The entities can be searched as alternatives.</p>
+        <p><strong>Intersection:</strong> “Why do dogs and cats rarely get along well?” Both entities are part of the same relationship and normally need to occur together.</p>
+      </section>
+
+      <section id="step2">
+        <h2><span class="stepno">Step 2</span> Identify relevant aspects <span class="mood">Mood: LogicalSmall</span></h2>
+        <div class="stepfiles">
+          <a href="../AgentsWorkspace/chunk_Query_2.md">chunk_Query_2.md</a>
+        </div>
+
+        <p>Most questions ask for specific details about the core entity. At this stage the AI identifies the relevant aspects as plain terms without yet deciding how they should be combined logically.</p>
+      </section>
+
+      <section id="step3">
+        <h2><span class="stepno">Step 3</span> Determine the logical relationship between aspects <span class="mood">Mood: PreciseLarge</span></h2>
+        <div class="stepfiles">
+          <a href="../AgentsWorkspace/chunk_Query_3.md">chunk_Query_3.md</a>
+        </div>
+
+        <p>The AI decides whether the aspects must be connected by AND or OR.</p>
+
+        <div class="callout">
+          <strong>Example:</strong><br>
+          <code>(dogs OR cats) AND (paws OR claws)</code><br>
+          At least one core entity and at least one relevant aspect should occur in every useful document.
+        </div>
+
+        <p>This logical stage can require substantial reasoning for complex questions, especially when smaller local models are used.</p>
+      </section>
+
+      <section id="step4">
+        <h2><span class="stepno">Step 4</span> Remove soft aspects <span class="mood">Mood: PreciseLarge</span></h2>
+        <div class="stepfiles">
+          <a href="../AgentsWorkspace/chunk_Query_4.md">chunk_Query_4.md</a>
+        </div>
+
+        <p>Some aspects are poor full-text search terms even though they are important to the meaning of the question.</p>
+
+        <p>For example, if the user asks for a person's profession, the word <em>profession</em> itself may never appear in documents that instead say the person is a carpenter, lawyer or researcher.</p>
+
+        <p>Such soft aspects are therefore removed from the deterministic search expression. Findit6 can first retrieve documents about the person; the semantic reranker and later AI analysis can then identify which files actually contain the requested professional information.</p>
+      </section>
+
+      <section id="step5">
+        <h2><span class="stepno">Step 5</span> Apply user rules <span class="mood">Mood: Precise</span></h2>
+        <div class="stepfiles">
+          <a href="../AgentsWorkspace/chunk_Query_UserRules.md">chunk_Query_UserRules.md</a>
+        </div>
+
+        <p>You know your own documents better than the software does. If recurring information in your archive follows predictable patterns, custom rules can help the AI build more effective searches.</p>
+
+        <div class="callout">
+          <strong>Example:</strong> A mobile phone number may be labelled <em>mobile</em>, <em>cell</em> or <em>phone</em> - or may not be labelled at all. In Germany, mobile numbers normally begin with 015, 016 or 017.<br><br>
+          A user rule can therefore treat <code>015* OR 016* OR 017*</code> as strong evidence for a mobile phone number.
+        </div>
+
+        <p>The supplied Markdown contains example rules and can be adapted to the characteristics of your own archive.</p>
+      </section>
+
+      <section id="step6">
+        <h2><span class="stepno">Step 6</span> Truncate words to useful stems <span class="mood">Mood: Precise</span></h2>
+        <div class="stepfiles">
+          <a href="../AgentsWorkspace/chunk_Query_6.md">chunk_Query_6.md</a>
+          <a href="../AgentsWorkspace/chunk_Query_6D.md">chunk_Query_6D.md</a>
+        </div>
+
+        <p>Findit6 searches exact character sequences. A search for <code>battery</code> would not automatically find <code>batteries</code>. The AI therefore reduces suitable words to the shortest useful stem, for example <code>batter*</code>. An occasional false positive can later be removed by the semantic reranker.</p>
+
+        <p>This stage uses a hybrid linguistic truncation method developed independently for Findit6Agent by Michael Houben in 2026. It combines context-sensitive LLM-derived morphological and derivational word forms with deterministic common-prefix truncation, a minimum-prefix safety threshold and an OR fallback when no sufficiently safe common prefix exists.</p>
+      </section>
+
+      <section id="step7">
+        <h2><span class="stepno">Step 7</span> Possible leading wildcard <span class="mood">Mood: Precise</span></h2>
+        <div class="stepfiles">
+          <a href="../AgentsWorkspace/chunk_Query_7.md">chunk_Query_7.md</a>
+          <a href="../AgentsWorkspace/chunk_Query_7D.md">chunk_Query_7D.md</a>
+        </div>
+
+        <p>The AI decides whether a leading wildcard is useful. For example, <code>*book*</code> may also find notebook, textbook, handbook or bookshelf. But a pattern such as <code>*art*</code> could match many unrelated words.</p>
+
+        <p>A leading wildcard is therefore added only when it is likely to improve recall without creating excessive noise. This optimization is language-dependent and currently uses separate English and German instruction files.</p>
+      </section>
+
+      <section id="step8">
+        <h2><span class="stepno">Step 8</span> Final query optimization <span class="mood">Mood: Reasoning</span></h2>
+        <div class="stepfiles">
+          <a href="../AgentsWorkspace/chunk_Query_8.md">chunk_Query_8.md</a>
+          <a href="../AgentsWorkspace/chunk_Query_8D.md">chunk_Query_8D.md</a>
+        </div>
+
+        <p>The AI may add close synonyms with the same intended meaning. For example, a search for <code>car</code> may also need <code>automobile</code> or <code>vehicle</code>.</p>
+
+        <p>This optimization is language-dependent and currently uses separate English and German instruction files.</p>
+      </section>
+
+      <section id="findit-search">
+        <h2>Findit6 starts the full-text search</h2>
+
+        <p>The finished query is now sent to Findit6. On suitable hardware, Findit6 can scan roughly 100 GB of data per minute. While the full-text search is running, the AI can already prepare the next stage.</p>
+      </section>
+
+      <section id="reranker-question">
+        <h2>Build the reranker question <span class="mood">Mood: Precise</span></h2>
+        <div class="stepfiles">
+          <a href="../AgentsWorkspace/chunk_Identify_Questions.md">chunk_Identify_Questions.md</a>
+        </div>
+
+        <p>Findit6 retrieves every file matching the deterministic query, but it has no semantic understanding and cannot decide whether a matching document actually answers the user's question. Reading every hit with the AI would be inefficient.</p>
+
+        <p>The AI therefore converts the user's information need into one or more concise questions for the local semantic reranker.</p>
+
+        <div class="callout">
+          <strong>Example:</strong> “Which products does Example Company manufacture, and which of them present a swallowing hazard?”<br>
+          General product information and safety reports may live in very different files. Separate reranker questions can improve retrieval quality.
+        </div>
+      </section>
+
+      <section id="reranking">
+        <h2>Reranking the Findit6 results</h2>
+
+        <p>When the Findit6 search is finished, the result list can be opened directly from the protocol.</p>
+
+        <p>The local semantic reranker scores the found files according to their likely relevance to the current reranker question. On a typical consumer GPU, roughly 100 files per minute may be evaluated. High-end systems can be faster; laptops may be substantially slower.</p>
+
+        <p>The Session Workspace contains the reranked result list sorted by relevance score.</p>
+      </section>
+
+      <section id="reading">
+        <h2>Read the most relevant files <span class="mood">Mood: Precise</span></h2>
+        <div class="stepfiles">
+          <a href="../AgentsWorkspace/chunk_06_ExcerptLong.md">chunk_06_ExcerptLong.md</a>
+          <a href="../AgentsWorkspace/chunk_06_ExcerptMed.md">chunk_06_ExcerptMed.md</a>
+          <a href="../AgentsWorkspace/chunk_06_ExcerptShort.md">chunk_06_ExcerptShort.md</a>
+        </div>
+
+        <p>The AI processes the highest-ranked files one after another. A local AI with a limited context window extracts the relevant passages and collects them in an excerpt file for later synthesis. These files are stored in the Session Workspace, for example as <code>excerpt_xx.txt</code>.</p>
+
+        <p>At the end of the search-run you will find a file  xyz_excerpt.txt within the Session folder. It will contain all excerpts the agent produced</p>
+
+        <p>Small, medium-sized and very large files are handled slightly differently for efficiency. Separate Markdown instructions are therefore used for different file sizes and for local versus large external models. These files usually require little or no customization.</p>
+      </section>
+
+      <section id="synthesis">
+        <h2>Synthesis - build the final answer <span class="mood">Mood: Precise</span></h2>
+        <div class="stepfiles">
+          <a href="../AgentsWorkspace/chunk_8_Synthesis.md">chunk_8_Synthesis.md</a>
+          <a href="../AgentsWorkspace/chunk_8_SynthesisBigMod.md">chunk_8_SynthesisBigMod.md</a>
+        </div>
+
+        <p>The local AI receives the collected excerpts. A large external AI may already have the relevant material in its working context. The synthesis instruction asks the AI to answer the current question from this evidence.</p>
+
+        <p>If several separate information needs were identified earlier, the excerpt and synthesis stages are repeated for each one. The synthesis instructions also define how conflicting information should be handled and how direct source-file references should be added whenever possible.</p>
+      </section>
+
+      <section id="complete">
+        <h2>A complete Guided Mode search</h2>
+
+        <p>At this point the Guided Mode workflow is complete. The final stages - reading relevant files and synthesizing the answer - may run several times when the original user question was split into multiple independent information needs.</p>
+
+        <p>The linked Markdown files allow the workflow to be fine-tuned in considerable detail. Please change them carefully: small modifications can sometimes have large and unexpected effects. The original versions remain available in the Findit6Agent program directory so the default configuration can always be restored.</p>
+      </section>
+
+      <section id="statistics">
+        <h2>Statistical research</h2>
+
+        <p>The Guided Mode described on this page is currently optimized for knowledge-oriented research: identify relevant documents, rank them semantically, extract useful evidence and synthesize an answer.</p>
+
+        <p>Systematic statistical research - for example counting, classifying, deduplicating or aggregating a complete document population - uses a different research contract. This capability is currently implemented in Agent Mode through its dedicated Statistic research workflow.</p>
+
+        <p>A future Guided statistical workflow could reuse the same underlying ideas while dividing the work into smaller local-model-friendly stages. In particular, the persistent Ledger architecture provides a natural basis for collecting compact task-specific facts from many documents before deterministic classification or calculation. This is not yet part of the Guided workflow described above.</p>
+      </section>
+
+      <section id="license">
+        <h2>Source and license</h2>
+
+        <p>Findit6Agent is source-available under the PolyForm Perimeter License 1.0.1., and the source code is available on GitHub.</p>
+
+        <p>The license permits study, modification and many forms of reuse, but intentionally restricts use for competing commercial products. Developers are welcome to experiment with specialized workflows or contribute improvements within the terms of the license.</p>
+      </section>
+
+      <div class="footer">
+        Findit6Agent Help - Guided Mode · HTML help
+      </div>
+
+    </article>
+  </main>
+</div>
+
+<script>
+const navSearch = document.getElementById('navSearch');
+const navLinks = [...document.querySelectorAll('#nav a')];
+
+navSearch.addEventListener('input', () => {
+  const q = navSearch.value.trim().toLowerCase();
+  navLinks.forEach(a => {
+    a.style.display = (!q || a.textContent.toLowerCase().includes(q)) ? 'block' : 'none';
+  });
+});
+
+const sections = [...document.querySelectorAll('section[id]')];
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+  });
+}, {rootMargin:'-20% 0px -70% 0px', threshold:0});
+
+sections.forEach(s => observer.observe(s));
+
+
+// UNIFIED_NAV_JS_BEGIN
+const menuToggle = document.getElementById('menuToggle');
+const topnav = document.getElementById('topnav');
+
+if (menuToggle && topnav) {
+  menuToggle.addEventListener('click', () => {
+    const open = topnav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuToggle.setAttribute(
+      'aria-label',
+      open ? 'Close documentation menu' : 'Open documentation menu'
+    );
+  });
+
+  topnav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    });
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && topnav.classList.contains('open')) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+      menuToggle.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1180) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    }
+  });
+}
+// UNIFIED_NAV_JS_END
+
+</script>
+</body>
+</html>

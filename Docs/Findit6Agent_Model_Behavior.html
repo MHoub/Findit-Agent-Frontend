@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Findit6Agent - Model behavior and practical notes</title>
+<style>
+:root{--bg:#202730;--panel:#2c3745;--panel2:#344255;--line:#3c4857;--text:#d7dbe1;--muted:#aeb6c2;--heading:#f1f3f5;--accent:#b9dcff;--accent2:#7eb8ee;--code:#182029;--good:#93d7b5;--warn:#e4c27b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.topbar{position:sticky;top:0;z-index:20;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#34445a;border-bottom:1px solid #435167;color:white}.topbar .title{font-size:19px;font-weight:650}.topbar .actions{display:flex;gap:10px;align-items:center}.topbar button{background:transparent;border:0;color:#c8d2df;font-size:18px;cursor:pointer;padding:5px 8px}.layout{display:grid;grid-template-columns:294px minmax(0,1fr);min-height:calc(100vh - 54px)}.sidebar{position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto;padding:30px 22px 40px 10px;border-right:1px solid var(--line);background:#242d38}.searchbox{display:flex;align-items:center;gap:8px;background:#344255;border:1px solid #3e4d60;border-radius:5px;padding:7px 10px;margin:0 0 22px}.searchbox input{width:100%;background:transparent;border:0;outline:0;color:#e6ebf2;font-size:14px}.searchbox input::placeholder{color:#8794a5}.nav a{display:block;padding:8px 10px;margin:2px 0;border-radius:4px;color:#c9e4ff;font-size:13.5px;font-weight:600}.nav a:hover,.nav a.active{background:#303c4b;text-decoration:none}.nav .sub{padding-left:22px;font-weight:500;color:#abc2d8}.main{padding:34px 44px 80px}.article{max-width:980px;margin:0 auto}h1,h2,h3{color:var(--heading);line-height:1.25}h1{font-size:34px;margin:0 0 22px}h2{font-size:25px;margin:38px 0 15px;padding-bottom:7px;border-bottom:1px solid var(--line)}h3{font-size:19px;margin:28px 0 8px}p{margin:0 0 16px}ul,ol{margin-top:7px}strong{color:#edf1f6}.callout{border-left:4px solid var(--accent2);background:var(--panel);padding:15px 18px;margin:20px 0;border-radius:4px}.callout.good{border-left-color:var(--good)}.callout.warn{border-left-color:var(--warn)}.modegrid,.linkgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:18px}.card h3{margin-top:0}.tag{display:inline-block;padding:2px 8px;border-radius:999px;background:#3b4a5d;color:#d9ebfb;font-size:12px;font-weight:700}.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:20px 0;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:7px}.flow .step{background:#303c4b;border:1px solid #435267;border-radius:5px;padding:7px 11px;font-weight:600}.flow .arrow{color:#91a7bc}code{font-family:Consolas,"Courier New",monospace;background:var(--code);color:#e1e9f1;padding:2px 5px;border-radius:4px}.filelink{display:block;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:9px 0}.filelink small{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}
+.filelink span{display:block;color:var(--text);font-size:13.5px;line-height:1.5;font-weight:400}.footer{color:#8995a3;font-size:12px;border-top:1px solid var(--line);padding-top:18px;margin-top:50px}@media(max-width:900px){.layout{display:block}.sidebar{position:relative;top:0;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:18px}.main{padding:28px 22px 60px}.modegrid,.linkgrid{grid-template-columns:1fr}}@media print{.topbar,.sidebar{display:none}.layout{display:block}.main{padding:0}body{background:white;color:#222}h1,h2,h3,strong{color:#111}.card,.callout,.flow,.filelink{background:#f5f5f5;border-color:#ccc}a{color:#124b7a}}
+
+.doclinks{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.doclinks a{display:inline-block;background:#303c4b;border:1px solid #435267;border-radius:5px;padding:8px 12px;font-weight:600}
+.doclinks a:hover{background:#374557;text-decoration:none}
+.smallnote{color:var(--muted);font-size:13.5px}
+
+.topnav{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    margin-left:auto;
+    margin-right:18px;
+}
+
+.topnav a{
+    color:#d6e4f2;
+    padding:7px 11px;
+    border-radius:4px;
+    font-size:14px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.topnav a:hover{
+    background:#3d4e64;
+    text-decoration:none;
+}
+
+.topnav a.active{
+    background:#1f3144;
+    color:#ffffff;
+    border:1px solid #7eb8ee;
+    cursor:default;
+}
+
+/* UNIFIED_NAV_BEGIN */
+.topnav{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    margin-left:auto;
+    margin-right:18px;
+}
+
+.topnav a{
+    color:#d6e4f2;
+    padding:7px 10px;
+    border-radius:4px;
+    font-size:13.5px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.topnav a:hover{
+    background:#3d4e64;
+    text-decoration:none;
+}
+
+.topnav a.active{
+    background:#1f3144;
+    color:#ffffff;
+    border:1px solid #7eb8ee;
+    cursor:default;
+}
+
+.menu-toggle{
+    display:none;
+    background:transparent;
+    border:0;
+    color:#d6e4f2;
+    font-size:25px;
+    line-height:1;
+    cursor:pointer;
+    padding:6px 9px;
+    margin-left:auto;
+}
+
+@media(max-width:700px){
+    .topbar{position:sticky}
+
+    .topnav{
+        display:none;
+        position:absolute;
+        top:54px;
+        left:0;
+        right:0;
+        margin:0;
+        padding:9px 12px 12px;
+        background:#2b394b;
+        border-bottom:1px solid #435167;
+        box-shadow:0 5px 14px rgba(0,0,0,.22);
+        flex-direction:column;
+        align-items:stretch;
+        gap:2px;
+    }
+
+    .topnav.open{display:flex}
+
+    .topnav a{
+        display:block;
+        padding:9px 12px;
+        font-size:14px;
+    }
+
+    .menu-toggle{display:block}
+
+    .topbar .actions{margin-left:6px}
+}
+/* UNIFIED_NAV_END */
+
+</style>
+</head>
+<body>
+
+<header class="topbar">
+    <div class="title">Findit6Agent</div>
+
+    <button class="menu-toggle" id="menuToggle" type="button"
+            aria-label="Open documentation menu"
+            aria-controls="topnav"
+            aria-expanded="false">&#9776;</button>
+
+    <nav class="topnav" id="topnav" aria-label="Main documentation">
+        <a href="FinditAgent_Start.html">Read First</a>
+        <a href="Findit6Agent_AgentMode.html">Agent Mode</a>
+        <a href="Findit6Agent_GuidedMode.html">Guided Mode</a>
+        <a class="active" aria-current="page">Model Behavior</a>
+        <a href="FinditAgent_What_AI_Says.html">What AI Says</a>
+        <a href="Findit6Agent_License_and_Legal.html">License &amp; Legal</a>
+    </nav>
+
+    <div class="actions">
+        <button type="button" onclick="history.back()" title="Back">&#9664;</button>
+        <button type="button" onclick="history.forward()" title="Forward">&#9654;</button>
+        <button type="button" onclick="window.print()" title="Print">&#9113;</button>
+    </div>
+</header>
+
+<div class="layout">
+<aside class="sidebar">
+  <div class="searchbox"><input id="navSearch" type="search" placeholder="Search..." aria-label="Search navigation"><span>🔎</span></div>
+  <nav class="nav" id="nav">
+    <a href="#intro">Why this page exists</a>
+    <a href="#question">The question changes the research</a>
+    <a href="#claude">Anthropic / Claude</a>
+    <a href="#grok">xAI / Grok</a>
+    <a href="#gemini">Google / Gemini</a>
+    <a href="#perplexity">Perplexity</a>
+    <a href="#mistral">Mistral</a>
+    <a href="#openai">OpenAI</a>
+    <a href="#ollama">Ollama / local models</a>
+    <a href="#compatible">Groq, STACKIT, Scaleway &amp; others</a>
+    <a href="#costs">Speed, cost and changing models</a>
+  </nav>
+</aside>
+
+<main class="main"><article class="article">
+
+<section id="intro">
+<h1>Model behavior in Findit6Agent</h1>
+<p><strong>This is deliberately not a benchmark table.</strong></p>
+<p>Findit6Agent can work with a growing number of AI providers, but the models do not behave like interchangeable engines. In practice they behave more like different researchers: some are fast and pragmatic, some are cautious, some are stubborn, some happily disappear into a rabbit hole and come back with things I had not even thought of asking for.</p>
+<p>The notes below are based on real searches in my own archive - roughly 50,000 files and about 55 GB of material collected over several decades. They are personal observations from development and repeated testing, not laboratory measurements and certainly not guarantees. Providers change models, prices and inference behavior all the time. I will update this page when my own experience changes.</p>
+<div class="callout"><strong>Technical compatibility is not the same as a recommendation.</strong><br>A provider may expose a perfectly compatible API while offering many models that are too small, too literal or simply not reliable enough for autonomous Agent Mode research.</div>
+</section>
+
+<section id="question">
+<h2>The wording of the question really matters in Agent Mode</h2>
+<p>This sounds obvious, but during testing I managed to forget it myself. Agent Mode is not a fixed pipeline. The model decides how much research a task appears to require, so the wording of the request can strongly influence search depth, runtime and cost.</p>
+<p>A narrow factual question may be treated as a lookup. For example, I repeatedly asked Claude a question roughly equivalent to:</p>
+<div class="example">Which chemical substance also used in wind turbines causes climate-damaging emissions?</div>
+<p>Claude correctly found SF6, read a small number of strong documents and returned a useful answer. I initially complained that it had become lazy.</p>
+<p>Then I changed the task to:</p>
+<div class="example">Create a comprehensive report from the files in my archive about SF6 in wind turbines.</div>
+<p>The same model immediately behaved like a research agent again: it searched the complete archive, analysed the candidate population, read source documents and opened separate research branches for quantities, leakage and recycling, technical alternatives, manufacturers, atmospheric measurements, environmental organizations, costs, regulation and political debate before writing the final report.</p>
+<div class="callout good"><strong>Practical lesson:</strong> ask for the product you actually want. If you want one fact, ask for one fact. If you want a thorough research report, say so. If you want only the basic facts and no deep research, say that too.</div>
+</section>
+
+<section id="claude" class="provider">
+<h2>Anthropic / Claude</h2>
+<div class="meta">Agent Mode: extensively used during development</div>
+
+<p>Claude was the first model family I used while developing Agent Mode, and for some time it was effectively the only one. The differences between the Claude models became quite clear during testing. Haiku can operate Findit6 reliably and usually produces solid results, but its research tends to remain comparatively simple and straightforward.</p>
+
+<p>Sonnet is considerably stronger. Depending on the task - a simple knowledge question or an explicitly requested comprehensive report - it can vary its research depth quite substantially. It plans searches well, follows additional research branches when necessary and usually structures the final answer very cleanly. Opus pushes this further, especially in research depth and in the quality and language of the final synthesis. It is the Claude model I would choose when the result matters more than shaving a few minutes or cents off the run.</p>
+
+<p>In my typical test questions, which often contained several related information needs, Haiku usually finished within a few minutes and was the least expensive option. Sonnet tended to take somewhat longer, but API costs were still usually only a few dozen cents. Opus generally took a little more time again and could cost up to roughly twice as much, but in my tests even fairly substantial research runs usually remained below about €0.50.</p>
+</section>
+
+<section id="grok" class="provider">
+<h2>xAI / Grok - the truffle pig</h2>
+<div class="meta">Agent Mode: very strong, very thorough, not always cheap</div>
+<p>In our tests Grok behaved a little like a truffle pig. Whether the task was a factual knowledge question or a more statistical investigation across many files, it tended to reason for a while, follow side branches and keep searching until it genuinely seemed convinced that it had found the important material. The resulting summaries were usually excellent and often unusually complete.</p>
+<p>That thoroughness has a price in both time and API cost. Our recurring test question - essentially “Who is Axel F., what have I had to do with him, and what does he occasionally have to do with ovens?” - could cost around one euro in a deep Grok run. But the answer then really did contain the professional biography, the different aspects of our cooperation and the very specific oven story in detail.</p>
+<p>If you want something simpler, tell Grok explicitly. “Only the basic facts, no detailed research” makes a real difference. Left to itself, Grok tends to assume that finding one correct answer is not the same thing as finishing the research.</p>
+</section>
+
+<section id="gemini" class="provider">
+<h2>Google / Gemini</h2>
+<div class="meta">Agent Mode: fast, inexpensive and surprisingly capable in our tests</div>
+<p>Gemini Flash has been one of the pleasant surprises. It is fast, relatively inexpensive and has handled the Agent Mode protocol and iterative search logic much better than I would have expected from a model optimized so strongly for speed.</p>
+<p>It does not usually have Grok's appetite for digging through every possible side branch, but for many normal research jobs that is an advantage rather than a weakness. It tends to move quickly from search to evidence to answer and can therefore be a very attractive everyday choice when cost and turnaround time matter.</p>
+<p>For extremely difficult, ambiguous or forensic research I would still tend to choose one of the heavier models. For routine Agent Mode work, however, Gemini Flash has repeatedly produced results good enough that I am quite happy to keep it in the normal model list.</p>
+</section>
+
+<section id="perplexity" class="provider">
+<h2>Perplexity</h2>
+<div class="meta">Agent Mode: pragmatic, source-oriented and economical</div>
+<p>Perplexity has generally behaved more pragmatically than Grok. It likes concrete evidence, tends to get to useful source documents quickly and has produced strong answers at comparatively low cost.</p>
+<p>One early test exposed a useful weakness in our own Agent briefing: after receiving a hitlist that was too broad, Perplexity correctly stated that the list needed further refinement - and then stopped, waiting for the user. We changed the briefing to make the intended behavior explicit: decide on the next research action and execute it without asking for permission. In later runs Perplexity then refined the population autonomously and continued normally.</p>
+<p>I like it particularly for straightforward archive research where I want a capable model that does not automatically turn every question into an expedition. It has also been refreshingly sober when asked afterwards to evaluate Findit6Agent itself.</p>
+<p><b>But Perplexity in Guided Mode – Bertie Botts Every Flavour Queries.</b> In my tests, Perplexity occasionally followed very explicit transformation instructions only approximately — for example by altering a required marker sequence or changing a prescribed logical operator. Most runs were correct, some almost perfect...But such small deviations can be enough to break a tightly controlled Guided Mode search pipeline. For that reason, Perplexity currently works very well for me in Agent Mode, but I do not recommend it for Guided Mode.</p>
+</section>
+
+<section id="mistral" class="provider">
+<h2>Mistral</h2>
+<div class="meta">Guided Mode: extensively tested with Mistral Medium 3.5</div>
+<p>I had actually hoped that Mistral, as a major European AI provider, would play an equal role alongside Claude, Grok, Gemini and the others in Agent Mode. Unfortunately, that was not what I observed in my tests. Mistral was the only large model I tested that repeatedly formulated the deterministic Findit6 search queries noticeably less well than the others and sometimes lost the thread during more complex multi-step research.</p>
+
+<p>This reflects my experience with the models available in August 2026 and may well change with future versions. The API integration itself works perfectly well; the limitation I observed was the model's autonomous research behavior, not technical compatibility. For the time being I therefore cannot recommend Mistral for Agent Mode.</p>
+
+<p>In Guided Mode, however, the picture is completely different. Mistral Medium 3.5 has worked extremely well there. The controlled workflow plays to its strengths: it follows the individual instructions reliably, handles the different reasoning settings correctly and produces rich, high-quality results. In my tests it was clearly more capable than the smaller local models while still being reasonably fast and inexpensive. At the moment, Mistral is therefore one of my preferred external models for Guided Mode</p>
+</section>
+
+<section id="openai" class="provider">
+<h2>OpenAI</h2>
+<div class="meta">Agent Mode</div>
+<p>In my tests, the OpenAI models generally behaved like competent professional assistants: careful, structured and good at matching the amount of research effort to the task.</p><p>
+Luna was already surprisingly capable on normal Knowledge questions. It worked efficiently and produced a strong answer from a comparatively small number of well-chosen documents, although one test showed a minor protocol-following hiccup. But produced good results for sometimes less than 10 Eurocent.</p><p>
+Sol is a different animal. On a deliberately difficult archive-wide counting question, it spent more than twenty minutes refining the research, separating clear cases from ambiguous variants and eventually identified 56 indisputable productions plus four borderline cases that made a total of 60 defensible. In that kind of task it behaved almost like Grok's “truffle pig” - but with a meticulous accountant checking the final count afterwards.</p><p>
+That depth comes at a price. The Sol run cost about €2.75, roughly the same order as one of our most expensive Grok research runs. For difficult research where completeness matters more than speed or cost, however, the result was excellent.</p>
+</section>
+
+<h2>Ollama / local models</h2>
+<div class="meta">Guided Mode: Qwen3 14B currently my practical reference model</div>
+
+<p>I tested several current local model families with Ollama, including models optimized specifically for reasoning and others that are frequently recommended for agentic work. The results were surprisingly uneven. Some reasoning-focused models could spend enormous amounts of time thinking without ever reaching a clean, usable decision. Others handled language well but still failed on seemingly basic Guided Mode tasks such as reliably identifying the main entity in a question or separating that entity from the aspects being asked about.</p>
+
+<p>In my tests, Qwen3 14B was the model that consistently survived the complete Guided workflow. It is not fast on my RTX 4060 Ti with 16 GB VRAM and some processing stages require patience, but the final results can be remarkably good. With a well-structured Guided workflow, Qwen3 14B can produce answers that do not need to hide behind those from much larger externally hosted models.</p>
+
+<p>This should not be read as a general verdict on local AI. My hardware currently limits practical testing largely to the 14B class. Once you move beyond that size - especially with more than 16 GB of VRAM and access to substantially larger models - the picture may change considerably. Larger local models may well become much stronger candidates, including for more autonomous workflows.</p>
+
+<p>For now, however, Qwen3 14B is the local model I can actually recommend from repeated practical use. Other models may work, but “popular”, “reasoning optimized” or “agentic” does not automatically mean suitable for the very specific sequence of logical and research tasks used by Findit6Agent.</p>
+
+<section id="compatible" class="provider">
+<h2>Groq, STACKIT, Scaleway and other OpenAI-compatible providers</h2>
+<div class="meta">Technically compatible does not mean individually validated</div>
+<p>Findit6Agent includes a general OpenAI-compatible provider path. This makes it possible to connect services such as Groq, STACKIT, Scaleway and others without writing a dedicated provider implementation for every API.</p>
+<p>The important warning is that these services usually offer many different models. I have not tested every one of them, and I would not expect most smaller models in those catalogues to be suitable for autonomous Agent Mode research. Correct API responses and valid JSON are only the beginning; a useful Agent also needs strong instruction following, planning, source evaluation, context handling and the ability to continue a multi-step investigation without drifting or stopping too early.</p>
+<p>So please read “OpenAI-compatible” literally: the interface is compatible. It is not a blanket quality certificate for every model behind that interface. If you experiment with additional models, Guided Mode is often the safer place to start.</p>
+</section>
+
+<section id="costs">
+<h2>Speed, cost and model versions</h2>
+<p>Any exact price or timing quoted on this page is only a snapshot from my own tests. API pricing changes, providers introduce new model versions and reasoning settings can change token consumption dramatically.</p>
+<p>The same is true for “character”. A model update can make a previously cautious model more adventurous, or vice versa. Findit6Agent itself also continues to evolve, and better research briefings can change model behavior without changing the model at all.</p>
+<div class="callout warn"><strong>My recommendation:</strong> treat these notes as field experience, not as a purchasing guide carved in stone. Try the same real question with two or three models and watch the protocol. Findit6Agent makes their research behavior unusually visible - and after a few runs you will probably develop your own preferences.</div>
+</section>
+
+<div class="footer">Findit6Agent Help - Model behavior and practical notes</div>
+
+</article></main>
+</div>
+
+<script>
+const navSearch=document.getElementById('navSearch');
+const navLinks=[...document.querySelectorAll('#nav a')];
+navSearch.addEventListener('input',()=>{const q=navSearch.value.trim().toLowerCase();navLinks.forEach(a=>{a.style.display=(!q||a.textContent.toLowerCase().includes(q))?'block':'none'})});
+const sections=[...document.querySelectorAll('section[id]')];
+const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id))})},{rootMargin:'-20% 0px -70% 0px',threshold:0});
+sections.forEach(s=>observer.observe(s));
+
+
+// UNIFIED_NAV_JS_BEGIN
+const menuToggle = document.getElementById('menuToggle');
+const topnav = document.getElementById('topnav');
+
+if (menuToggle && topnav) {
+  menuToggle.addEventListener('click', () => {
+    const open = topnav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuToggle.setAttribute(
+      'aria-label',
+      open ? 'Close documentation menu' : 'Open documentation menu'
+    );
+  });
+
+  topnav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    });
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && topnav.classList.contains('open')) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+      menuToggle.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1180) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    }
+  });
+}
+// UNIFIED_NAV_JS_END
+
+</script>
+</body>
+</html>
