@@ -23,14 +23,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Show workspace
-        run: |
-          pwd
-          echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
-          ls -la
-          echo "--- docs ---"
-          ls -la "$GITHUB_WORKSPACE/docs"
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
