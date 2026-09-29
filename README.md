@@ -60,6 +60,7 @@ The complete research process is documented:
 Searches and result lists can be reopened and inspected by the user at any time. This makes the research process reproducible, transparent and directly verifiable — instead of producing an answer whose origin remains hidden.
 
 ![Findit Agent Screenshot](images/FINDIT6AGENT-Results.png)
+(Short Needle in the heystack lookup done by Gemini flash)
 
 👉 **[Program description and documentation](https://mhoub.github.io/Findit-Agent-Frontend/)**
 
