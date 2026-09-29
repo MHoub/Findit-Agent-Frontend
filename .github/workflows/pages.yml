@@ -1,4 +1,4 @@
-name: Deploy static documentation to Pages 1
+name: Deploy static documentation to Pages
 
 "on":
   push:
