@@ -31,7 +31,7 @@ Findit Agent Frontend and Findit 6a are available free of charge for private and
 
 ## Download, install, run
 
-👉 **[Download the complete Windows installer](DEIN-RELEASE-DOWNLOAD-LINK)**
+👉 **[Download the complete Windows installer](https://github.com/MHoub/Findit-Agent-Frontend/releases/tag/v1.00.01)**
 
 The installer contains all required Findit6Agent components, including the local reranker and its runtime environment. No manual setup is required.
 You only need an API key for a supported AI provider — or a working Ollama installation for local use.
