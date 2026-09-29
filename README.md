@@ -31,6 +31,8 @@ Findit Agent Frontend and Findit 6a are available free of charge for private and
 
 ## Download, install, run
 
+👉 **[Download the complete Windows installer](DEIN-RELEASE-DOWNLOAD-LINK)**
+
 The installer contains all required Findit6Agent components, including the local reranker and its runtime environment. No manual setup is required.
 You only need an API key for a supported AI provider — or a working Ollama installation for local use.
 
@@ -65,7 +67,7 @@ The complete research process is documented:
 Searches and result lists can be reopened and inspected by the user at any time. This makes the research process reproducible, transparent and directly verifiable — instead of producing an answer whose origin remains hidden.
 
 ![Findit Agent Screenshot](images/FINDIT6AGENT-Results.png)
-(Short Needle in the heystack lookup done by Gemini flash)
+Example: a short “needle in the haystack” lookup performed by Gemini Flash.
 
-👉 **[Program description and documentation](https://mhoub.github.io/Findit-Agent-Frontend/)**
+👉 **[Full documentation and first steps](https://mhoub.github.io/Findit-Agent-Frontend/)**
 
