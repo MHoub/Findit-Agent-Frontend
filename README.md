@@ -15,11 +15,12 @@ The research is performed by an AI agent using a wide range of supported LLMs (c
 
 ## 🏛️ The Archivist Principle
 
-Findit Agent acts as a smart archivist between your files and the AI:
+Findit6Agent acts as a strict **smart archivist** between your files and the AI.
 
-1. **Privacy First:** The AI never gets direct or full access to your archive.
-2. **On-Demand Access:** The AI asks Findit Agent to search, receives a list of results, and requests only specific documents or excerpts for deeper analysis.
-3. **Local Sovereignty:** Only the text required for the current task is sent to an external AI provider. With a powerful machine and a local LLM (via Ollama), **the entire process stays 100% local** – your archive, searches, and analysis never leave your computer.
+* **Privacy First:** The AI never gets any kind of access to any file in your archive. It operates completely isolated from your file system.
+* **On-Demand Access:** The AI asks Findit6Agent to search and receives only a list of results. It can then request specific documents or excerpts for deeper analysis—however, **the AI never accesses the original files directly**. It only receives extracted text copies transmitted strictly in **UTF-8 format**.
+* **Local Sovereignty:** Only the specific text required for the current task is passed to an AI provider. With a sufficiently powerful computer and a local LLM (via Ollama), **the entire process remains 100% local**: your archive, searches, extracted text, and AI analysis never leave your machine.
+
 
 ---
 
