@@ -67,10 +67,18 @@ You can reopen and inspect the agent's search history at any time, making the re
 
 ---
 
-## ⚖️ License & Terms
+## ⚖️ Source-Available & License Terms
 
-**Freeware Beta / Source-available**  
-Findit Agent Frontend and the underlying Findit engine are available **free of charge for private and experimental use**. Commercial, professional, or business use requires a valid commercial license.
+This repository contains the **complete source code** for Findit6Agent. 
+
+* **Source-Available:** The source code is licensed under the **[PolyForm Perimeter License 1.0.1](https://polyformproject.org)**. You are free to inspect, study, and modify the code, but you may not use it to create or support a competing product or service.
+* **Private & Experimental Use:** Findit6Agent is **free of charge** for private, non-commercial experimental, and evaluation use without a fixed expiration date.
+* **Commercial Use:** Any commercial, professional, or business use requires a valid commercial **Findit6** license (which includes Findit6Agent).
+
+*Note: This project is source-available, but not Open Source in the OSI-approved sense due to the competition restriction.*
+
+👉 For full details, warranty limitations, and third-party notices, please see the complete **[License & Legal Documentation](https://mhoub.github.io/Findit-Agent-Frontend/Findit6Agent_License_and_Legal.html)**.
+
 
 👉 **[Full documentation and first steps](https://mhoub.github.io/Findit-Agent-Frontend/)**
 
