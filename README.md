@@ -1,15 +1,6 @@
-# Findit Agent Frontend
+# Findit Agent 
 
 👉 **[Program description and documentation](https://mhoub.github.io/Findit-Agent-Frontend/)**
-
-🚧 **Work in Progress**
-
-This repository is currently under active development.  
-Available from early October with complete downloads and source code.
-
----
-
-## What is Findit Agent?
 
 **Findit Agent brings agentic AI research to your own local document collections.**
 
@@ -69,4 +60,6 @@ The complete research process is documented:
 Searches and result lists can be reopened and inspected by the user at any time. This makes the research process reproducible, transparent and directly verifiable — instead of producing an answer whose origin remains hidden.
 
 ![Findit Agent Screenshot](images/Screenshot1.png)
+
+👉 **[Program description and documentation](https://mhoub.github.io/Findit-Agent-Frontend/)**
 
