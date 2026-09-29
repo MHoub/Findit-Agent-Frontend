@@ -29,6 +29,11 @@ With a sufficiently powerful computer and a local LLM, even this processing can 
 
 Findit Agent Frontend and Findit 6a are available free of charge for private and experimental use. Commercial, professional or business use requires a valid commercial license.
 
+## Download, install, run
+
+The installer contains all required Findit6Agent components, including the local reranker and its runtime environment. No manual setup is required.
+You only need an API key for a supported AI provider — or a working Ollama installation for local use.
+
 ## Why Findit Agent?
 
 Findit6 searches existing local archives directly — without indexing, embeddings, vector databases or preprocessing. New or changed files are immediately available for research.
