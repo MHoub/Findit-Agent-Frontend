@@ -67,6 +67,7 @@ The complete research process is documented:
 Searches and result lists can be reopened and inspected by the user at any time. This makes the research process reproducible, transparent and directly verifiable — instead of producing an answer whose origin remains hidden.
 
 ![Findit Agent Screenshot](images/FINDIT6AGENT-Results.png)
+
 Example: a short “needle in the haystack” lookup performed by Gemini Flash. The Agent automatically works in the language used by the user and dominant in the archive. In this case, it found the private mobile number of the director of a major economic research institute in my archive — of course, the number is hidden here.
 
 👉 **[Full documentation and first steps](https://mhoub.github.io/Findit-Agent-Frontend/)**
