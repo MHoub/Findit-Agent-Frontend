@@ -21,6 +21,7 @@ Findit6Agent acts as a strict **smart archivist** between your files and the AI.
 * **On-Demand Access:** The AI asks Findit6Agent to search and receives only a list of results. It can then request specific documents or excerpts for deeper analysis—however, **the AI never accesses the original files directly**. It only receives extracted text copies transmitted strictly in **UTF-8 format**.
 * **Local Sovereignty:** Only the specific text required for the current task is passed to an AI provider. With a sufficiently powerful computer and a local LLM (via Ollama), **the entire process remains 100% local**: your archive, searches, extracted text, and AI analysis never leave your machine.
 
+👉 **[Full documentation and first steps](https://mhoub.github.io/Findit-Agent-Frontend/)**
 
 ---
 
