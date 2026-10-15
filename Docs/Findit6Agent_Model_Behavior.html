@@ -131,11 +131,12 @@
             aria-expanded="false">&#9776;</button>
 
     <nav class="topnav" id="topnav" aria-label="Main documentation">
-        <a href="FinditAgent_Start.html">Read First</a>
-        <a href="Findit6Agent_AgentMode.html">Agent Mode</a>
+       <a href="FinditAgent_Start.html">Read First</a>
+	    <a href="Findit6Agent_AgentMode.html">Agent Mode</a>
         <a href="Findit6Agent_GuidedMode.html">Guided Mode</a>
         <a class="active" aria-current="page">Model Behavior</a>
         <a href="FinditAgent_What_AI_Says.html">What AI Says</a>
+        <a href="FinditAgent_Live_Demos.html">Live Demos</a>
         <a href="Findit6Agent_License_and_Legal.html">License &amp; Legal</a>
     </nav>
 
@@ -145,6 +146,7 @@
         <button type="button" onclick="window.print()" title="Print">&#9113;</button>
     </div>
 </header>
+
 
 <div class="layout">
 <aside class="sidebar">
@@ -157,6 +159,7 @@
     <a href="#gemini">Google / Gemini</a>
     <a href="#perplexity">Perplexity</a>
     <a href="#mistral">Mistral</a>
+    <a href="#zai-glm">Mistral / Z.ai GLM</a>
     <a href="#openai">OpenAI</a>
     <a href="#ollama">Ollama / local models</a>
     <a href="#compatible">Groq, STACKIT, Scaleway &amp; others</a>
@@ -230,6 +233,13 @@
 <p>This reflects my experience with the models available in August 2026 and may well change with future versions. The API integration itself works perfectly well; the limitation I observed was the model's autonomous research behavior, not technical compatibility. For the time being I therefore cannot recommend Mistral for Agent Mode.</p>
 
 <p>In Guided Mode, however, the picture is completely different. Mistral Medium 3.5 has worked extremely well there. The controlled workflow plays to its strengths: it follows the individual instructions reliably, handles the different reasoning settings correctly and produces rich, high-quality results. In my tests it was clearly more capable than the smaller local models while still being reasonably fast and inexpensive. At the moment, Mistral is therefore one of my preferred external models for Guided Mode</p>
+</section>
+
+<section id="zai-glm" class="provider">
+<h2>Mistral-hosted / Z.ai GLM</h2>
+<div class="meta">Agent Mode: promising first tests; not yet extensively evaluated</div>
+<p>Mistral also hosts <strong>z.ai-glm-latest</strong>, a model developed in China by Z.ai rather than by Mistral itself. In my initial Agent Mode tests, it performed noticeably better at autonomous archive research than the Mistral-developed models I had previously tried. It planned sensible searches, selected relevant original documents and produced a detailed, well-structured report.</p>
+<p>In that first comparison, the results were broadly comparable to those I have seen from Claude Sonnet, GPT Sol and Grok, while the research was relatively fast. API pricing appears attractive, although I have not yet checked the actual cost of this particular run. This is still an early impression, not a thorough model evaluation. <strong>Nevertheless, z.ai-glm-latest is already a viable choice for Agent Mode.</strong></p>
 </section>
 
 <section id="openai" class="provider">

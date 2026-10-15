@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Live Research Demos | Findit6Agent</title>
+<style>
+:root{--bg:#202730;--panel:#2c3745;--panel2:#344255;--line:#3c4857;--text:#d7dbe1;--muted:#aeb6c2;--heading:#f1f3f5;--accent:#b9dcff;--accent2:#7eb8ee;--code:#182029;--good:#93d7b5;--warn:#e4c27b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.topbar{position:sticky;top:0;z-index:20;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#34445a;border-bottom:1px solid #435167;color:white}.topbar .title{font-size:19px;font-weight:650}.topbar .actions{display:flex;gap:10px;align-items:center}.topbar button{background:transparent;border:0;color:#c8d2df;font-size:18px;cursor:pointer;padding:5px 8px}.layout{display:grid;grid-template-columns:294px minmax(0,1fr);min-height:calc(100vh - 54px)}.sidebar{position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto;padding:30px 22px 40px 10px;border-right:1px solid var(--line);background:#242d38}.searchbox{display:flex;align-items:center;gap:8px;background:#344255;border:1px solid #3e4d60;border-radius:5px;padding:7px 10px;margin:0 0 22px}.searchbox input{width:100%;background:transparent;border:0;outline:0;color:#e6ebf2;font-size:14px}.searchbox input::placeholder{color:#8794a5}.nav a{display:block;padding:8px 10px;margin:2px 0;border-radius:4px;color:#c9e4ff;font-size:13.5px;font-weight:600}.nav a:hover,.nav a.active{background:#303c4b;text-decoration:none}.nav .sub{padding-left:22px;font-weight:500;color:#abc2d8}.main{padding:34px 44px 80px}.article{max-width:980px;margin:0 auto}h1,h2,h3{color:var(--heading);line-height:1.25}h1{font-size:34px;margin:0 0 22px}h2{font-size:25px;margin:38px 0 15px;padding-bottom:7px;border-bottom:1px solid var(--line)}h3{font-size:19px;margin:28px 0 8px}p{margin:0 0 16px}ul,ol{margin-top:7px}strong{color:#edf1f6}.callout{border-left:4px solid var(--accent2);background:var(--panel);padding:15px 18px;margin:20px 0;border-radius:4px}.callout.good{border-left-color:var(--good)}.callout.warn{border-left-color:var(--warn)}.modegrid,.linkgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:18px}.card h3{margin-top:0}.tag{display:inline-block;padding:2px 8px;border-radius:999px;background:#3b4a5d;color:#d9ebfb;font-size:12px;font-weight:700}.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:20px 0;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:7px}.flow .step{background:#303c4b;border:1px solid #435267;border-radius:5px;padding:7px 11px;font-weight:600}.flow .arrow{color:#91a7bc}code{font-family:Consolas,"Courier New",monospace;background:var(--code);color:#e1e9f1;padding:2px 5px;border-radius:4px}.filelink{display:block;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:9px 0}.filelink small{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}
+.filelink span{display:block;color:var(--text);font-size:13.5px;line-height:1.5;font-weight:400}.footer{color:#8995a3;font-size:12px;border-top:1px solid var(--line);padding-top:18px;margin-top:50px}@media(max-width:900px){.layout{display:block}.sidebar{position:relative;top:0;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:18px}.main{padding:28px 22px 60px}.modegrid,.linkgrid{grid-template-columns:1fr}}@media print{.topbar,.sidebar{display:none}.layout{display:block}.main{padding:0}body{background:white;color:#222}h1,h2,h3,strong{color:#111}.card,.callout,.flow,.filelink{background:#f5f5f5;border-color:#ccc}a{color:#124b7a}}
+
+.doclinks{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.doclinks a{display:inline-block;background:#303c4b;border:1px solid #435267;border-radius:5px;padding:8px 12px;font-weight:600}
+.doclinks a:hover{background:#374557;text-decoration:none}
+.smallnote{color:var(--muted);font-size:13.5px}
+.modegrid{clear:both}
+
+.product-title{display:flex;align-items:center;gap:12px}
+.product-title img{width:46px;height:46px;flex:0 0 46px}
+.findit-title{display:flex;align-items:center;gap:9px}
+.findit-title img{width:38px;height:38px;flex:0 0 38px}
+
+.api-note{float:right;width:58%;background:var(--panel2);border:1px solid var(--line);border-left:4px solid var(--accent2);border-radius:6px;padding:14px 18px;margin:4px 0 18px 24px}
+.api-note p{margin:0 0 10px}.api-note p:last-child{margin-bottom:0}.api-note .api-title{font-weight:700;color:var(--heading)}
+#overview::after{content:"";display:block;clear:both}
+@media(max-width:900px){.api-note{float:none;width:100%;margin:20px 0 24px}}
+
+
+/* UNIFIED_NAV_BEGIN */
+.topnav{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    margin-left:auto;
+    margin-right:18px;
+}
+
+.topnav a{
+    color:#d6e4f2;
+    padding:7px 10px;
+    border-radius:4px;
+    font-size:13.5px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.topnav a:hover{
+    background:#3d4e64;
+    text-decoration:none;
+}
+
+.topnav a.active{
+    background:#1f3144;
+    color:#ffffff;
+    border:1px solid #7eb8ee;
+    cursor:default;
+}
+
+.menu-toggle{
+    display:none;
+    background:transparent;
+    border:0;
+    color:#d6e4f2;
+    font-size:25px;
+    line-height:1;
+    cursor:pointer;
+    padding:6px 9px;
+    margin-left:auto;
+}
+
+@media(max-width:700px){
+    .topbar{position:sticky}
+
+    .topnav{
+        display:none;
+        position:absolute;
+        top:54px;
+        left:0;
+        right:0;
+        margin:0;
+        padding:9px 12px 12px;
+        background:#2b394b;
+        border-bottom:1px solid #435167;
+        box-shadow:0 5px 14px rgba(0,0,0,.22);
+        flex-direction:column;
+        align-items:stretch;
+        gap:2px;
+    }
+
+    .topnav.open{display:flex}
+
+    .topnav a{
+        display:block;
+        padding:9px 12px;
+        font-size:14px;
+    }
+
+    .menu-toggle{display:block}
+
+    .topbar .actions{margin-left:6px}
+}
+/* UNIFIED_NAV_END */
+
+
+
+/* LIVE DEMOS ADDITIONS */
+.nav-group{display:block;margin:18px 8px 7px;padding-top:11px;border-top:1px solid var(--line);color:#92aabe;font-size:11px;font-weight:800;letter-spacing:.065em}.nav-group:first-of-type{margin-top:0;border:0;padding-top:0}
+.video-shell{float:left;width:48%;margin:5px 23px 12px 0;border:1px solid var(--line);border-radius:7px;overflow:hidden;background:#111821}
+.video-shell video{width:100%;aspect-ratio:16/9;object-fit:contain;display:block;background:#111}
+.video-meta{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}.video-meta .tag{padding:5px 10px}
+.demo-entry{background:var(--panel);border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:22px 0}
+.demo-entry .demo-inside{padding:21px 23px;display:flow-root}.demo-entry h2{border:0;padding:0;margin:0 0 11px}
+.demo-footer{padding:13px 23px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px;background:#263240}
+.demo-footer a{font-weight:600}
+.timeline-table{width:100%;border-collapse:collapse;margin:14px 0 22px;font-size:14px}
+.timeline-table th,.timeline-table td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.timeline-table th{color:var(--heading);background:#324052}.timeline-table td:first-child{white-space:nowrap;font-family:Consolas,monospace;color:var(--accent)}
+.quote-question{padding:17px 20px;background:#334254;border-left:4px solid var(--accent2);border-radius:4px;margin:16px 0 25px;color:#edf1f6;font-weight:600}
+.result-content h2{margin:35px 0 15px}.result-content h3{margin:24px 0 8px}
+.result-content p{margin-bottom:13px}.result-content ul{margin:4px 0 17px;padding-left:26px}
+.source-ref{color:#a8c9e8;font-style:normal}.source-ref::before{content:' ';}
+.file-note{font-size:13px;color:var(--muted)}
+@media(max-width:700px){.video-shell{float:none;width:100%;margin:12px 0 17px}.demo-entry .demo-inside{padding:15px}.demo-footer{padding:13px 15px}.timeline-table{font-size:12px}.timeline-table td,.timeline-table th{padding:8px 6px}}
+@media print{video{display:none}.video-shell{display:none}}
+</style></head><body>
+
+
+<header class="topbar">
+    <div class="title">Findit6Agent</div>
+
+    <button class="menu-toggle" id="menuToggle" type="button"
+            aria-label="Open documentation menu"
+            aria-controls="topnav"
+            aria-expanded="false">&#9776;</button>
+
+    <nav class="topnav" id="topnav" aria-label="Main documetation">
+        <a href="FinditAgent_Start.html">Read First</a>
+	    <a href="Findit6Agent_AgentMode.html">Agent Mode</a>
+        <a href="Findit6Agent_GuidedMode.html">Guided Mode</a>
+        <a href="Findit6Agent_Model_Behavior.html">Model Behavior</a>
+        <a href="FinditAgent_What_AI_Says.html">What AI Says</a>
+        <a class="active" aria-current="page">Live Demos</a>
+        <a href="Findit6Agent_License_and_Legal.html">License &amp; Legal</a>
+    </nav>
+
+    <div class="actions">
+        <button type="button" onclick="history.back()" title="Back">&#9664;</button>
+        <button type="button" onclick="history.forward()" title="Forward">&#9654;</button>
+        <button type="button" onclick="window.print()" title="Print">&#9113;</button>
+    </div>
+</header>
+
+
+<div class="layout"><aside class="sidebar"><div class="searchbox"><input aria-label="Search navigation" id="navSearch" placeholder="Search..." type="search"/><span>馃攷</span></div><nav class="nav" id="nav"><a href="#introduction">About the demos</a>
+<span class="nav-group">AGENT MODE 路 Autonomous planning</span>
+<a href="#friedrich">01 路 Axel Friedrich / Sonnet</a>
+<a href="#huether">02 路 Mobile phone / Perplexity</a><a href="#sf6">03 路 SF6 in wind turbines / GPT</a><a href="#grok">04 路 Counting collaboration / Grok</a><span class="nav-group">GUIDED MODE 路 Structured workflow</span><a href="#qwen">05 路 SF6 / Ollama Qwen</a><a href="#upcoming">More demonstrations</a></nav></aside>
+
+<main class="main"><article class="article"><section id="introduction"><h1>Live Research Demos</h1>
+<p><strong>Real research sessions. An existing archive. Different questions and AI models.</strong></p>
+<p>These demonstrations show Findit6Agent working with my personal archive of roughly 35 years of journalism: tens of thousands of files, with no prior indexing, embeddings or specially prepared demo collection. Findit6Agent performs all local file operations.</p><p><strong>Two approaches to research:</strong> In <strong>Agent Mode</strong>, capable cloud-based LLMs such as Claude, GPT and Grok can plan complex searches, decide on a strategy, and revise it as they go. In <strong>Guided Mode</strong>, Findit6Agent breaks the task into predefined steps (chunks). Smaller locally running models handle focused sub-tasks such as interpreting the question, examining aspects, evaluating retrieved documents and synthesizing an answer. The workflow is defined in the program rather than planned autonomously by the model.</p>
+<p>All demonstrations use the same real archive, accumulated over 35 years of work as a German television journalist. Naturally, the questions were chosen because this archive contains relevant information. These are examples, not a specially prepared dataset: a historian, researcher, lawyer or business owner might ask entirely different questions about their own files. The subject changes, but the principle is the same. Results depend on the material, the model and the question 鈥?imagine what you could investigate in your own archive.</p><div class="callout"><strong>Unscripted research, edited presentation.</strong><br/>The questions were prepared, but the research runs are genuine. Some waiting periods in the video have been accelerated and marked with <strong>&gt;&gt;</strong>. The published protocol shows the original processing timestamps and the AI's result, including any errors.</div></section>
+<section id="friedrich"><div class="demo-entry"><div class="demo-inside">
+<h2>01 鈥?Axel Friedrich: Career, Collaboration and Wood Stoves</h2>
+
+<div class="video-shell"><video controls="" playsinline="" poster="https://www.dateisuche.de/en/AgentVideos//Sonnet-Friedrich-poster.jpg" preload="metadata"><source src="https://www.dateisuche.de/en/AgentVideos/Sonnet-Friedrich.mp4" type="video/mp4"/>Your browser does not support embedded MP4 video. <a href="https://www.dateisuche.de/en/AgentVideos/Sonnet-Friedrich.mp4">Open the video file.</a></video></div>
+<p>In a live session, Claude Sonnet researches the career of German environmental expert Axel Friedrich, his long-standing professional connection with journalist Michael Houben, and an unexpected third topic: emissions from wood-burning stoves.</p>
+<div class="video-meta"><span class="tag">Claude Sonnet</span><span class="tag">Agent Mode</span><span class="tag">54.7 GB / 50,191 files</span><span class="tag">Research: 7:35</span><span class="tag">Video: 5:38</span></div>
+<p>The local full-text search finds 224 matches in under a minute. Sonnet then receives excerpts, assesses the candidate sources, reads three documents in full and produces a report citing specific archive files.</p>
+</div><div class="demo-footer"><a href="Sonnet-Friedrich.html">Read full research protocol 鈫?/a><a href="https://www.dateisuche.de/en/AgentVideos/Sonnet-Friedrich.mp4">Open MP4 directly 鈫?/a></div></div></section>
+
+<section id="huether"><div class="demo-entry"><div class="demo-inside">
+<h2>02 鈥?A Phone Number Hidden Among 50,000 Files</h2>
+<div class="video-shell"><video controls="" playsinline="" poster="https://www.dateisuche.de/en/AgentVideos/Perplexity-Huether-poster.svg" preload="none"><source src="https://www.dateisuche.de/en/AgentVideos/Perplexity-mobile.mp4" type="video/mp4"/>Your browser does not support embedded MP4 video. <a href="https://www.dateisuche.de/en/AgentVideos/Perplexity-mobile.mp4">Open the video file.</a></video></div>
+<p>Can an AI locate one specific detail buried in a tiny text file inside decades of accumulated documents? Perplexity searches Michael Houben's unchanged 54.7 GB journalism archive for one person's mobile phone number.</p>
+<div class="video-meta"><span class="tag">Perplexity</span><span class="tag">Agent Mode</span><span class="tag">54.7 GB / 50,192 files</span><span class="tag">Research: 1:39</span><span class="tag">Video: 3:14</span></div>
+<p>Its first search mixes NEAR and AND without the necessary parentheses. Findit6 reports the ambiguous expression; Perplexity fixes the query on its own. The corrected full-text search yields 13 results. The agent opens a single TXT file and identifies the requested number, with a source reference.</p>
+<p class="smallnote">The mobile number is masked in the published video and transcript.</p>
+</div><div class="demo-footer"><a href="Perplexity-Huether.html">Read full research protocol 鈫?/a><a href="https://www.dateisuche.de/en/AgentVideos/Perplexity-mobile.mp4">Open MP4 directly 鈫?/a></div></div></section><section id="sf6"><div class="demo-entry"><div class="demo-inside">
+
+<h2>03 鈥?SF6 in Wind Turbines: Investigating a Climate Controversy</h2>
+<div class="video-shell"><video controls="" playsinline="" poster="https://www.dateisuche.de/en/AgentVideos/GPT-SF6-poster.svg" preload="none"><source src="https://www.dateisuche.de/en/AgentVideos/GPT-Sol-SF6.mp4" type="video/mp4"/>Your browser does not support embedded MP4 video. <a href="https://www.dateisuche.de/en/AgentVideos/GPT-Sol-SF6.mp4">Open the video file.</a></video></div>
+<p>What is the highly potent greenhouse gas used in wind turbines, and how did the political controversy around it develop? GPT Sol searches a journalist's original archive of reports, scientific studies, industry statements, EU policy discussions, correspondence and audience reactions.</p>
+<div class="video-meta"><span class="tag">GPT-Solt</span><span class="tag">Agent Mode</span><span class="tag">54.7 GB / ~50,200 files</span><span class="tag">Research: 9:01</span><span class="tag">Video: 7:05</span></div>
+<p>GPT Sol carries out two full-archive searches, broadening the second one to cover F-gas regulation and political proposals. It reviews excerpts, reads selected original sources and writes a detailed, referenced report about SF6 emissions, technical alternatives and the debate about restrictions. The report explicitly distinguishes what the historical archive can establish from current legal developments it cannot verify.</p>
+</div><div class="demo-footer"><a href="GPT-Sol-SF6.html">Read full research protocol 鈫?/a><a href="https://www.dateisuche.de/en/AgentVideos/GPT-Sol-SF6.mp4">Open MP4 directly 鈫?/a></div></div></section><section id="grok"><div class="demo-entry"><div class="demo-inside">
+<h2>04 鈥?Counting a Decade of TV Collaboration: Grok Keeps Digging</h2>
+<div class="video-shell"><video controls="" playsinline="" poster="https://www.dateisuche.de/en/AgentVideos/Grok-counting-collaboration-poster.svg" preload="none"><source src="https://www.dateisuche.de/en/AgentVideos/Grok-counting-collaborations.mp4" type="video/mp4"/>Your browser does not support embedded MP4 video.</video></div>
+<p>How often has journalist Michael Houben worked with editor Alexander Kraus (also credited as Krause), since when, and in what role? Grok investigates a decade of productions across a 35-year archive, attempting to distinguish real collaborations from name collisions, drafts, scheduling requests and alternate edits of the same report.</p>
+<div class="video-meta"><span class="tag">Grok</span><span class="tag">Agent Mode</span><span class="tag">54.7 GB / ~50,200 files</span><span class="tag">Research: 27:42</span><span class="tag">Video: 9:24</span></div>
+<p>Five full-archive searches, repeated excerpt analysis and targeted checks of misspellings and production identifiers lead to an itemized list. Grok even notices an inconsistency in its own yearly totals and revises its initial count from 60 to <strong>59 independently documented productions</strong>, with explicit borderline cases. It identifies one camera credit among predominantly editing assignments.</p>
+<p class="smallnote">The most recent collaboration was not yet stored in the searched archive. The video is a narrated, time-compressed presentation of the original research session. Preview image is a placeholder.</p>
+</div><div class="demo-footer"><a href="Grok-counting-collaboration.html">Read full research protocol 鈫?/a><a href="https://www.dateisuche.de/en/AgentVideos/Grok-counting-collaborations.mp4">Open MP4 directly 鈫?/a></div></div></section><section id="qwen"><div class="demo-entry"><div class="demo-inside">
+<h2>05 鈥?SF6 in Wind Turbines: Local Qwen Builds a Search Query</h2>
+<div class="video-shell"><video controls="" playsinline="" poster="https://www.dateisuche.de/en/AgentVideos/Ollama-Qwen-SF6-poster.svg" preload="none"><source src="https://www.dateisuche.de/en/AgentVideos/Ollama-Qwen-SF6.mp4" type="video/mp4"/>Your browser does not support embedded MP4 video. <a href="https://www.dateisuche.de/en/AgentVideos/Ollama-Qwen-SF6.mp4">Open the video file.</a></video></div>
+<p>How can a small local AI model find a substance it has not identified yet? Unlike powerful cloud models that can independently plan and pursue complex research, <strong>Guided Mode</strong> gives smaller models a predefined sequence of manageable steps. This demonstration makes those steps visible: the question is separated into aspects, translated into AND/OR conditions, optimized with truncation and expanded with alternative terms before Findit6 searches the local archive.</p>
+<p>The question revisits the SF6 topic investigated by <a href="#sf6">GPT Sol in video 03</a>. Here, <strong>Qwen3 14B running through Ollama</strong> starts without naming SF6 in the search expression, then learns the answer from documents found by Findit6. The final response is shorter and less detailed than the premium-model report 鈥?but this entire workflow runs locally on an RTX 4060 Ti with 16 GB of VRAM.</p>
+<div class="video-meta"><span class="tag">Ollama 路 Qwen3 14B</span><span class="tag">Guided Mode</span><span class="tag">RTX 4060 Ti 路 16 GB VRAM</span><span class="tag">54.7 GB / 50,185 files</span><span class="tag">87 hits</span><span class="tag">Research: 9:46</span><span class="tag">Video: 9:30</span></div>
+<p>The original research session and the model鈥檚 answer are reproduced in the protocol, including their imperfections. Waiting periods in the video are visibly accelerated rather than omitted.</p>
+</div><div class="demo-footer"><a href="Ollama-Qwen-SF6.html">Read full research protocol 鈫?/a><a href="https://www.dateisuche.de/en/AgentVideos/Ollama-Qwen-SF6.mp4">Open MP4 directly 鈫?/a></div></div></section><section id="upcoming"><h2>More demonstrations coming soon</h2>
+<p>Additional research runs with different questions and AI models may be added here. All use the same long-established personal archive rather than purpose-built sample data.</p></section><div class="footer">Findit6Agent Help 路 Live research demonstrations</div></article></main></div>
+<script>
+const navSearch = document.getElementById('navSearch');
+const navLinks = [...document.querySelectorAll('#nav a')];
+
+navSearch.addEventListener('input', () => {
+  const q = navSearch.value.trim().toLowerCase();
+  navLinks.forEach(a => {
+    a.style.display = (!q || a.textContent.toLowerCase().includes(q)) ? 'block' : 'none';
+  });
+});
+
+const sections = [...document.querySelectorAll('section[id]')];
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+  });
+}, {rootMargin:'-20% 0px -70% 0px', threshold:0});
+
+sections.forEach(s => observer.observe(s));
+
+
+
+
+
+// UNIFIED_NAV_JS_BEGIN
+const menuToggle = document.getElementById('menuToggle');
+const topnav = document.getElementById('topnav');
+
+if (menuToggle && topnav) {
+  menuToggle.addEventListener('click', () => {
+    const open = topnav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuToggle.setAttribute(
+      'aria-label',
+      open ? 'Close documentation menu' : 'Open documentation menu'
+    );
+  });
+
+  topnav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    });
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && topnav.classList.contains('open')) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+      menuToggle.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1180) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    }
+  });
+}
+// UNIFIED_NAV_JS_END
+
+</script></body></html>

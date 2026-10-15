@@ -15,7 +15,7 @@
 .smallnote{color:var(--muted);font-size:13.5px}
 .modegrid{clear:both}
 
-.product-title{display:flex;align-items:center;gap:12px}
+.product-title{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.product-title .platform{font-size:16px;font-weight:400;color:var(--muted);white-space:nowrap}
 .product-title img{width:46px;height:46px;flex:0 0 46px}
 .findit-title{display:flex;align-items:center;gap:9px}
 .findit-title img{width:38px;height:38px;flex:0 0 38px}
@@ -119,6 +119,7 @@
         <a href="Findit6Agent_GuidedMode.html">Guided Mode</a>
         <a href="Findit6Agent_Model_Behavior.html">Model Behavior</a>
         <a href="FinditAgent_What_AI_Says.html">What AI Says</a>
+        <a href="FinditAgent_Live_Demos.html">Live Demos</a>
         <a href="Findit6Agent_License_and_Legal.html">License &amp; Legal</a>
     </nav>
 
@@ -156,10 +157,12 @@
     <article class="article">
 
       <section id="overview">
-        <h1 class="product-title"><img src="FiKiIcon.gif" alt="Findit6Agent icon">Findit6Agent</h1>
+        <h1 class="product-title"><img src="FiKiIcon.gif" alt="Findit6Agent icon">Findit6Agent <span class="platform">(for Windows)</span></h1>
         <p><strong>An AI-assisted research tool for your existing file archive.</strong></p>
 
         <p><b>The goal is familiar from RAG: let AI work with your own data. The difference is that Findit6Agent works directly on the original archive - without prior indexing, vectorization or reorganization, and without giving the AI uncontrolled access to your files.</b></p>
+
+        <p><strong>A video can say more than pages of text.</strong> See our <a href="FinditAgent_Live_Demos.html">live research demonstrations</a>, or start with <a href="https://www.dateisuche.de/en/AgentVideos/Perplexity-mobile.mp4">this three-minute example</a> of an AI finding a specific detail in a large archive.</p>
 
 	  
 	          <div class="api-note">
@@ -199,7 +202,7 @@
 	  
 	          <div class="api-note">
           <p class="api-title">&#128161; Chat subscription or API access?</p>
-          <p>A regular ChatGPT, Claude or similar monthly subscription normally covers chatting on the provider's website. <strong>Findit6Agent needs separate API access</strong> so the AI can work automatically in the background. API usage is billed by the amount of text processed; a typical search usually costs only a few cents. How to enable API access is explained on the website of the respective provider.</p>
+          <p>A regular ChatGPT, Claude or similar monthly subscription normally covers chatting on the provider's website. <strong>Findit6Agent needs separate API access</strong> so the AI can work automatically in the background. API usage is billed by the amount of text processed; a typical search usually costs only a few cents. Very complex research using premium, high-performance models can occasionally cost up to around €2 per question. How to enable API access is explained on the website of the respective provider.</p>
           <p><strong>No API is required for local use:</strong> Guided Mode can run completely on your own computer with Ollama and a suitable local model. This requires Ollama and sufficiently capable hardware (typically <strong>12 GB VRAM or more</strong>).</p>
         </div>
 		

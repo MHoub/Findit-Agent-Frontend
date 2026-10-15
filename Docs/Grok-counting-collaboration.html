@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Findit6Agent — Grok Collaboration Counting Protocol</title>
+<style>
+:root{--bg:#202730;--panel:#2c3745;--panel2:#344255;--line:#3c4857;--text:#d7dbe1;--muted:#aeb6c2;--heading:#f1f3f5;--accent:#b9dcff;--accent2:#7eb8ee;--code:#182029;--good:#93d7b5;--warn:#e4c27b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.topbar{position:sticky;top:0;z-index:20;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#34445a;border-bottom:1px solid #435167;color:white}.topbar .title{font-size:19px;font-weight:650}.topbar .actions{display:flex;gap:10px;align-items:center}.topbar button{background:transparent;border:0;color:#c8d2df;font-size:18px;cursor:pointer;padding:5px 8px}.layout{display:grid;grid-template-columns:294px minmax(0,1fr);min-height:calc(100vh - 54px)}.sidebar{position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto;padding:30px 22px 40px 10px;border-right:1px solid var(--line);background:#242d38}.searchbox{display:flex;align-items:center;gap:8px;background:#344255;border:1px solid #3e4d60;border-radius:5px;padding:7px 10px;margin:0 0 22px}.searchbox input{width:100%;background:transparent;border:0;outline:0;color:#e6ebf2;font-size:14px}.searchbox input::placeholder{color:#8794a5}.nav a{display:block;padding:8px 10px;margin:2px 0;border-radius:4px;color:#c9e4ff;font-size:13.5px;font-weight:600}.nav a:hover,.nav a.active{background:#303c4b;text-decoration:none}.nav .sub{padding-left:22px;font-weight:500;color:#abc2d8}.main{padding:34px 44px 80px}.article{max-width:980px;margin:0 auto}h1,h2,h3{color:var(--heading);line-height:1.25}h1{font-size:34px;margin:0 0 22px}h2{font-size:25px;margin:38px 0 15px;padding-bottom:7px;border-bottom:1px solid var(--line)}h3{font-size:19px;margin:28px 0 8px}p{margin:0 0 16px}ul,ol{margin-top:7px}strong{color:#edf1f6}.callout{border-left:4px solid var(--accent2);background:var(--panel);padding:15px 18px;margin:20px 0;border-radius:4px}.callout.good{border-left-color:var(--good)}.callout.warn{border-left-color:var(--warn)}.modegrid,.linkgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:18px}.card h3{margin-top:0}.tag{display:inline-block;padding:2px 8px;border-radius:999px;background:#3b4a5d;color:#d9ebfb;font-size:12px;font-weight:700}.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:20px 0;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:7px}.flow .step{background:#303c4b;border:1px solid #435267;border-radius:5px;padding:7px 11px;font-weight:600}.flow .arrow{color:#91a7bc}code{font-family:Consolas,"Courier New",monospace;background:var(--code);color:#e1e9f1;padding:2px 5px;border-radius:4px}.filelink{display:block;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:9px 0}.filelink small{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}
+.filelink span{display:block;color:var(--text);font-size:13.5px;line-height:1.5;font-weight:400}.footer{color:#8995a3;font-size:12px;border-top:1px solid var(--line);padding-top:18px;margin-top:50px}@media(max-width:900px){.layout{display:block}.sidebar{position:relative;top:0;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:18px}.main{padding:28px 22px 60px}.modegrid,.linkgrid{grid-template-columns:1fr}}@media print{.topbar,.sidebar{display:none}.layout{display:block}.main{padding:0}body{background:white;color:#222}h1,h2,h3,strong{color:#111}.card,.callout,.flow,.filelink{background:#f5f5f5;border-color:#ccc}a{color:#124b7a}}
+
+.doclinks{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.doclinks a{display:inline-block;background:#303c4b;border:1px solid #435267;border-radius:5px;padding:8px 12px;font-weight:600}
+.doclinks a:hover{background:#374557;text-decoration:none}
+.smallnote{color:var(--muted);font-size:13.5px}
+.modegrid{clear:both}
+
+.product-title{display:flex;align-items:center;gap:12px}
+.product-title img{width:46px;height:46px;flex:0 0 46px}
+.findit-title{display:flex;align-items:center;gap:9px}
+.findit-title img{width:38px;height:38px;flex:0 0 38px}
+
+.api-note{float:right;width:58%;background:var(--panel2);border:1px solid var(--line);border-left:4px solid var(--accent2);border-radius:6px;padding:14px 18px;margin:4px 0 18px 24px}
+.api-note p{margin:0 0 10px}.api-note p:last-child{margin-bottom:0}.api-note .api-title{font-weight:700;color:var(--heading)}
+#overview::after{content:"";display:block;clear:both}
+@media(max-width:900px){.api-note{float:none;width:100%;margin:20px 0 24px}}
+
+
+/* UNIFIED_NAV_BEGIN */
+.topnav{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    margin-left:auto;
+    margin-right:18px;
+}
+
+.topnav a{
+    color:#d6e4f2;
+    padding:7px 10px;
+    border-radius:4px;
+    font-size:13.5px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.topnav a:hover{
+    background:#3d4e64;
+    text-decoration:none;
+}
+
+.topnav a.active{
+    background:#1f3144;
+    color:#ffffff;
+    border:1px solid #7eb8ee;
+    cursor:default;
+}
+
+.menu-toggle{
+    display:none;
+    background:transparent;
+    border:0;
+    color:#d6e4f2;
+    font-size:25px;
+    line-height:1;
+    cursor:pointer;
+    padding:6px 9px;
+    margin-left:auto;
+}
+
+@media(max-width:700px){
+    .topbar{position:sticky}
+
+    .topnav{
+        display:none;
+        position:absolute;
+        top:54px;
+        left:0;
+        right:0;
+        margin:0;
+        padding:9px 12px 12px;
+        background:#2b394b;
+        border-bottom:1px solid #435167;
+        box-shadow:0 5px 14px rgba(0,0,0,.22);
+        flex-direction:column;
+        align-items:stretch;
+        gap:2px;
+    }
+
+    .topnav.open{display:flex}
+
+    .topnav a{
+        display:block;
+        padding:9px 12px;
+        font-size:14px;
+    }
+
+    .menu-toggle{display:block}
+
+    .topbar .actions{margin-left:6px}
+}
+/* UNIFIED_NAV_END */
+
+
+
+/* LIVE DEMOS ADDITIONS */
+.video-shell{border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#111821;margin:22px 0 15px}
+.video-shell video{width:100%;aspect-ratio:16/9;object-fit:contain;display:block;background:#111}
+.video-meta{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}.video-meta .tag{padding:5px 10px}
+.demo-entry{background:var(--panel);border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:22px 0}
+.demo-entry .demo-inside{padding:21px 23px}.demo-entry h2{border:0;padding:0;margin:0 0 11px}
+.demo-footer{padding:13px 23px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px;background:#263240}
+.demo-footer a{font-weight:600}
+.timeline-table{width:100%;border-collapse:collapse;margin:14px 0 22px;font-size:14px}
+.timeline-table th,.timeline-table td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.timeline-table th{color:var(--heading);background:#324052}.timeline-table td:first-child{white-space:nowrap;font-family:Consolas,monospace;color:var(--accent)}
+.quote-question{padding:17px 20px;background:#334254;border-left:4px solid var(--accent2);border-radius:4px;margin:16px 0 25px;color:#edf1f6;font-weight:600}
+.result-content h2{margin:35px 0 15px}.result-content h3{margin:24px 0 8px}
+.result-content p{margin-bottom:13px}.result-content ul{margin:4px 0 17px;padding-left:26px}
+.source-ref{color:#a8c9e8;font-style:normal}.source-ref::before{content:' ';}
+.file-note{font-size:13px;color:var(--muted)}
+@media(max-width:700px){.demo-entry .demo-inside{padding:15px}.demo-footer{padding:13px 15px}.timeline-table{font-size:12px}.timeline-table td,.timeline-table th{padding:8px 6px}}
+@media print{video{display:none}.video-shell{display:none}}
+
+/* Console-like rendering of the original Findit6Agent research log */
+.research-log{background:#505b67;border:1px solid #65717e;border-radius:6px;padding:16px 18px;margin:14px 0 25px;color:#ecf0f3;font-family:Segoe UI,Arial,sans-serif;font-size:13px;line-height:1.32;overflow-wrap:anywhere}
+.research-log .log-line{margin:0 0 10px;white-space:pre-wrap}
+.research-log .log-line.question{color:#b4f8ad;font-weight:650;margin-bottom:12px}
+.research-log .log-line.search{font-weight:650;color:#e9edf1;margin-top:-5px}
+.research-log .log-heading{font-size:13px;line-height:1.35;padding:0;border:0;margin:12px 0 7px;font-weight:650;color:#9bc8fa}
+.research-log .log-h2{margin-top:7px}
+.research-log .log-paragraph{margin:0 0 10px;line-height:1.37}
+.research-log .log-paragraph strong{color:#edf1f6;font-weight:650}
+.research-log ul{margin:0 0 10px 0;padding-left:18px}
+.research-log li{margin-bottom:3px;line-height:1.37}
+.research-log .source-ref{color:#b7d5f0;text-decoration:underline;text-underline-offset:2px}
+@media(max-width:700px){.research-log{padding:12px;font-size:12.5px}}
+@media print{.research-log{background:#eee;color:#222;border:1px solid #bbb}.research-log .log-heading,.research-log .source-ref{color:#174e8b}.research-log .log-line.question{color:#216c28}}
+
+.translation-label{color:var(--warn);font-size:13px;font-weight:650;border-left:3px solid var(--warn);padding:6px 12px;background:#34404e;margin:16px 0 12px}
+.research-log .source-ref{color:#b7d5f0;text-decoration:underline;text-underline-offset:2px;cursor:text}
+</style></head><body>
+<header class="topbar"><div class="title">Findit6Agent</div>
+<button aria-controls="topnav" aria-expanded="false" aria-label="Open documentation menu" class="menu-toggle" id="menuToggle" type="button">☰</button>
+<nav aria-label="Main documentation" class="topnav" id="topnav"><a href="FinditAgent_Start.html">Read First</a>
+<a href="Findit6Agent_AgentMode.html">Agent Mode</a>
+<a href="Findit6Agent_GuidedMode.html">Guided Mode</a>
+<a href="Findit6Agent_Model_Behavior.html">Model Behavior</a>
+<a href="FinditAgent_What_AI_Says.html">What AI Says</a>
+<a aria-current="page" class="active" href="FinditAgent_Live_Demos.html">Live Demos</a>
+<a href="Findit6Agent_License_and_Legal.html">License &amp; Legal</a></nav>
+<div class="actions"><button onclick="history.back()" title="Back" type="button">◀</button><button onclick="history.forward()" title="Forward" type="button">▶</button><button onclick="window.print()" title="Print" type="button">⎙</button></div></header>
+<div class="layout"><aside class="sidebar"><div class="searchbox"><input aria-label="Search navigation" id="navSearch" placeholder="Search..." type="search"/><span>🔎</span></div><nav class="nav" id="nav"><a href="#overview">Overview</a><a href="#protocol">Original research log</a><a href="#sources">Source references</a></nav></aside>
+<main class="main"><article class="article"><section id="overview"><h1>Counting a Decade of TV Collaboration — Grok Research Protocol</h1><p>Grok investigates how often journalist Michael Houben worked with editor Alexander Kraus over more than a decade, comparing credits and versions across a 54.7 GB archive. The original German answer is translated below, including the agent’s self-correction from 60 to 59.</p>
+<div class="video-meta"><span class="tag">~50,200 archive files</span><span class="tag">54.7 GB</span><span class="tag">Research: 27:42</span><span class="tag">Video: 9:24</span></div>
+<div class="doclinks"><a href="FinditAgent_Live_Demos.html#grok">← Back to video</a><a href="Grok-counting-collaboration.mp4">Open MP4 ↗</a></div></section><section id="protocol"><h2>Original research log</h2><p class="smallnote">Search queries, file paths and timestamps are reproduced as logged. The original German question and AI-generated answer are translated into English; the titles of local files and the search commands remain unchanged. The model’s contradictory interim count and its final correction are retained.</p><div class="research-log"><div class="log-line question">How many times, and since when, have I worked with Alex or Alexander Kraus or Krause on my TV reports? And what was his role?</div><div class="log-line event">[00:59] Findit6 is processing full search: </div><div class="log-line search">((Bericht OR Autor) NEAR Michael NEAR Houben) AND ((Alex OR Alexander) NEAR (Kraus OR Krause))</div><div class="log-line event">[01:58]  Findit6 found 128 results in 50.202 searched files with 54,7 GB in: Agent_FullSearch_20261012_155828.fil</div><div class="log-line event">[02:23] Findit6 is processing hitlist search:  (ExecerptBuilding)</div><div class="log-line search">((Bericht OR Autor) NEAR Michael NEAR Houben) AND ((Alex OR Alexander) NEAR (Kraus OR Krause))</div><div class="log-line event">[02:30]  Findit6 found 129 results in 129 searched files with 0,0 GB in: Agent_HitlistSearch_20261012_155952.fil</div><p class="log-paragraph">Agent is analysing Excerpts</p><div class="log-line event">[08:18] Ledger entries received and stored.</div><div class="log-line event">[10:45] Findit6 is processing full search: </div><div class="log-line search">((Bericht OR Autor) NEAR Michael NEAR Houben) AND (Rente* OR Datenkrake* OR Wetterapp* OR LVC6 OR HKWQ OR F6NJ)</div><div class="log-line event">[11:47]  Findit6 found 140 results in 50.203 searched files with 54,7 GB in: Agent_FullSearch_20261012_160815.fil</div><div class="log-line event">[12:28] Findit6 is processing hitlist search:  (ExecerptBuilding)</div><div class="log-line search">(((Bericht OR Autor) NEAR Michael NEAR Houben) AND (Rente* OR Datenkrake* OR Wetterapp* OR LVC6 OR HKWQ OR F6NJ)) AND (Schnitt* OR Cutter* OR Kraus OR Krause)</div><div class="log-line event">[12:35]  Findit6 found 101 results in 141 searched files with 0,0 GB in: Agent_HitlistSearch_20261012_160958.fil</div><p class="log-paragraph">Agent is analysing Excerpts</p><div class="log-line event">[15:25] Ledger entries received and stored.</div><div class="log-line event">[16:08] Findit6 is processing full search: </div><div class="log-line search">((Bericht OR Autor) NEAR Michael NEAR Houben) AND (((Schnitt OR Cutter OR CutterIn OR Kamera) NEAR (Kraus OR Krause)) OR alexanderkraus* OR alexader*)</div><div class="log-line event">[17:12]  Findit6 found 8 results in 50.204 searched files with 54,7 GB in: Agent_FullSearch_20261012_161338.fil</div><div class="log-line event">[17:36] Findit6 is processing hitlist search:  (ExecerptBuilding)</div><div class="log-line search">((Bericht OR Autor) NEAR Michael NEAR Houben) AND (((Schnitt OR Cutter OR CutterIn OR Kamera) NEAR (Kraus OR Krause)) OR alexanderkraus* OR alexader*)</div><div class="log-line event">[17:42]  Findit6 found 9 results in 9 searched files with 0,0 GB in: Agent_HitlistSearch_20261012_161506.fil</div><p class="log-paragraph">Agent is analysing Excerpts</p><div class="log-line event">[18:33] Ledger entries received and stored.</div><div class="log-line event">[18:56] Findit6 is processing full search: </div><div class="log-line search">((Bericht OR Autor) NEAR Michael NEAR Houben) AND (Kraus OR Krause OR alexanderkraus*)</div><div class="log-line event">[19:22]  Findit6 found 5 results in 50.205 searched files with 54,7 GB in: Agent_FullSearch_20261012_161626.fil</div><div class="log-line event">[20:02] Findit6 is processing hitlist search:  (ExecerptBuilding)</div><div class="log-line search">((Bericht OR Autor) NEAR Michael NEAR Houben) AND (Kraus OR Krause OR alexanderkraus*)</div><div class="log-line event">[20:08]  Findit6 found 6 results in 6 searched files with 0,0 GB in: Agent_HitlistSearch_20261012_161732.fil</div><p class="log-paragraph">Agent is analysing Excerpts</p><div class="log-line event">[20:56] Ledger entries received and stored.</div><div class="log-line event">[21:09] Findit6 is processing full search: </div><div class="log-line search">Datenkrake* AND (Schnitt* OR Cutter* OR Kraus OR Krause OR Houben)</div><div class="log-line event">[22:03]  Findit6 found 33 results in 50.206 searched files with 54,7 GB in: Agent_FullSearch_20261012_161839.fil</div><div class="log-line event">[22:10] Findit6 is processing hitlist search:  (ExecerptBuilding)</div><div class="log-line search">Datenkrake* AND (Schnitt* OR Cutter* OR Kraus OR Krause OR Houben)</div><div class="log-line event">[22:16]  Findit6 found 34 results in 34 searched files with 0,0 GB in: Agent_HitlistSearch_20261012_161940.fil</div><p class="log-paragraph">Agent is analysing Excerpts</p><div class="log-line event">[23:01] Ledger entries received and stored.</div><div class="log-line event">[23:27] Research in Excerpts Houben-Kraus-TV-Zusammenarbeit is complete. The agent is now evaluating the collected results. </div><div class="log-line event">[27:42] Result</div><p class="log-paragraph">Short answer: Your archive documents at least 60 distinct TV reports of yours involving Alexander Kraus (also credited as Krause, occasionally misspelled “Alexader Kraus” or written as “alexanderkraus”). The collaboration is documented from at least May 2015 through 2026. His role was almost always editing (cutter); on one Europamagazin report he was the cameraman.</p><p class="log-paragraph">This is a documented minimum. Completed reports or reports with a verifiable credit were counted after deduplicating drafts, copies and organizational files for the same production. Requests for a particular editor without a final editing credit were excluded.</p><div class="log-heading">Role</div><p class="log-paragraph">In the overwhelming majority of cases, Kraus is credited as editor (“Schnitt” or “CutterIn”) in the script or production schedule. (<span class="source-ref">PLUMI HHA txt.doc</span>) (<span class="source-ref">Produktionsplanung Plusminus_190723.pdf</span>)</p><p class="log-paragraph">One clear exception: in the 2025 Europamagazin report Energiewende-Netze, he is credited for camera work; editing is credited to Stephan Neuhalfen, Fatih Doganer and Max Schneider. (<span class="source-ref">PM txt EnergiewendeNetze.docx</span>)</p><p class="log-paragraph">On occasion he shared editing duties: with Ines Müller on the Markt version “Nichts zu verschenken – bei den Strompreisen,” and with Anja Wetzel on the Europamagazin version about truck drivers. (<span class="source-ref">M nzv beim Strom txt final.docx</span>) (<span class="source-ref">EM LKW Fahrer txt.docx</span>)</p><div class="log-heading">Since when?</div><p class="log-paragraph">The earliest report with a verifiable credit is Plusminus HypoAlpeAdria, script dated 25 May 2015, editing Alexander Kraus, duration 7:04. (<span class="source-ref">PLUMI HHA txt.doc</span>)</p><p class="log-paragraph">A targeted search through Houben reports before 2016 found no earlier collaboration with Alexander Kraus. Earlier hits for “Kraus/Krause” concern other people or characters (Stephan Krause, Transport Minister Krause, advertising character “Krause”). (<span class="source-ref">05Okt.DOC</span>) (<span class="source-ref">ISNRAPSÖ.DOC</span>) (<span class="source-ref">mkt Bosch txt.doc</span>)</p><p class="log-paragraph">The next clear record is the Plusminus EU unitary patent report dated 15 August 2016. (<span class="source-ref">PM EUPatent FINAL.docx</span>) From 2017 onward, collaboration becomes regular, particularly on Plusminus, as well as Markt, Europamagazin and Umschau.</p><div class="log-heading">How many? 60 distinct productions</div><p class="log-paragraph">The 60 units were consolidated by topic, MOI production identifier and broadcast format. Multiple files for one report (draft, final, planning, copy) count as one. Alternate versions of the same story (short/long version, online graphic, shortened Markt edit) are assigned to the corresponding Plusminus report, not counted separately.</p><div class="log-heading">2015 (1)</div><p class="log-paragraph">- Plusminus HypoAlpeAdria – editing. (<span class="source-ref">PLUMI HHA txt.doc</span>)</p><div class="log-heading">2016 (1)</div><p class="log-paragraph">- Plusminus EU unitary patent – editing. (<span class="source-ref">PM EUPatent FINAL.docx</span>)</p><div class="log-heading">2017 (3)</div><p class="log-paragraph">- Plusminus Dangerous printers – editing. (<span class="source-ref">PM Drucker txt.doc</span>)</p><p class="log-paragraph">- Plusminus Diesel incentive – editing. (<span class="source-ref">PM Dieselprämie txt.doc</span>)</p><p class="log-paragraph">- Plusminus Traffic chaos – editing. (<span class="source-ref">PM V-Chaos txt.doc</span>)</p><div class="log-heading">2018 (1)</div><p class="log-paragraph">- Plusminus Care-home corporations – editing (short and long versions treated as one story). (<span class="source-ref">PM Konzerpflege txt kurz.docx</span>) (<span class="source-ref">PM Konzerpflege txt lang.docx</span>)</p><div class="log-heading">2019 (4)</div><p class="log-paragraph">- Plusminus Alternatives to electric cars – editing. (<span class="source-ref">PM E-Alternativen txt.docx</span>)</p><p class="log-paragraph">- Plusminus Inflation vs. interest rates – editing. (<span class="source-ref">PM Inflation vs zins txt.docx</span>)</p><p class="log-paragraph">- Europareport (MDR co-production) – editing, longer editing assignment at Rheinklang. (Europareport Zeitplan (1).pdf)</p><p class="log-paragraph">- Plusminus Asbest – editing. (<span class="source-ref">PM Asbest txt Final.docx</span>)</p><div class="log-heading">2020 (4)</div><p class="log-paragraph">- Plusminus Obstacles to solar power – editing. (<span class="source-ref">PM Solarhemnisse txt.docx</span>)</p><p class="log-paragraph">- Plusminus/Umschau Boeing – maximum risk – editing. (<span class="source-ref">PM BOEING txt.docx</span>) (<span class="source-ref">WDR Schnitt für MDR Umschau 01.04. bs 02.04.2020.pdf</span>)</p><p class="log-paragraph">- Plusminus Unaffordable supplementary care insurance – editing. (<span class="source-ref">PM Pflegezusatz.docx</span>)</p><p class="log-paragraph">- Plusminus Biofuel squeezed out – editing. (<span class="source-ref">Pm Biosprit txt.docx</span>)</p><div class="log-heading">2021 (4)</div><p class="log-paragraph">- Markt RWE free-riding on green energy – editing. (<span class="source-ref">M ÖkoTrittbrett RWE txt.docx</span>)</p><p class="log-paragraph">- Plusminus Inflation – editing. (<span class="source-ref">PM Inflation txt.docx</span>)</p><p class="log-paragraph">- Plusminus Dutch pensions – editing (online supplemental graphic also included, same MOI i0lk). (<span class="source-ref">PM Hollandrente txt.docx</span>) (<span class="source-ref">PM Hollandrente OnlineGrafik txt.docx</span>)</p><p class="log-paragraph">- Plusminus Rail future / rail network – editing (MOI iipc, 2021 scripts and later 2023 version treated as one story). (<span class="source-ref">Pm SchienenNetz Text.docx</span>)</p><div class="log-heading">2022 (8)</div><p class="log-paragraph">- Plusminus Horse blood for pig breeding – editing. (<span class="source-ref">PM Blutstuten txt.docx</span>)</p><p class="log-paragraph">- Plusminus Mobility law – editing. (<span class="source-ref">PM Mobilitätsgesetz2.docx</span>)</p><p class="log-paragraph">- Plusminus Electricity prices – editing. (<span class="source-ref">PM Strompreise txt.docx</span>)</p><p class="log-paragraph">- Plusminus Consequences of war – editing. (<span class="source-ref">PM Kriegsfolgen.docx</span>)</p><p class="log-paragraph">- Plusminus Renewables dependence / fracking – editing (same MOI jbxg). (<span class="source-ref">PM Abhängigkeiten.docx</span>)</p><p class="log-paragraph">- Plusminus Travel prices – editing. (<span class="source-ref">PM Reisepreise txt.docx</span>)</p><p class="log-paragraph">- Plusminus Electricity and inflation – editing. (<span class="source-ref">Plumi Inflationsstrom.docx</span>)</p><p class="log-paragraph">- Plusminus Electricity prices II – editing. (<span class="source-ref">PM Strompreise II txt.docx</span>)</p><div class="log-heading">2023 (9)</div><p class="log-paragraph">- Plusminus Labor shortage – editing. (<span class="source-ref">PM Arbeitsmarkt txt.docx</span>)</p><p class="log-paragraph">- Plusminus Travel prices 2023 – editing. (<span class="source-ref">PM Reisepreise 2023.docx</span>)</p><p class="log-paragraph">- Plusminus Spring electricity prices – editing (Markt versions MOI kr88 and kz20 grouped with it). (<span class="source-ref">PM Stromfrühling txt.docx</span>) (<span class="source-ref">M nzv beim Strom txt final.docx</span>)</p><p class="log-paragraph">- Plusminus End of shortages – editing. (<span class="source-ref">PM Mangel-Ende txt-Neu.docx</span>)</p><p class="log-paragraph">- Plusminus Bank merger – editing. (<span class="source-ref">Plusminus Bankenfusion.docx</span>)</p><p class="log-paragraph">- Plusminus Fisheries – editing. (<span class="source-ref">PM Fischerei txt.docx</span>)</p><p class="log-paragraph">- Plusminus Brenner Base Tunnel – editing. (<span class="source-ref">PM Brennerbasistunnel.docx</span>)</p><p class="log-paragraph">- Plusminus Biogas plants – editing. (<span class="source-ref">PM Biogas txt final.docx</span>)</p><p class="log-paragraph">Plusminus Schienennetz is assigned to the 2021 rail report above and not counted again here. The ninth 2023 report in the count is therefore the Strompreis-Frühling complex as its own unit alongside the other eight titles that year; the annual figure of nine covers labor shortage, travel prices 2023, Strompreis-Frühling, end of shortages, bank merger, fisheries, Brenner Base Tunnel, biogas and — rather than counting Schienennetz again as a separate 2023 title alongside the 2021 rail complex — the remaining titles plus the Markt attribution within Strompreis-Frühling. Correction to the annual breakdown: the nine units for 2023 are labor shortage, travel prices 2023, Strompreis-Frühling, end of shortages, bank merger, fisheries, Brenner, biogas and — after another check of the master list — no second Schienennetz. The ninth 2023 unit in the overall count of 60 is Strompreis-Frühling as its own entry within the nine, alongside the other 2023 titles: 1 labor shortage, 2 travel prices 2023, 3 Strompreis-Frühling, 4 end of shortages, 5 bank merger, 6 fisheries, 7 Brenner, 8 biogas. That makes eight. The total of 60 came from adding the yearly counts 1+1+3+1+4+4+4+8+9+11+6+8. To reconcile nine for 2023 with the master list, one would need to count the later-dated Schienennetz script separately, although the 2023 electricity-price complex is already included. The missing ninth 2023 unit would only be Plusminus Schienennetz if the file dated 20 April 2023 were treated as a new report instead of a version of MOI iipc from 2021. In this count, Schienennetz stays in 2021; the total of 60 is based on the master list below, not on a second addition of the yearly headings.</p><p class="log-paragraph">To avoid this ambiguity, here is the definitive master list of 60 productions, without double-counting the annual totals:</p><p class="log-paragraph">1. HypoAlpeAdria (2015) (<span class="source-ref">PLUMI HHA txt.doc</span>)</p><p class="log-paragraph">2. EU unitary patent (2016) (<span class="source-ref">PM EUPatent FINAL.docx</span>)</p><p class="log-paragraph">3. Dangerous printers (2017) (<span class="source-ref">PM Drucker txt.doc</span>)</p><p class="log-paragraph">4. Diesel incentive (2017) (<span class="source-ref">PM Dieselprämie txt.doc</span>)</p><p class="log-paragraph">5. Traffic chaos (2017) (<span class="source-ref">PM V-Chaos txt.doc</span>)</p><p class="log-paragraph">6. Care-home corporations (2018) (<span class="source-ref">PM Konzerpflege txt kurz.docx</span>)</p><p class="log-paragraph">7. Alternatives to electric cars (2019) (<span class="source-ref">PM E-Alternativen txt.docx</span>)</p><p class="log-paragraph">8. Inflation vs. interest rates (2019) (<span class="source-ref">PM Inflation vs zins txt.docx</span>)</p><p class="log-paragraph">9. Europareport (2019) (Europareport Zeitplan (1).pdf)</p><p class="log-paragraph">10. Asbest (2019) (<span class="source-ref">PM Asbest txt Final.docx</span>)</p><p class="log-paragraph">11. Obstacles to solar power (2020) (<span class="source-ref">PM Solarhemnisse txt.docx</span>)</p><p class="log-paragraph">12. Boeing (2020) (<span class="source-ref">PM BOEING txt.docx</span>)</p><p class="log-paragraph">13. Pflegezusatzversicherung (2020) (<span class="source-ref">PM Pflegezusatz.docx</span>)</p><p class="log-paragraph">14. Biosprit (2020) (<span class="source-ref">Pm Biosprit txt.docx</span>)</p><p class="log-paragraph">15. RWE free-riding on green energy (2021) (<span class="source-ref">M ÖkoTrittbrett RWE txt.docx</span>)</p><p class="log-paragraph">16. Inflation HE33 (2021) (<span class="source-ref">PM Inflation txt.docx</span>)</p><p class="log-paragraph">17. Dutch pensions (2021) (<span class="source-ref">PM Hollandrente txt.docx</span>)</p><p class="log-paragraph">18. Bahn-Zukunft/Schienennetz (2021, MOI iipc) (<span class="source-ref">Pm SchienenNetz Text.docx</span>)</p><p class="log-paragraph">19. Pferdeblut (2022) (<span class="source-ref">PM Blutstuten txt.docx</span>)</p><p class="log-paragraph">20. Mobility law (2022) (<span class="source-ref">PM Mobilitätsgesetz2.docx</span>)</p><p class="log-paragraph">21. Electricity prices (2022, MOI j3n2) (<span class="source-ref">PM Strompreise txt.docx</span>)</p><p class="log-paragraph">22. Consequences of war (2022) (<span class="source-ref">PM Kriegsfolgen.docx</span>)</p><p class="log-paragraph">23. Renewables dependence (2022) (<span class="source-ref">PM Abhängigkeiten.docx</span>)</p><p class="log-paragraph">24. Travel prices (2022) (<span class="source-ref">PM Reisepreise txt.docx</span>)</p><p class="log-paragraph">25. Electricity and inflation (2022) (<span class="source-ref">Plumi Inflationsstrom.docx</span>)</p><p class="log-paragraph">26. Electricity prices II (2022) (<span class="source-ref">PM Strompreise II txt.docx</span>)</p><p class="log-paragraph">27. Labor shortage (2023) (<span class="source-ref">PM Arbeitsmarkt txt.docx</span>)</p><p class="log-paragraph">28. Travel prices 2023 (2023) (<span class="source-ref">PM Reisepreise 2023.docx</span>)</p><p class="log-paragraph">29. Spring electricity prices (2023) (<span class="source-ref">PM Stromfrühling txt.docx</span>)</p><p class="log-paragraph">30. End of shortages (2023) (<span class="source-ref">PM Mangel-Ende txt-Neu.docx</span>)</p><p class="log-paragraph">31. Bank merger (2023) (<span class="source-ref">Plusminus Bankenfusion.docx</span>)</p><p class="log-paragraph">32. Fisheries (2023) (<span class="source-ref">PM Fischerei txt.docx</span>)</p><p class="log-paragraph">33. Brenner Base Tunnel (2023) (<span class="source-ref">PM Brennerbasistunnel.docx</span>)</p><p class="log-paragraph">34. Biogas plants (2023) (<span class="source-ref">PM Biogas txt final.docx</span>)</p><p class="log-paragraph">35. 35-hour working week (2024) (<span class="source-ref">PM 35Stunden txt.docx</span>)</p><p class="log-paragraph">36. Problems with Germany as a business location (2024) (<span class="source-ref">PM Standortprobleme txt.docx</span>)</p><p class="log-paragraph">37. Construction bureaucracy (2024) (<span class="source-ref">PM Bauabürokratie txt.docx</span>)</p><p class="log-paragraph">38. Rail access charges (2024; 2026 file “Gleispreise NEU” treated as a possible update of the same story) (<span class="source-ref">PM Gleispreise.docx</span>) (<span class="source-ref">PM Gleispreise NEU.docx</span>)</p><p class="log-paragraph">39. Travel prices 2024 (2024) (<span class="source-ref">PM Reisepreise 2024.docx</span>)</p><p class="log-paragraph">40. Rail problems (2024) (<span class="source-ref">PM Bahnprobleme.docx</span>)</p><p class="log-paragraph">41. Huge rail investment backlog (2024, MOI n5hf) (<span class="source-ref">PM Investitionsstau txt.docx</span>)</p><p class="log-paragraph">42. Skilled-trades education (2024) (<span class="source-ref">PM Handwerk.docx</span>)</p><p class="log-paragraph">43. Heat pumps / investment backlog MOI ng2d (2024; different MOI and duration from the rail investment-backlog report) (<span class="source-ref">PM Wärmepumpen.docx</span>)</p><p class="log-paragraph">44. Russian gas in Europe (2024) (<span class="source-ref">PM Russengas txt.docx</span>)</p><p class="log-paragraph">45. Christmas (2024) (<span class="source-ref">PM Weihnacht txt.docx</span>)</p><p class="log-paragraph">46. Low-wind, low-sun period (2025) (<span class="source-ref">PM Dunkelflaute txt.docx</span>)</p><p class="log-paragraph">47. Heating after the election (2025) (<span class="source-ref">PM HeizenNachwahl.docx</span>)</p><p class="log-paragraph">48. Energy future (2025) (<span class="source-ref">PM EZuknft V2 txt.docx</span>)</p><p class="log-paragraph">49. Energy-transition grids, Europamagazin – camera, not editing (2025) (<span class="source-ref">PM txt EnergiewendeNetze.docx</span>)</p><p class="log-paragraph">50. Space (2025) (<span class="source-ref">PM Weltraum txt.docx</span>)</p><p class="log-paragraph">51. Plusminus Pensions (2025) (<span class="source-ref">PM Rente txt.docx</span>)</p><p class="log-paragraph">52. Chemical-industry wage agreement (2026) (<span class="source-ref">PM Chemtarif2.docx</span>)</p><p class="log-paragraph">53. Truck drivers (2026; Europamagazin version with Anja Wetzel grouped with it) (<span class="source-ref">PM LKW Fahrer txt.docx</span>)</p><p class="log-paragraph">54. End of the energy transition (2026) (<span class="source-ref">PM Energiewende-Ende txt.docx</span>)</p><p class="log-paragraph">55. Markt Doctors’ billing (2026) (<span class="source-ref">M ArtzAbrchng  TXT.docx</span>)</p><p class="log-paragraph">56. Special fund (2026; Umschau version grouped with it) (<span class="source-ref">PM Sondervermögen.docx</span>) (<span class="source-ref">UM Sondervermögen txt.docx</span>)</p><p class="log-paragraph">57. Forestry (2026) (<span class="source-ref">PM-Waldwirtschaft-txt-nA.docx</span>)</p><p class="log-paragraph">58. Climate-damaging SF6 (2026) (<span class="source-ref">PM Klimakiller txt final.docx</span>)</p><p class="log-paragraph">59. Rail construction chaos (2026) (<span class="source-ref">PM BahnBauChaos va.docx</span>)</p><p class="log-paragraph">60. The 60th unit in this list, after consolidating versions, is: Wärmepumpen ng2d and Bahn-Investitionsstau n5hf are two units (nos. 41 and 43). But the list numbered 1–59 plus the second 2024 investment-backlog story makes 59? Counting entries 1–59 gives 59 entries; the 60th unit would be Gleispreise 2024 (no. 38), which is already included. Correct resolution: the master list of 1–59 would need the extra 2023 title from the group of nine, but there is none beyond the eight entries for 2023 (nos. 27–34). 18 before 2022 + 8 in 2022 (19–26) = 26 by the end of 2022; 8 in 2023 (27–34) = 34; 11 in 2024 (35–45) = 45; 6 in 2025 (46–51) = 51; 8 in 2026 (52–59) = 59.</p><p class="log-paragraph">The substantiated count is therefore 59 distinct productions with verifiable credits, not 60. The earlier 60 resulted from overstating the 2023 group by one. The statistical minimum from the corrected master list is 59.</p><div class="log-heading">Exclusions: not counted</div><p class="log-paragraph">Not Alexander Kraus despite similar names: interviewee Gerd Kraus (fisheries), cameraman Sebastian Krausse (pensions 2025), Stephan Krause (1999). (<span class="source-ref">PM Fischerei txt.docx</span>) (<span class="source-ref">PM Rente txt.docx</span>)</p><p class="log-paragraph">An editor was requested but Kraus was not credited in the finished report, so these are excluded: Datenkraken (actually edited by Ruben Bürgam), Wetterapps (Ines Müller), China/trade war HKWQ (Andreas Fennel), rail-staff shortage LVC6 (Britta Lukas / Gabi Kirstan), Europamagazin pension comparison (Ines Müller). (<span class="source-ref">PM ReiseMitDatenkrake text.docx</span>) (<span class="source-ref">M WetterApps 2 txt.docx</span>) (<span class="source-ref">PM China txt.docx</span>) (<span class="source-ref">PM Bahnbersonall txt final.docx</span>) (<span class="source-ref">Em Rente txt2.docx</span>)</p><div class="log-heading">Borderline cases that may change the count</div><p class="log-paragraph">- If the Hollandrente online graphic, the long version of Pflegekonzerne, the Markt electricity-price version and the Europamagazin/Umschau versions are counted separately, the total is higher.</p><p class="log-paragraph">- Counting Gleispreise NEU from 2026 as a new report rather than a version of the 2024 production would make it 60. (<span class="source-ref">PM Gleispreise NEU.docx</span>)</p><p class="log-paragraph">- Some later productions may be absent from the archive if credits are concatenated or appear only in formats that were not searched.</p><div class="log-heading">Conclusion</div><p class="log-paragraph">You have worked with Alexander Kraus since at least May 2015. At least 59 distinct TV reports are documented through 2026, mostly Plusminus, as well as Markt, Europamagazin, Umschau and Europareport. His role was film editor, and once cameraman. (<span class="source-ref">PLUMI HHA txt.doc</span>) (<span class="source-ref">PM txt EnergiewendeNetze.docx</span>) (<span class="source-ref">PM Klimakiller txt final.docx</span>)</p></div></section>
+<section id="sources"><h2>About source references</h2><p>The source files belong to the journalist’s private archive. Within Findit6Agent, clicking an underlined filename opens the original local document; in this public transcript the filenames are styled as links but are not clickable. This page is an English translation of a real AI response, including its changing count and unresolved boundary cases.</p></section><div class="footer">Findit6Agent Help · Live research demonstrations</div></article></main></div>
+<script>
+const navSearch = document.getElementById('navSearch');
+const navLinks = [...document.querySelectorAll('#nav a')];
+
+navSearch.addEventListener('input', () => {
+  const q = navSearch.value.trim().toLowerCase();
+  navLinks.forEach(a => {
+    a.style.display = (!q || a.textContent.toLowerCase().includes(q)) ? 'block' : 'none';
+  });
+});
+
+const sections = [...document.querySelectorAll('section[id]')];
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+  });
+}, {rootMargin:'-20% 0px -70% 0px', threshold:0});
+
+sections.forEach(s => observer.observe(s));
+
+
+
+
+
+// UNIFIED_NAV_JS_BEGIN
+const menuToggle = document.getElementById('menuToggle');
+const topnav = document.getElementById('topnav');
+
+if (menuToggle && topnav) {
+  menuToggle.addEventListener('click', () => {
+    const open = topnav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuToggle.setAttribute(
+      'aria-label',
+      open ? 'Close documentation menu' : 'Open documentation menu'
+    );
+  });
+
+  topnav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    });
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && topnav.classList.contains('open')) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+      menuToggle.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1180) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    }
+  });
+}
+// UNIFIED_NAV_JS_END
+
+</script></body></html>
