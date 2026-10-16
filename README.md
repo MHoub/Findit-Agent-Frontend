@@ -1,4 +1,4 @@
-# Findit Agent 🕵️‍♂️
+# Findit Agent
 > **Agentic AI research for your local document collections – without the RAG overhead.**
 
 Findit Agent brings advanced agentic AI research directly to your local files. It can find a single fact hidden inside thousands of files or research complex topics across multiple documents to generate an evidence-based report. 
@@ -13,7 +13,7 @@ The research is performed by an AI agent using a wide range of supported LLMs (c
 
 ---
 
-## 🏛️ The Archivist Principle
+## The Archivist Principle
 
 Findit6Agent acts as a strict **smart archivist** between your files and the AI.
 
@@ -25,7 +25,7 @@ Findit6Agent acts as a strict **smart archivist** between your files and the AI.
 
 ---
 
-## 🚀 Quick Start (Windows only)
+## Quick Start (Windows only)
 
 ### 1. Download & Install
 👉 **[Download the complete Windows installer](https://github.com/MHoub/Findit-Agent-Frontend/releases/tag/v1.00.01)**  
@@ -38,7 +38,7 @@ You only need one of the following:
 
 ---
 
-## 💡 Why Findit Agent?
+## Why Findit Agent?
 
 Traditional AI document assistants require time-consuming indexing and vector databases. Findit Agent queries your existing local archives directly. It supports **Office documents, PDFs, emails, ZIP/tar archives, source code, and OCR-processed documents**. 
 
@@ -50,7 +50,7 @@ The AI agent uses these direct search results to:
 
 ---
 
-## 🔍 Fully Traceable & Verifiable Research
+## Fully Traceable & Verifiable Research
 
 No more AI hallucinations without proof. Findit Agent is designed to make every step of the research process transparent:
 
@@ -61,7 +61,7 @@ You can reopen and inspect the agent's search history at any time, making the re
 
 ---
 
-## 📸 Screenshot & Example
+## Screenshot & Example
 
 ![Findit Agent Screenshot](images/FINDIT6AGENT-Results.png)
 
@@ -69,7 +69,7 @@ You can reopen and inspect the agent's search history at any time, making the re
 
 ---
 
-## ⚖️ Source-Available & License Terms
+## Source-Available & License Terms
 
 This repository contains the **complete source code** for Findit6Agent. 
 
