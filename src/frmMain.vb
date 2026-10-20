@@ -134,7 +134,10 @@ Public Class frmMain
         Me.BackColor = clr.Background
         rtfbProtokoll.Cursor = Cursors.Arrow
         btnConnect.BackColor = clr.Buttons
-        btnSend.BackColor = btnConnect.BackColor
+        btnSend.BackColor = clr.Buttons
+        btnSend.ForeColor = Color.White
+        btnSettings.BackColor = clr.Buttons
+        btnWhere.BackColor = clr.Buttons
         rtfbProtokoll.BackColor = clr.Buttons
         rtfbProtokoll.ForeColor = clr.Text
         For Each child As Control In Me.Controls
@@ -334,15 +337,12 @@ Public Class frmMain
             If currentProvider IsNot Nothing Then
                 Await currentProvider.DisconnectAsync(CancellationToken.None)
             End If
-
             btnConnect.ImageKey = "OFF"
             currentSession = New SessionData()
             currentProvider = Nothing
-
             btnSend.Text = "awaiting connection"
             btnSend.Enabled = False
-            btnSend.ForeColor = clr.Text
-
+            btnSend.ForeColor = Color.White
             LogDebug("Session disconnected.")
         Catch ex As Exception
             LogDebug("Disconnect error: " & ex.Message)
@@ -514,8 +514,8 @@ Public Class frmMain
     ' File URI links are converted back to local paths before launching.
     Private Sub startclickedFile(sender As Object, e As LinkClickedEventArgs) Handles rtfbProtokoll.LinkClicked
         ' Open a file link selected in the protocol.
+        Dim target As String = e.LinkText 'New Uri(e.LinkText).LocalPath
         Try
-            Dim target As String = e.LinkText 'New Uri(e.LinkText).LocalPath
             If target.StartsWith("file:", StringComparison.OrdinalIgnoreCase) Then
                 target = New Uri(target).LocalPath
             End If
@@ -524,7 +524,7 @@ Public Class frmMain
             .UseShellExecute = True
         })
         Catch ex As Exception
-            MsgBoxNeu("Problem running file: " & ex.Message, MsgBoxStyle.OkOnly)
+            MsgBoxNeu("Problem running file: " & target & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.OkOnly)
         End Try
     End Sub
 
@@ -889,7 +889,4 @@ Public Class frmMain
         IO.Directory.CreateDirectory(SessionWorkspace)
     End Sub
 
-    Private Sub lblTokensUsed_Click(sender As Object, e As EventArgs) Handles lblTokensUsed.Click
-
-    End Sub
 End Class

@@ -21,12 +21,10 @@ Public Module GlobalState
     ' The colours used within the ui
     Public Class Colors
         ' Colors
-        Public Background As Color = ColorTranslator.FromHtml("#4A5159")
-        Public lightBackgrnd As Color = Color.Gray
-        Public TxtBackgrnd As Color = ColorTranslator.FromHtml("#2A2F36")
-        Public Buttons As Color = ColorTranslator.FromHtml("#626973")
+        Public Background As Color = ColorTranslator.FromHtml("#34445a") 'ColorTranslator.FromHtml("#4A5159")#
+        Public TxtBackgrnd As Color = ColorTranslator.FromHtml("#202730") 'ColorTranslator.FromHtml("#2A2F36")
+        Public Buttons As Color = ColorTranslator.FromHtml("#2a3441") 'ColorTranslator.FromHtml("#626973")
         Public UsrTxt As Color = Color.LightGreen
-        Public KiTXT As Color = Color.Black
         Public LnkTxt As Color = Color.Blue
         Public Text As Color = Color.White
         Public lightgreen As Color = Color.LightGreen

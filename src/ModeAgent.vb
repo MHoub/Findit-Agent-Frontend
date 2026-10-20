@@ -94,10 +94,13 @@ Module ModeAgent
     ' consumeResponse=False keeps KIresponse for a later timer cycle, currently used while the file worker is busy.
     ' Returns optional text for the user interface
     Private Function ProcessAgentAction(jResponse As JsonElement, action As String, ByRef consumeResponse As Boolean) As String
+        ' In some cases the agent has to be forced to produce ledgerentries before continuing
         If iWaitingForLedger > 0 AndAlso Not action.Equals("ledgerentries", StringComparison.OrdinalIgnoreCase) Then
-            consumeResponse = True
-            sPromptToProcess = " MANDATORY NEXT ACTION: ledgerentries. This is the ONLY permitted action now. Return one Ledger entry for EVERY file in the complete last Context Excerpt list. Do not skip, merge or summarize files. Do NOT request or read files, do NOT search, do NOT send working, and do NOT answer the user. No other action is permitted until the complete Ledger has been received. Any other action will be ignored and this instruction will be repeated."
-            Return ""
+            If Not action.Equals("synthesisready", StringComparison.OrdinalIgnoreCase) Then
+                consumeResponse = True
+                sPromptToProcess = " MANDATORY NEXT ACTION: ledgerentries. This is the ONLY permitted action now. Return one Ledger entry for EVERY file in the complete last Context Excerpt list. Do not skip, merge or summarize files. Do NOT request or read files, do NOT search, do NOT send working, and do NOT answer the user. No other action is permitted until the complete Ledger has been received. Any other action will be ignored and this instruction will be repeated."
+                Return ""
+            End If
         End If
 
         Select Case action
@@ -968,7 +971,7 @@ Module ModeAgent
             Dim lMaxStatExcerptSize As Long = CLng(iMaxStatExcerptKB) * 1024L
             If lStatExcerptSize <= lMaxStatExcerptSize Then
                 LogDebug("--------------> Sending StateExcerpt (" & (lStatExcerptSize \ 1024L).ToString() & " KB)")
-                iWaitingForLedger = 1
+                iWaitingForLedger = 1 'hier nur 
                 sPromptToProcess = BuildStateExcerptPrompt(sStatExcerptPath) & vbCrLf &
                      "Do not send an interim answer to the user in response to this search result. Do not ask for any advice or Release or Permission. Continue immediately with the next required research action, or send the final synthesis if the research is complete."
 
@@ -1383,7 +1386,7 @@ Module ModeAgent
         sb.AppendLine("USER QUESTION:")
         sb.AppendLine(query.UserQuestion)
         sb.AppendLine()
-        sb.AppendLine("The task may be more complex than it appears at first glance. These Briefings have been written deliberately, and every section is included for a reason. Before every important decision, verify that your planned action is genuinely consistent with the guidance provided here rather than relying only on your first intuition.")
+        sb.AppendLine("The task is more complex than it appears at first glance. These briefings were written deliberately and each section is included for a specific reason. Think carefully: After searching, can it be helpful to request excerpts of the files found by Findit6 to determine the most promising files to read in full? Which individual files really seem important enough to request to be read in their entirety? Can a hit list search for individual special aspects with other search terms be helpful? Before making any important decision, you should check whether your planned action really aligns with the instructions provided here, rather than relying solely on your initial intuition.“)
         sb.AppendLine()
         sb.AppendLine("Knowledge Mode Is complete research, Not simple fact lookup." & vbCrLf &
                     "Unless the user explicitly asks For a Short answer, do Not stop once the direct answer has been found. Write a complete report! Before returning the result, review what is discussed in the relevant documents and include important context that helps explain, qualify Or substantiate the answer." & vbCrLf &

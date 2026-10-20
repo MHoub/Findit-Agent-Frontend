@@ -1,3 +1,4 @@
+Imports System.Configuration.Provider
 Imports System.Threading
 
 Public Class frm_Connect
@@ -27,25 +28,28 @@ Public Class frm_Connect
         Me.Height = 755
         Me.Owner = frmMain
         ' Apply the current application colors.
-        Me.BackColor = clr.Buttons
-        txtUser.BackColor = clr.Background
+        Me.BackColor = clr.Background
+        txtUser.BackColor = clr.Buttons
         txtUser.ForeColor = clr.Text
-        txtUserInfo.BackColor = clr.Background
+        txtUserInfo.BackColor = clr.Buttons
         txtUserInfo.ForeColor = clr.Text
-        bESC.BackColor = clr.Background
-        btnOK.BackColor = clr.Background
+        bESC.BackColor = clr.Buttons
+        btnOK.BackColor = clr.Buttons
         bESC.ForeColor = clr.Text
         btnOK.ForeColor = clr.Text
         rdbChunkExcerpts.ForeColor = clr.Text
         rdbAgent.ForeColor = clr.Text
-        lblAGENTexplain.BackColor = BackColor
+        rdbAgent.BackColor = clr.Buttons
+        rdbChunkExcerpts.BackColor = clr.Buttons
+        lblAGENTexplain.BackColor = clr.Background
         lblAGENTexplain.ForeColor = clr.Text
-        lblUsername.BackColor = Me.BackColor
+        lblUsername.BackColor = clr.Background
         lblUsername.ForeColor = clr.Text
-        lblUserInfo.BackColor = Me.BackColor
+        lblUserInfo.BackColor = clr.Background
         lblUserInfo.ForeColor = clr.Text
-        lblProvider.BackColor = Me.BackColor
+        lblProvider.BackColor = clr.Background
         lblProvider.ForeColor = clr.Text
+        '
         ' Set fixed dialog lettering.
         Me.Text = "Connection with Model"
         lblProvider.Text = "Provider:"
@@ -456,7 +460,7 @@ Public Class frm_Connect
                     If key = "EnvironmentName" OrElse key = "AgentName" Then
                         txt.ReadOnly = Not String.IsNullOrWhiteSpace(value)
                     End If
-                    ctl.BackColor = clr.Background
+                    ctl.BackColor = clr.Buttons
                     ctl.ForeColor = clr.Text
                 ElseIf TypeOf ctl Is ComboBox Then
                     Dim cmb As ComboBox = DirectCast(ctl, ComboBox)
@@ -617,8 +621,14 @@ Public Class frm_Connect
             LogDebug("Problem connecting: " & ex.Message)
             frmMain.Cursor = Cursors.Default
             Me.Visible = True
-            MsgBoxNeu("Problem connecting:" & vbCrLf &
+            Select Case currentSession.Provider.ToLower
+                Case "ollama"
+                    MsgBoxNeu("Problem connecting:" & vbCrLf &
+                     "Is Ollama up and running?", MsgBoxStyle.OkOnly)
+                Case Else
+                    MsgBoxNeu("Problem connecting:" & vbCrLf &
                      "No or wrong API-KEY?", MsgBoxStyle.OkOnly)
+            End Select
             Exit Sub
         End Try
         frmMain.Cursor = Cursors.Default

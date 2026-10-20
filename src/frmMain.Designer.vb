@@ -233,7 +233,7 @@ Partial Class frmMain
         txtWhere.Name = "txtWhere"
         txtWhere.Size = New Size(280, 17)
         txtWhere.TabIndex = 2
-        txtWhere.Text = "  d:\Archiv & Subs"
+        txtWhere.Text = " "
         ' 
         ' btnCurDir
         ' 
