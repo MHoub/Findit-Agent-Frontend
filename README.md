@@ -28,7 +28,9 @@ Findit6Agent acts as a strict **smart archivist** between your files and the AI.
 ## Quick Start (Windows only)
 
 ### 1. Download & Install
-👉 **Download Findit6Agent (Windows Installer)](https://github.com/MHoub/Findit-Agent-Frontend/releases/latest/download/Findit6Agent_Setup.exe)**
+
+👉 ** Download Findit6Agent (Windows Installer) (https://github.com/MHoub/Findit-Agent-Frontend/releases/latest/download/Findit6Agent_Setup.exe) **
+
 *The installer contains all required components, including the local reranker and its runtime environment. No manual setup required.*
 
 ### 2. Prerequisites
