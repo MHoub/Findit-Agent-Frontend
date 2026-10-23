@@ -61,11 +61,11 @@ You can reopen and inspect the agent's search history at any time, making the re
 
 ---
 
-## Screenshot & Example
+## Example Video
 
-![Findit Agent Screenshot](images/FINDIT6AGENT-Results.png)
 
-*Example: A short "needle in a haystack" lookup performed by Gemini Flash. The agent automatically works in the language used by the user and dominant in the archive. In this case, it successfully located a hidden private mobile number inside a large archive.*
+https://github.com/user-attachments/assets/ac31b07a-8600-4d6c-8be9-bf5d3c3d6a2e
+
 
 ---
 
