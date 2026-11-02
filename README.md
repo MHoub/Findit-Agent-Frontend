@@ -1,6 +1,6 @@
 # Findit Agent
 > **Agentic AI research for your local document collections – without the RAG overhead.<br>
-> Free for private and experimental use - from 69€ / 79 when used commercially**
+> Free for private and experimental use -  69€ / 79$ Lifetime license when used commercially**
 
 Findit Agent brings advanced agentic AI research directly to your local files. It can find a single fact hidden inside thousands of files or research complex topics across multiple documents to generate an evidence-based report. 
 
