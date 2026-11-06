@@ -32,6 +32,18 @@ Findit6Agent acts as a strict **smart archivist** between your files and the AI.
 
 ---
 
+## See Findit Agent in Action — A Real AI Research Session
+
+**Before diving into the details, watch what Findit Agent can actually do.**
+
+In this real-world example, an AI agent independently investigates a complex question across a local archive of more than 50,000 files. It develops search strategies, discovers relevant information, reads and evaluates sources, and produces a detailed, evidence-based report.
+
+**From the initial question to the finished research report: about 7 minutes,  compressed into one minute.**
+
+https://github.com/user-attachments/assets/ac31b07a-8600-4d6c-8be9-bf5d3c3d6a2e
+
+
+
 ## Quick Start (Windows only)
 
 ### 1. Download & Install
@@ -73,11 +85,6 @@ You can reopen and inspect the agent's search history at any time, making the re
 ---
 
 ## Example Video
-
-
-https://github.com/user-attachments/assets/ac31b07a-8600-4d6c-8be9-bf5d3c3d6a2e
-
-
 ---
 
 ## Source-Available & License Terms
