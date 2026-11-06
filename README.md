@@ -14,6 +14,12 @@ The research is performed by an AI agent using a wide range of supported LLMs (c
 
 ---
 
+# Index-free doesn't mean slow.
+
+On a mid-range six-core AMD Ryzen PC, Findit6 typically searches through 50,000–100,000 files (50–100 GB of archive data) in roughly one minute — without building or maintaining a search index.
+
+When an AI agent investigates a complex question, it spends minutes reading, evaluating, and reasoning about the information it finds. **The actual file searches usually account for only a small part of the overall research time.**
+
 ## The Archivist Principle
 
 Findit6Agent acts as a strict **smart archivist** between your files and the AI.
