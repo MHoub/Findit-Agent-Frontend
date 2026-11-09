@@ -1,427 +1,471 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Findit6 - Professional File Search for Windows</title>
-<link href="Findit.ico" rel="icon" type="image/x-icon"/>
-<link href="findit-styles.css" rel="stylesheet"/>
-<!-- Matomo Tracking -->
-<script>
-  var _paq = window._paq = window._paq || [];
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FinditAgent - First Steps</title>
+<style>
+:root{--bg:#202730;--panel:#2c3745;--panel2:#344255;--line:#3c4857;--text:#d7dbe1;--muted:#aeb6c2;--heading:#f1f3f5;--accent:#b9dcff;--accent2:#7eb8ee;--code:#182029;--good:#93d7b5;--warn:#e4c27b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.topbar{position:sticky;top:0;z-index:20;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#34445a;border-bottom:1px solid #435167;color:white}.topbar .title{font-size:19px;font-weight:650}.topbar .actions{display:flex;gap:10px;align-items:center}.topbar button{background:transparent;border:0;color:#c8d2df;font-size:18px;cursor:pointer;padding:5px 8px}.layout{display:grid;grid-template-columns:294px minmax(0,1fr);min-height:calc(100vh - 54px)}.sidebar{position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto;padding:30px 22px 40px 10px;border-right:1px solid var(--line);background:#242d38}.searchbox{display:flex;align-items:center;gap:8px;background:#344255;border:1px solid #3e4d60;border-radius:5px;padding:7px 10px;margin:0 0 22px}.searchbox input{width:100%;background:transparent;border:0;outline:0;color:#e6ebf2;font-size:14px}.searchbox input::placeholder{color:#8794a5}.nav a{display:block;padding:8px 10px;margin:2px 0;border-radius:4px;color:#c9e4ff;font-size:13.5px;font-weight:600}.nav a:hover,.nav a.active{background:#303c4b;text-decoration:none}.nav .sub{padding-left:22px;font-weight:500;color:#abc2d8}.main{padding:34px 44px 80px}.article{max-width:980px;margin:0 auto}h1,h2,h3{color:var(--heading);line-height:1.25}h1{font-size:34px;margin:0 0 22px}h2{font-size:25px;margin:38px 0 15px;padding-bottom:7px;border-bottom:1px solid var(--line)}h3{font-size:19px;margin:28px 0 8px}p{margin:0 0 16px}ul,ol{margin-top:7px}strong{color:#edf1f6}.callout{border-left:4px solid var(--accent2);background:var(--panel);padding:15px 18px;margin:20px 0;border-radius:4px}.callout.good{border-left-color:var(--good)}.callout.warn{border-left-color:var(--warn)}.modegrid,.linkgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:18px}.card h3{margin-top:0}.tag{display:inline-block;padding:2px 8px;border-radius:999px;background:#3b4a5d;color:#d9ebfb;font-size:12px;font-weight:700}.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:20px 0;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:7px}.flow .step{background:#303c4b;border:1px solid #435267;border-radius:5px;padding:7px 11px;font-weight:600}.flow .arrow{color:#91a7bc}code{font-family:Consolas,"Courier New",monospace;background:var(--code);color:#e1e9f1;padding:2px 5px;border-radius:4px}.filelink{display:block;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:9px 0}.filelink small{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}
+.filelink span{display:block;color:var(--text);font-size:13.5px;line-height:1.5;font-weight:400}.footer{color:#8995a3;font-size:12px;border-top:1px solid var(--line);padding-top:18px;margin-top:50px}@media(max-width:900px){.layout{display:block}.sidebar{position:relative;top:0;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:18px}.main{padding:28px 22px 60px}.modegrid,.linkgrid{grid-template-columns:1fr}}@media print{.topbar,.sidebar{display:none}.layout{display:block}.main{padding:0}body{background:white;color:#222}h1,h2,h3,strong{color:#111}.card,.callout,.flow,.filelink{background:#f5f5f5;border-color:#ccc}a{color:#124b7a}}
 
-  (function () {
-    var MATOMO_URL = "https://analytics.dateisuche.de/";  // mit / am Ende
-    var SITE_ID = "1";
+.doclinks{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.doclinks a{display:inline-block;background:#303c4b;border:1px solid #435267;border-radius:5px;padding:8px 12px;font-weight:600}
+.doclinks a:hover{background:#374557;text-decoration:none}
+.smallnote{color:var(--muted);font-size:13.5px}
+.modegrid{clear:both}
 
-    _paq.push(['setTrackerUrl', MATOMO_URL + 'matomo.php']);
-    _paq.push(['setSiteId', SITE_ID]);
+.product-title{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.product-title .platform{font-size:16px;font-weight:400;color:var(--muted);white-space:nowrap}
+.product-title img{width:46px;height:46px;flex:0 0 46px}
+.findit-title{display:flex;align-items:center;gap:9px}
+.findit-title img{width:38px;height:38px;flex:0 0 38px}
 
-    // Datenschutzfreundlich
-    _paq.push(['disableCookies']); // cookieless
+.api-note{float:right;width:58%;background:var(--panel2);border:1px solid var(--line);border-left:4px solid var(--accent2);border-radius:6px;padding:14px 18px;margin:4px 0 18px 24px}
+.api-note p{margin:0 0 10px}.api-note p:last-child{margin-bottom:0}.api-note .api-title{font-weight:700;color:var(--heading)}
+#overview::after{content:"";display:block;clear:both}
+@media(max-width:900px){.api-note{float:none;width:100%;margin:20px 0 24px}}
 
-    // Basis-Tracking
-    _paq.push(['trackPageView']);
-    _paq.push(['enableLinkTracking']);
 
-    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-    g.async = true;
-    g.src = MATOMO_URL + 'matomo.js';
-    s.parentNode.insertBefore(g, s);
-  })();
-</script>
-<!-- /Matomo Tracking -->
+/* UNIFIED_NAV_BEGIN */
+.topnav{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    margin-left:auto;
+    margin-right:18px;
+}
+
+.topnav a{
+    color:#d6e4f2;
+    padding:7px 10px;
+    border-radius:4px;
+    font-size:13.5px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.topnav a:hover{
+    background:#3d4e64;
+    text-decoration:none;
+}
+
+.topnav a.active{
+    background:#1f3144;
+    color:#ffffff;
+    border:1px solid #7eb8ee;
+    cursor:default;
+}
+
+.menu-toggle{
+    display:none;
+    background:transparent;
+    border:0;
+    color:#d6e4f2;
+    font-size:25px;
+    line-height:1;
+    cursor:pointer;
+    padding:6px 9px;
+    margin-left:auto;
+}
+
+@media(max-width:700px){
+    .topbar{position:sticky}
+
+    .topnav{
+        display:none;
+        position:absolute;
+        top:54px;
+        left:0;
+        right:0;
+        margin:0;
+        padding:9px 12px 12px;
+        background:#2b394b;
+        border-bottom:1px solid #435167;
+        box-shadow:0 5px 14px rgba(0,0,0,.22);
+        flex-direction:column;
+        align-items:stretch;
+        gap:2px;
+    }
+
+    .topnav.open{display:flex}
+
+    .topnav a{
+        display:block;
+        padding:9px 12px;
+        font-size:14px;
+    }
+
+    .menu-toggle{display:block}
+
+    .topbar .actions{margin-left:6px}
+}
+/* UNIFIED_NAV_END */
+
+</style>
 </head>
 <body>
-<div id="nav-placeholder"></div>
-<div class="language-banner">
-  <strong>This website is in English.</strong>
-  Findit is international: choose from seven interface languages directly in the program.
-  <span class="flags" aria-label="Seven interface languages">
-    <span title="German">🇩🇪</span><span title="English">🇬🇧</span><span title="French">🇫🇷</span><span title="Spanish">🇪🇸</span><span title="Italian">🇮🇹</span><span title="Dutch">🇳🇱</span><span title="Portuguese">🇵🇹</span>
-  </span>
-</div>
+
+<header class="topbar">
+    <div class="title">FinditAgent</div>
+
+    <button class="menu-toggle" id="menuToggle" type="button"
+            aria-label="Open documentation menu"
+            aria-controls="topnav"
+            aria-expanded="false">&#9776;</button>
+
+    <nav class="topnav" id="topnav" aria-label="Main documentation">
+        <a class="active" aria-current="page">Read First</a>
+        <a href="Findit6Agent_AgentMode.html">Agent Mode</a>
+        <a href="Findit6Agent_GuidedMode.html">Guided Mode</a>
+        <a href="Findit6Agent_Model_Behavior.html">Model Behavior</a>
+        <a href="FinditAgent_What_AI_Says.html">What AI Says</a>
+        <a href="FinditAgent_Live_Demos.html">Live Demos</a>
+        <a href="Findit6Agent_License_and_Legal.html">License &amp; Legal</a>
+    </nav>
+
+    <div class="actions">
+        <button type="button" onclick="history.back()" title="Back">&#9664;</button>
+        <button type="button" onclick="history.forward()" title="Forward">&#9654;</button>
+        <button type="button" onclick="window.print()" title="Print">&#9113;</button>
+    </div>
+</header>
 
 
-<!-- Hero Section mit animierten Sprechblasen -->
-<section class="hero" id="beta">
-<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; align-items: center; max-width: 1600px; margin: 0 auto; padding: 1rem;">
-<!-- Linke Sprechblasen -->
-<div class="speech-bubble-container" style="display: flex; justify-content: center; position: relative; min-height: 500px;">
-<img alt="Sprechblase" class="speech-bubble speech-left active" src="PIC/sb1.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-left" src="PIC/sb2.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-left" src="PIC/sb3.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-left" src="PIC/sb4.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-left" src="PIC/sb5.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-left" src="PIC/sb6.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-left" src="PIC/sb7.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-left" src="PIC/sb8.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-left" src="PIC/sb9.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-left" src="PIC/sb10.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-left" src="PIC/sb11.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-left" src="PIC/sb12.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-left" src="PIC/sb13.gif"/>
-</div>
-<!-- Mitte: Text -->
-<div style="text-align: center; z-index: 10;">
-<h1>Findit 6 <small>+ FinditAgent</small></h1>
-<p class="hero-subtitle">
-                With Findit 6, YOU can find any file on your computer by its contents in seconds. No index required.
-                <br/><br/>
-                With FinditAgent, AI can do research FOR YOU – including complex analysis and reports. No advance preparation.
-                <br/><br/>
-<strong>Findit6 finds. FinditAgent researches.</strong>
-</p>
-<div class="hero-actions">
-<a class="cta-button" href="#download-cta">Try Findit</a>
-</div>
-</div>
-<!-- Rechte Sprechblasen -->
-<div class="speech-bubble-container" style="display: flex; justify-content: center; position: relative; min-height: 500px;">
-<img alt="Sprechblase" class="speech-bubble speech-right active" src="PIC/sb1r.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-right" src="PIC/sb2r.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-right" src="PIC/sb3r.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-right" src="PIC/sb4r.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-right" src="PIC/sb5r.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-right" src="PIC/sb6r.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-right" src="PIC/sb7r.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-right" src="PIC/sb8r.gif"/>
-<img alt="Sprechblase" class="speech-bubble speech-right" src="PIC/sb9r.gif"/>
-</div>
-</div>
-</section>
-<!-- Responsive CSS für Sprechblasen -->
-<style>
-    .speech-bubble-container {
-        position: relative;
-        width: 100%;
-        max-width: 700px;
-    }
-    
-    .speech-bubble {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        max-width: 700px;
-        opacity: 0;
-        filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
-        transition: opacity 0.5s ease-in-out;
-        pointer-events: none;
-    }
-    
-    .speech-left {
-        transform: translate(-50%, -50%) perspective(1200px) rotateY(12deg) rotateZ(-3deg);
-    }
-    
-    .speech-right {
-        transform: translate(-50%, -50%) perspective(1200px) rotateY(-12deg) rotateZ(3deg);
-    }
-    
-    .speech-bubble.active {
-        opacity: 1;
-        animation: float 3s ease-in-out infinite;
-    }
-    
-    @keyframes float {
-        0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
-        50% { transform: translate(-50%, -50%) translateY(-10px); }
-    }
-    
-    .speech-left.active {
-        animation: floatLeft 5s ease-in-out infinite;
-    }
-    
-    .speech-right.active {
-        animation: floatRight 6s ease-in-out infinite;
-    }
-    
-    @keyframes floatLeft {
-        0%, 100% { 
-            transform: translate(-50%, -50%) perspective(1200px) rotateY(12deg) rotateZ(-3deg) translateY(0px); 
-        }
-        50% { 
-            transform: translate(-50%, -50%) perspective(1200px) rotateY(12deg) rotateZ(-3deg) translateY(-10px); 
-        }
-    }
-    
-    @keyframes floatRight {
-        0%, 100% { 
-            transform: translate(-50%, -50%) perspective(1200px) rotateY(-12deg) rotateZ(3deg) translateY(0px); 
-        }
-        50% { 
-            transform: translate(-50%, -50%) perspective(1200px) rotateY(-12deg) rotateZ(3deg) translateY(-10px); 
-        }
-    }
-    
-    /* Tablet-Bereich: 2 Spalten (Text + rechte Blase), linke Blase ausblenden */
-    @media (max-width: 900px) and (min-width: 601px) {
-        .hero > div {
-            grid-template-columns: 1fr 1fr !important;
-            gap: 2rem !important;
-        }
-        .speech-bubble-container:first-child {
-            display: none !important;
-        }
-        .speech-bubble-container {
-            min-height: 400px !important;
-        }
-        .speech-bubble {
-            max-width: 500px !important;
-        }
-    }
-    
-    /* Mobile: 1 Spalte, nur rechte Blase klein unter Button */
-    @media (max-width: 600px) {
-        .hero > div {
-            grid-template-columns: 1fr !important;
-            gap: 1rem !important;
-        }
-        .hero > div > div {
-            order: 2;
-        }
-        .hero > div > div:nth-child(2) {
-            order: 1;
-        }
-        .speech-bubble-container:first-child {
-            display: none !important;
-        }
-        .speech-bubble-container {
-            min-height: 150px !important;
-            max-width: 300px !important;
-            margin: 0 auto;
-        }
-        .speech-bubble {
-            max-width: 300px !important;
-            transform: translate(-50%, -50%) !important;
-        }
-        .speech-left.active, .speech-right.active {
-            animation: floatMobile 3s ease-in-out infinite;
-        }
-        @keyframes floatMobile {
-            0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
-            50% { transform: translate(-50%, -50%) translateY(-10px); }
-        }
-    }
-</style>
-<style>
-:root{--page:#1d2938;--panel:#27364a;--panel2:#30445e;--ink:#edf2f8;--muted:#bfccdc;--blue:#76aaff;--green:#81bb68}
-html{scroll-behavior:smooth}body{margin:0;background:var(--page);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
-.container{max-width:1350px;margin:auto;padding:0 24px}
-.hero{background:linear-gradient(140deg,#273950,#202b39);padding:24px 0 5px}
-.hero h1{font-size:clamp(32px,3.4vw,52px);color:#76aaff;line-height:1.15;margin:.4em 0}
-.hero h1 small{font-size:.4em;white-space:nowrap}
-.hero-subtitle{font-size:clamp(17px,1.45vw,22px);line-height:1.55;color:#cbd5e3}
-.hero-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
-.cta-button{display:inline-block;background:#76ae65;color:#fff;text-decoration:none;padding:14px 23px;border-radius:6px;font-weight:700;text-align:center}
-.cta-outline{background:transparent;border:1px solid #7caeff;color:#c7ddff}
-.cta-button:hover{filter:brightness(1.12)}
-.section-kicker{text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:bold;color:#83b5ff;margin:0 0 10px}
-.comparison-intro{text-align:center;padding:48px 18px 30px}
-.comparison-intro h2{font-size:clamp(25px,2.8vw,37px);margin:0 0 12px}
-.comparison-intro p{color:var(--muted);max-width:820px;margin:auto;line-height:1.6}
-.product-columns {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-areas:
-        "findit agent"
-        "download download";
-    grid-template-rows: auto auto;
-    gap: 24px;
-    align-items: stretch;
-    padding-bottom: 55px;
-}
+<div class="layout">
+  <aside class="sidebar">
+    <div class="searchbox">
+      <input id="navSearch" type="search" placeholder="Search..." aria-label="Search navigation">
+      <span>🔎</span>
+    </div>
+    <nav class="nav" id="nav">
+      <a href="#overview">What FinditAgent does</a>
+      <a href="#first-steps">First steps</a>
+      <a href="#where">1. Define where to search</a>
+      <a href="#connect">2. Connect an AI model</a>
+      <a href="#userinfo">Tell the Agent about you</a>
+      <a href="#question">3. Ask your first question</a>
+      <a href="#start">4. Start the search</a>
+      <a href="#example">Example workflow</a>
+      <a href="#next">That's it</a>
+      <a href="#hardware">Hardware requirements</a>
+      <a href="#technical-appendix">Technical Appendix</a>
+      <a href="#support">Troubleshooting &amp; Support</a>
+    </nav>
+  </aside>
 
-#findit6 { grid-area: findit; }
-#finditagent { grid-area: agent; }
-#download-cta { grid-area: download; }
-.product-panel{background:var(--panel);border:1px solid #43556b;border-radius:12px;padding:30px;min-width:0}
-.product-panel.agent{background:#29394d;border-color:#56789b}
-.product-header{min-height:170px}
-.product-header h2{font-size:33px;margin:5px 0 10px;color:#fff}
-.product-header p{line-height:1.65;color:#cbd5e3;margin:0 0 22px}
-.product-feature{padding:21px 0;border-top:1px solid #45566c}
-.product-feature h3{font-size:20px;margin:0 0 9px;color:#b5d2ff}
-.product-feature p{line-height:1.68;color:#cdd6e2;margin:0 0 10px}
-.product-feature strong{color:#fff}
-.product-feature img,.product-feature video{max-width:100%;width:100%;border-radius:8px;display:block;box-shadow:0 10px 22px #1118}
-.product-feature img{cursor:zoom-in}
-.product-feature img.ocr-mini{width:50%;max-width:280px;height:auto}
-.agent-clip{margin:15px 0 0}
-.agent-clip video{width:100%;height:auto;background:#111b28}
-.agent-clip figcaption{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.agent-clip a{color:#b4d5ff;text-decoration:underline;text-underline-offset:3px}
-@media(max-width:600px){.product-feature img.ocr-mini{width:65%}}
-.product-feature figure{margin:14px 0 0}
-.product-feature figcaption{color:#aabdd3;font-size:12px;margin-top:8px}
-.agent-example{background:#1c2a3b;border-left:3px solid #79aaff;border-radius:4px;padding:13px 17px;color:#e0eafb;line-height:1.55;margin:14px 0}
-.agent-workflow{display:flex;flex-wrap:wrap;gap:7px;margin:17px 0}
-.agent-workflow span{border:1px solid #506886;background:#1c2d41;padding:9px 11px;border-radius:6px;font-size:13px}
-.agent-workflow b{color:#83b5ff;align-self:center}
-.media-placeholder{border:1px dashed #66809f;background:#22354b;padding:28px 14px;border-radius:8px;text-align:center;color:#aec8e4;font-size:14px}
-.product-bottom{grid-column:1 / -1;border:1px solid #58718a;border-radius:12px;background:#304052;margin-top:0;padding:28px 32px 32px;text-align:center}
-.product-bottom > p{max-width:820px;margin:0 auto 20px}
-.product-bottom .download-choices{max-width:800px;margin:20px auto 0}
-.product-bottom p{line-height:1.55;color:#c5d2df}
-.product-bottom h3{margin:0 0 12px}
-.product-bottom .cta-button{margin:6px 8px 6px 0}
-.download-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px;text-align:center}
-.download-choice{min-width:0}
-.download-choice .cta-button{display:block;margin:0 0 12px;padding:13px 8px;font-size:clamp(14px,1.3vw,18px)}
-.download-choice p{font-size:14px;line-height:1.5;margin:0}
-@media(max-width:480px){.download-choices{grid-template-columns:1fr}}
-.full-width-demo{padding:42px 0 54px;background:#202c3a;text-align:center}
-.full-width-demo h2{font-size:29px}
-.full-width-demo p{max-width:780px;margin:12px auto 25px;line-height:1.65;color:#c5d0df}
-.full-width-demo video{display:block;width:100%;max-width:940px;margin:auto;border-radius:10px}
-.site-footer{text-align:center;padding:36px 15px;color:#b3c3d3;font-size:14px}
-.site-footer a{color:#bbd5fa}
-.lightbox{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:25px;cursor:zoom-out}
-.lightbox.show{display:flex}.lightbox img{max-width:94vw;max-height:90vh;object-fit:contain}.lightbox-close{position:absolute;top:12px;right:24px;font-size:36px;color:white}
-@media (max-width:980px) {
-    .product-columns {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "findit"
-            "agent"
-            "download";
-        grid-template-rows: auto;
-    }
-    .product-header { min-height: auto; }
-    .product-panel { padding: 22px; }
-}
+  <main class="main">
+    <article class="article">
 
-@media(max-width:600px){.product-panel{padding:18px}.product-header h2{font-size:29px}}
+      <section id="overview">
+        <h1 class="product-title"><img src="FiKiIcon.gif" alt="Findit6Agent icon">FinditAgent <span class="platform">(for Windows)</span></h1>
+        <p><strong>An AI-assisted research tool for your existing file archive.</strong></p>
+
+        <p><b>The goal is familiar from RAG: let AI work with your own data. The difference is that FinditAgent works directly on the original archive - without prior indexing, vectorization or reorganization, and without giving the AI uncontrolled access to your files.</b></p>
+
+        <p><strong>A video can say more than pages of text.</strong> See our <a href="FinditAgent_Live_Demos.html">live research demonstrations</a>, or start with <a href="https://www.dateisuche.de/en/AgentVideos/Perplexity-mobile.mp4">this three-minute example</a> of an AI finding a specific detail in a large archive.</p>
+
+	  
+	          <div class="api-note">
+			    <p class="api-title findit-title"><img src="FI-icon.gif" alt="Findit6 icon"><span>&#128161; Discover Findit6!</span></p>
+
+  The search engine that allows an AI to find almost any file content for you in a very short time can also be extremely useful on its own — for humans, including you.
+
+  Findit6 searches your existing files directly, without prior indexing, is exceptionally fast and is designed to be simple to use. Give it a try: <strong>Findit6 was installed together with FinditAgent</strong> and can be recognized by its turquoise icon.<br><br>
+
+  <strong>P.S.:</strong> If you have many scanned documents that you want to search using OCR, we recommend running the potentially time-consuming initial OCR scan directly from Findit6 anyway. Once OCR text has been cached, subsequent searches — including FinditAgent searches — can be considerably faster.
+</div>
+		
+		        <p>FinditAgent remains in control of the local archive. The AI receives search results and only machine-readable text from documents or excerpts selected for the current research task.</p>
 
 
+        <p>If your work involves searching large collections of documents, FinditAgent can turn archive research that would otherwise require manual searching, specialized retrieval software or considerable staff time into an interactive, source-based research process.</p>
 
-/* Slim language strip directly below the fixed navigation */
-.language-banner { width:100%; margin-top:80px; padding:9px 18px; background:#253548; border-bottom:1px solid #456078; color:#e8e8e8; text-align:right; font-size:14px; line-height:1.6; }
-.language-banner .flags { display:inline-flex; gap:11px; align-items:center; margin-left:12px; vertical-align:middle; font-size:20px; }
-.language-banner .flags span { cursor:default; }
-.language-banner + .hero { margin-top:0 !important; }
-@media(max-width:650px) { .language-banner {padding:8px 12px; font-size:13px;} .language-banner .flags {display:flex;justify-content:center;margin:4px 0 0;} }
+        <p>Its particular strength is that it works directly with the archive you already have. New or recently changed files are immediately searchable, and the original data remains under your control.</p>
+      </section>
 
-</style>
-<section class="comparison-intro container">
-<p class="section-kicker"><h2>Two tools for your files.</h2></p>
-<p><b>Findit6 has been finding arbitrary file contents across a wide variety of file formats for more than 30 years. In seconds – without prior indexing. FinditAgent builds on this: AI models research your files using targeted searches and text excerpts – without being allowed to open files or folders themselves.</b></p>
-</section>
+      <section id="first-steps">
+        <h2>FinditAgent - First Steps</h2>
+        <p>For your first search, only a few steps are required.</p>
+      </section>
 
-<main class="container product-columns" id="produkte">
-<article class="product-panel" id="findit6">
-<header class="product-header"><p class="section-kicker">Classic full-text search</p><h2>Findit6</h2><p>Find your files – and the exact passage that matters. Fast, without a search index, and without having to upload or organize a document archive first.</p></header>
-<section class="product-feature"><h3>⚡ Fast searching. No index.</h3><p>Search tens of thousands of files using freely combinable search terms, <strong>AND, OR, NOT and NEAR</strong>. Even large, constantly changing collections can be searched directly.</p><figure><img alt="Findit6 main window" onclick="openLightbox(this)" src="PIC/screenshot.png"/><figcaption>Findit6: search interface and results list</figcaption></figure></section>
-<section class="product-feature">
-<h3>📄 Beyond file names</h3>
-<img alt="OCR and fuzzy search in Findit6" onclick="openLightbox(this)" src="PIC/fuzzyocr.png" style="float: left; width: 48%; max-width: 280px; height: auto; margin: 0 18px 12px 0; cursor: pointer;"/>
-<p>Office documents, including older file formats, PDFs, emails with attachments and compressed archives: Findit6 searches <strong>contents</strong>, not just file names. In the PRO version, integrated OCR also recognizes and finds text in scanned images inside PDFs and many image formats!</p>
-<div style="clear: both;"></div>
-</section>
-<section class="product-feature"><h3>🎯 Inspect matches instantly</h3><p>The built-in viewer highlights the relevant passages. Results lists can be searched again, saved and exported. You can also work with files much as you would in Explorer. If too many files are found, filter the results using additional terms – with genuinely instant updates.</p><figure><img alt="Findit6 Viewer mit markierten Fundstellen" onclick="openLightbox(this)" src="PIC/viewer.png"/></figure></section>
-<section class="product-feature"><h3>🔎 Refine searches and use fuzzy matching</h3><p>Restrict searches by file type, properties, folders and date ranges. Fuzzy search in the PRO version also helps with misspellings and damaged special characters.</p></section>
-<section class="product-feature"><h3>⚙️ Built for real-world archives</h3><p>Local drives, network drives and portable use in the PRO version. No index needs to be updated before asking a new question. Innovative multithread management nevertheless lets even an average office computer search many gigabytes per second!</p></section>
-</article>
-<article class="product-panel agent" id="finditagent">
-<header class="product-header"><p class="section-kicker">AI-powered research</p><h2>FinditAgent</h2><p>Turn a question into a research project: FinditAgent connects AI models to Findit6, develops search strategies, evaluates matches and generates reports based on your existing archive.</p></header>
-<section class="product-feature"><h3>🤖 Agent Mode – autonomous research</h3><p>You describe the task. The agent formulates queries, asks Findit6 to search, examines results and text excerpts, and refines its strategy. Multiple searches can thus lead to a <strong>source-based answer</strong> .</p><div class="agent-example">“Which climate-damaging chemicals used in wind turbines are politically controversial – and why?”</div><figure class="agent-clip"><video aria-label="Brief look at FinditAgent" autoplay="" controls="" loop="" muted="" playsinline="" preload="metadata"><source src="PIC\FinditAgent_Clip.mp4" type="video/mp4"/>Your browser does not support HTML5 video.</video><figcaption><span><a href="FinditAgent_Clip.mp4" rel="noopener noreferrer" target="_blank" title="Open video in a new tab and watch full screen">
-   FinditAgent in action  ↗ Open in new tab / full screen</a></span></figcaption></figure></section>
-<section class="product-feature"><h3>🔒 AI has no direct access to your files</h3><p>The AI model gets neither unrestricted access to the file system nor the ability to open files itself. <strong>Findit6 acts like an archivist: it has the key to the archive and searches for the relevant texts. </strong> The AI stays outside and receives only copies of the relevant text excerpts.</p><p><small>Important: When external AI providers are used, the supplied excerpts are transmitted to their service. With local models, the processing can remain entirely local.</small></p></section>
-<section class="product-feature"><h3>📚 Existing archives instead of a prepared knowledge base</h3>
-<img alt="OCR and fuzzy search in Findit6" onclick="openLightbox(this)" src="PIC/DirTree.png" style="float: right; width: 48%; max-width: 280px; height: auto; margin: 0 18px 12px 0; cursor: pointer;"/><p>No need to drag documents into a new collection or set up a vector database: FinditAgent works with the existing folder and file collections that Findit6 can already search.</p><div class="agent-workflow"><span>Your question</span><b>›</b><span>Findit6 search</span><b>›</b><span>Matches</span><b>›</b><span>AI analysis</span><b>›</b><span>Report</span></div></section>
-<section class="product-feature"><h3>📝 Reports with verifiable sources</h3><p>For each relevant fact, the AI agent also provides the name of the original source file. FinditAgent presents the report so you can open any document with a single click and check the agent’s findings. Every step that led to the result is documented in detail. </p></section>
-<section class="product-feature"><h3>🧩 Choose a model: cloud or local</h3><p>Choose from supported external providers – Claude, GPT, Gemini, Perplexity and Grok – or locally running models. Capabilities, speed and any API costs depend on the model and the research task.</p><div class="media-placeholder"><a href="Agent.html" style="color: white; text-decoration: none;">More about the agent</a></div></section>
-<section class="product-feature"><h3>🎬 Real research, not marketing demos</h3><p>We have recorded real research questions in a real archive as examples, with the full research process captured. The videos show the search steps and the results.</p><div class="media-placeholder"><a href="Agent.html#WelcheKI" style="color: white; text-decoration: none;">Live videos of real agent research sessions</a></div></section>
-</article>
-<footer class="product-bottom" id="download-cta">
-<h3>Try it free!</h3>
-<p>One download, a simple Windows installation and 30 days to try everything without restrictions. Whether you choose classic Findit6 or Findit Suite with FinditAgent, you only buy a lifetime license (starting at €33) once you are convinced.</p>
-<div class="download-choices">
-<div class="download-choice">
-<a class="cta-button" href="https://www.dateisuche.de/Down/Findit6_Setup.exe">FINDIT6</a>
-<p>Classic full-text search in a small installer (38 MB).</p>
+      <section id="where">
+        <h2>1. Define where FinditAgent may search</h2>
+
+        <p>Open <strong>Where to search</strong> and create or select a search path group. A path group defines the drives and folders FinditAgent is allowed to search. Check the locations you want to include and confirm your selection with OK.</p>
+
+        <p>You can create several groups for different purposes - for example one for your main archive, another for current projects, or separate groups for private and professional data.</p>
+
+        <p>FinditAgent and the AI work strictly within the locations included in the currently selected path group. A path group can contain folders from several drives; there is no need to reorganize your existing archive.</p>
+
+        <p class="smallnote">If you want FinditAgent to search scanned documents using OCR, please also read the <a href="#ocr">OCR note in the Technical Appendix</a> at the end of this page.</p>
+      </section>
+	  
+	          <div class="api-note">
+          <p class="api-title">&#128161; Chat subscription or API access?</p>
+          <p>A regular ChatGPT, Claude or similar monthly subscription normally covers chatting on the provider's website. <strong>FinditAgent needs separate API access</strong> so the AI can work automatically in the background. API usage is billed by the amount of text processed; a typical search usually costs only a few cents. Very complex research using premium, high-performance models can occasionally cost up to around €2 per question. How to enable API access is explained on the website of the respective provider.</p>
+          <p><strong>No API is required for local use:</strong> Guided Mode can run completely on your own computer with Ollama and a suitable local model. This requires Ollama and sufficiently capable hardware (typically <strong>12 GB VRAM or more</strong>).</p>
+        </div>
+		
+      <section id="connect">
+        <h2>2. Connect an AI model</h2>
+
+        <h2>Choose Guided Mode or Agent Mode</h2>
+
+        <p>Depending on the provider and type of model you use, FinditAgent can work in different ways.</p>
+
+        <p><strong>Large, high-capability models accessed through an API</strong> can plan and carry out a complex research process largely on their own. They can use Findit much like a human researcher would: decide what to search for, inspect the results, refine the search, read relevant sources and continue until they can produce a final answer. This is what <strong>Agent Mode</strong> is designed for.</p>
+
+        <p><strong>Smaller language models</strong> - especially models that can run locally on your own computer - can also use Findit, but they benefit from a less complex workflow. In <strong>Guided Mode</strong>, FinditAgent leads the model through a series of predefined research steps and supports the process with a local semantic reranker.</p>
+
+        <div class="modegrid">
+          <div class="card">
+            <h3>Agent Mode</h3>
+            <p>For capable models that can plan searches, evaluate results, read selected sources and refine their own research strategy until they have enough evidence to answer. <br> You can chat with the Agent while it works, guide the research at any time, or simply let it work autonomously.</p>
+            <div class="doclinks">
+              <a href="Findit6Agent_AgentMode.html">Agent Mode details</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Guided Mode</h3>
+            <p>For smaller and local models. FinditAgent breaks the research into controlled stages and uses a local semantic reranker to help select relevant material.<br>
+			There is no interactive chat during a Guided Mode search; the individual processing steps do not share a continuous conversational memory..</p>
+            <div class="doclinks">
+              <a href="Findit6Agent_GuidedMode.html">Guided Mode details</a>
+            </div>
+          </div>
+        </div>
+
+        <p>After choosing the working mode, select the provider and model you want to use.</p>
+
+        <p>When using an external provider, enter the required connection information and API key. With Ollama in Guided Mode, the AI processing itself can remain completely local.</p>
+
+        <div class="callout">
+          <strong>Guided Mode is included with FinditAgent.</strong><br>
+          The local Python environment and semantic reranker required by the Guided workflow are installed together with FinditAgent. Ollama and a suitable local language model are only required if you want the AI processing itself to run locally.
+        </div>
+      </section>
+
+
+      <section id="userinfo">
+        <h2>Tell the Agent something about you</h2>
+
+        <p>The <strong>Name of User</strong> and <strong>Basic information about User</strong> fields are especially useful in Agent Mode.</p>
+
+        <p>You can provide a short description of yourself, your work or the kind of archive you are searching. For example:</p>
+
+        <div class="callout">
+          German TV journalist specializing in environmental and economic topics, with an archive growing since 1995.
+        </div>
+
+        <p>This helps the Agent interpret otherwise ambiguous references. It may understand what you mean by “my reports”, recognize recurring project structures or understand why certain people, organizations or document types are likely to matter.</p>
+
+        <p>Keep this description short. It is useful background information, not a complete biography.</p>
+      </section>
+
+
+      <section id="question">
+        <h2>3. Ask your first question</h2>
+
+        <p>Enter a question whose answer can reasonably be expected to exist somewhere in the selected archive. You do not need to write a Findit6 search expression yourself.</p>
+
+        <h3>Guided Mode</h3>
+        <p>Keep the question short, precise and focused on the information you want to find. Avoid telling the AI how to perform the search; the Guided workflow determines the individual processing steps automatically.</p>
+
+        <p>Multi-word technical terms and known synonyms can still be supplied explicitly when useful, for example <code>"combustion engine"</code> or <code>car ((automobile, vehicle))</code>.</p>
+
+        <h3>Agent Mode</h3>
+        <p>You can formulate the request more freely and provide additional information that may help the Agent understand your archive or develop a better search strategy. Useful hints about folder structures, naming conventions, document types, people, projects or other archive-specific knowledge can significantly improve the research.</p>
+      </section>
+
+<div class="api-note">
+  <p class="api-title">&#128274; The AI never has access to your files</p>
+
+  <p><strong>The connected AI never has access to your file system or your files - in any form.</strong>
+  It cannot open, read, create, write, modify, copy, move or delete files on your computer.</p>
+
+  <p>Think of the AI as a visitor standing in front of the secure archive. It cannot see what is stored in the stacks and cannot open a single drawer itself. The archivist - <strong>FinditAgent</strong> - performs all searches and file access, selects material relevant to the current task and hands the AI only a working copy of the required text or text excerpts.</p>
+
+  <p><strong>Your original files remain untouched on your drives at all times.</strong></p>
+
+  <p>When you use an external AI provider, only text explicitly supplied by FinditAgent is transmitted to that provider for processing. With a fully local setup, even this copies of text remain on your computer as well.</p>
 </div>
-<div class="download-choice">
-<a class="cta-button" href="https://www.dateisuche.de/Down/Findit6_Suite_Setup.exe">Findit Suite</a>
-<p>Findit6 + Agent: complete installation for people and AI, including reranker and Python (1.2 GB).</p>
+
+      <section id="start">
+        <h2>4. Start the search</h2>
+
+        <p>Press <strong>Start / Send</strong>.</p>
+
+        <p>FinditAgent now performs the required processing steps and shows them in the visible protocol.</p>
+
+        <p>A search may take several minutes, especially when AI reasoning or many documents have to be evaluated. The Findit6 full-text search itself is usually very fast even across large archives; much of the remaining time is spent constructing searches, evaluating results and reading relevant material.</p>
+
+        <p>You can watch the individual steps while they happen - or simply return a few minutes later and read the result. Whenever possible, the final answer includes references to the source files from which the information was derived.</p>
+      </section>
+
+      <section id="example">
+        <h2>Example workflow</h2>
+
+        <p>In a typical Agent Mode research run, the Agent may search more than 50,000 files, reduce hundreds of initial matches to a manageable set of candidates, inspect selected source documents and produce a referenced answer within a few minutes.</p>
+
+        <p class="smallnote">The exact duration depends on archive size, hardware, model, provider and the amount of evidence the question requires.</p>
+      </section>
+
+      <section id="next">
+        <h2>That's it</h2>
+
+        <p>You are now ready to use FinditAgent. There is no need to import your archive, build a database or wait for an indexing process. Select where to search, connect an AI model and ask a question.</p>
+
+        <p>As you become more familiar with the system, the detailed documentation explains how Guided Mode and Agent Mode work, how local and external AI models differ and how the individual workflows can be customized.</p>
+
+        <div class="doclinks">
+          <a href="Findit6Agent_AgentMode.html">Open Agent Mode help</a>
+          <a href="Findit6Agent_GuidedMode.html">Open Guided Mode help</a>
+        </div>
+      </section>
+
+
+      <section id="hardware">
+        <h2>Hardware requirements</h2>
+
+        <h3>Agent Mode with external AI</h3>
+        <p>Agent Mode with an external AI provider can be used on practically any reasonably current Windows computer. No dedicated GPU is required. Findit6 itself benefits from more CPU cores, higher clock speeds and fast storage, so older laptops will generally search more slowly than modern desktop systems. In normal use, however, archives up to around 100 GB can still remain practical on older hardware.</p>
+
+        <h3>Guided Mode with external AI</h3>
+        <p>Guided Mode also works well with external AI providers, but adds a local semantic reranker. Whenever possible, the reranker uses the graphics processor through DirectML. On systems with limited graphics hardware - especially integrated graphics and smaller or older laptops - DirectML may not be usable reliably. FinditAgent then automatically falls back to CPU-based reranking.</p>
+        <p>CPU reranking produces the same full-length reranking workflow, but can be considerably slower. Depending on the hardware, the number and length of candidate documents and the complexity of the search, reranking time can increase substantially and may become impractical for some workloads.</p>
+
+        <h3>Fully local operation with Ollama</h3>
+        <p>Running the AI itself locally through Ollama requires significantly more capable hardware. FinditAgent is designed for local models starting at roughly the 14B class. For models around this lower end, at least <strong>12 GB of VRAM</strong> should be available, with <strong>16 GB or more recommended</strong>. Larger models may require correspondingly more VRAM. A GPU in this class will normally also provide sufficient performance for the local semantic reranker.</p>
+
+        <div class="callout">
+          <strong>Performance varies with the workload.</strong><br>
+          Search speed depends on archive size, CPU performance and storage speed. Guided Mode additionally depends on reranker performance, while fully local AI also depends heavily on GPU speed and available VRAM.
+        </div>
+      </section>
+
+      <section id="technical-appendix">
+        <h2>Technical Appendix</h2>
+
+        <h3>System requirements</h3>
+        <ul>
+          <li>Windows 10 or Windows 11, 64-bit.</li>
+          <li>Sufficient free disk space for FinditAgent, local AI models and temporary Session Workspace data.</li>
+          <li>An Internet connection is required when external AI providers are used and when models or components are downloaded. A fully local Guided Mode workflow can operate without sending archive content to an external AI provider.</li>
+        </ul>
+
+<h3 id="ocr">OCR and scanned documents</h3>
+
+<p>FinditAgent can also read and search scanned documents using OCR. Enable OCR when required using the checkbox at the top of the application.</p>
+
+<p>OCR processing can take considerably more time than normal text extraction. Once text has been extracted from a document, Findit6 stores the result in a small local cache so that the same document normally does not have to be processed again.</p>
+
+<p>Before using OCR extensively with FinditAgent, it is therefore recommended to start Findit6 itself once and run an arbitrary search across the relevant data collection with OCR enabled. This allows the OCR cache to be built in advance and can make subsequent Agent searches significantly faster.</p>
+
+        <h3>Guided Mode and local AI</h3>
+        <ul>
+          <li>FinditAgent includes the local Python runtime and semantic reranker required by Guided Mode.</li>
+          <li>A DirectML-compatible GPU is recommended for semantic reranking.</li>
+          <li>Local AI through Ollama requires Ollama and a suitable local language model.</li>
+          <li>For local operation, models starting at roughly the 14B class are recommended. Around 12 GB of VRAM is a practical minimum for models near this lower end; 16 GB or more is recommended, and larger models may require correspondingly more VRAM.</li>
+        </ul>
+
+        <div class="callout good">
+          <strong>No archive preparation is required.</strong><br>
+          FinditAgent does not require prior indexing, vectorization or import of your archive. It works directly with the configured files and folders.
+        </div>
+      </section>
+
+
+      <section id="support">
+        <h2>Troubleshooting and Support</h2>
+
+        <p><strong>FinditAgent is the first release of a new kind of research tool.</strong> We have tested it with great care and expect it to work directly after installation on the vast majority of systems. However, the number of possible combinations of Windows systems, hardware configurations, AI providers and models makes it impossible to test every environment in advance.</p>
+
+        <p>If you encounter a problem, please contact us at <a href="mailto:findit@dateisuche.de"><strong>findit@dateisuche.de</strong></a>. We will try to identify and resolve the issue as quickly as possible.</p>
+
+        <p>FinditAgent creates a log file for every research run. As soon as you connect to an AI provider, a <strong>folder icon appears in the lower-right corner</strong> of the application. It opens the session folder containing the corresponding <code>*.log</code> file.</p>
+
+        <p>If possible, please attach this log file to your support request. It contains information about the individual processing steps, provider responses and errors and can make it considerably easier to identify the cause of a problem.</p>
+
+        <p class="smallnote">Before sending a log file, please review it if your research involves confidential file names, paths or document content. Depending on the search, such information may be included in the log.</p>
+      </section>
+
+
+      <div class="footer">
+        FinditAgent Help - First Steps · HTML help
+      </div>
+
+    </article>
+  </main>
 </div>
-</div>
-</footer>
-</main>
-<footer class="site-footer"><p>© 2026 Findit – File Search and AI Research for Windows</p><p><a href="impressum.html#impressum">Legal notice</a> · <a href="impressum.html#datenschutz">Privacy policy</a> · <a href="impressum.html#kontakt">Contact</a></p></footer>
-<div class="lightbox" id="lightbox" onclick="closeLightbox()"><span class="lightbox-close">×</span><img alt="Vergrößerte Ansicht" id="lightbox-img"/></div>
+
 <script>
-function openLightbox(el){const box=document.getElementById('lightbox');document.getElementById('lightbox-img').src=el.querySelector('img')?.src||el.src;box.classList.add('show')}
-function closeLightbox(){document.getElementById('lightbox').classList.remove('show')}
-// Die gemeinsame Navigation wird durch findit-scripts.js nachgeladen.
-// Nur die Beschriftung des bisherigen Menüpunkts "Update" auf dieser Entwurfsseite ändern.
-function renameUpdateNav(){
-  const nav=document.getElementById('nav-placeholder');if(!nav)return;
-  nav.querySelectorAll('a').forEach(a=>{if(a.textContent.trim().toLowerCase()==='update'){a.textContent='KI-Agent';a.setAttribute('title','FinditAgent / KI-Recherche')}})
-}
-const navTarget=document.getElementById('nav-placeholder');
-if(navTarget){new MutationObserver(renameUpdateNav).observe(navTarget,{childList:true,subtree:true});renameUpdateNav()}
-</script>
-<script>
-// SPEECH BUBBLE ANIMATION - Sequenzielles Fade-Out/Fade-In (korrigiert)
-let leftBubbleIndex = 0;
-let rightBubbleIndex = 0;
+const navSearch = document.getElementById('navSearch');
+const navLinks = [...document.querySelectorAll('#nav a')];
 
-function switchLeftBubble() {
-    const leftBubbles = document.querySelectorAll('.speech-left');
-    
-    // Fade-Out der aktuellen Blase
-    leftBubbles[leftBubbleIndex].classList.remove('active');
-    
-    // Warte 500ms, dann Fade-In der nächsten
-    setTimeout(() => {
-        leftBubbleIndex = (leftBubbleIndex + 1) % leftBubbles.length;
-        leftBubbles[leftBubbleIndex].classList.add('active');
-        console.log('Left bubble switched to:', leftBubbleIndex);
-    }, 500);
-}
+navSearch.addEventListener('input', () => {
+  const q = navSearch.value.trim().toLowerCase();
+  navLinks.forEach(a => {
+    a.style.display = (!q || a.textContent.toLowerCase().includes(q)) ? 'block' : 'none';
+  });
+});
 
-function switchRightBubble() {
-    const rightBubbles = document.querySelectorAll('.speech-right');
-    
-    // Fade-Out der aktuellen Blase
-    rightBubbles[rightBubbleIndex].classList.remove('active');
-    
-    // Warte 500ms, dann Fade-In der nächsten
-    setTimeout(() => {
-        rightBubbleIndex = (rightBubbleIndex + 1) % rightBubbles.length;
-        rightBubbles[rightBubbleIndex].classList.add('active');
-        console.log('Right bubble switched to:', rightBubbleIndex);
-    }, 500);
-}
+const sections = [...document.querySelectorAll('section[id]')];
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+  });
+}, {rootMargin:'-20% 0px -70% 0px', threshold:0});
 
-function initSpeechBubbles() {
-    const leftBubbles = document.querySelectorAll('.speech-left');
-    const rightBubbles = document.querySelectorAll('.speech-right');
-    
-    console.log('Found left bubbles:', leftBubbles.length);
-    console.log('Found right bubbles:', rightBubbles.length);
-    
-    if (leftBubbles.length > 0) {
-        // Linke Sprechblasen - alle 4 Sekunden
-        setInterval(switchLeftBubble, 5000);
+sections.forEach(s => observer.observe(s));
+
+
+
+
+
+// UNIFIED_NAV_JS_BEGIN
+const menuToggle = document.getElementById('menuToggle');
+const topnav = document.getElementById('topnav');
+
+if (menuToggle && topnav) {
+  menuToggle.addEventListener('click', () => {
+    const open = topnav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuToggle.setAttribute(
+      'aria-label',
+      open ? 'Close documentation menu' : 'Open documentation menu'
+    );
+  });
+
+  topnav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    });
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && topnav.classList.contains('open')) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+      menuToggle.focus();
     }
-    
-    if (rightBubbles.length > 0) {
-        // Rechte Sprechblasen - alle 6 Sekunden
-        setInterval(switchRightBubble, 6000);
-    }
-}
+  });
 
-// Sofort nach DOM-Load starten
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSpeechBubbles);
-} else {
-    initSpeechBubbles();
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1180) {
+      topnav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open documentation menu');
+    }
+  });
 }
+// UNIFIED_NAV_JS_END
+
 </script>
-<script src="findit-scripts.js"></script>
 </body>
 </html>
