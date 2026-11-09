@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Findit6Agent Help - Guided Mode</title>
+<title>FinditAgent Help - Guided Mode</title>
 <style>
 :root{--bg:#202730;--panel:#2c3745;--panel2:#344255;--line:#3c4857;--text:#d7dbe1;--muted:#aeb6c2;--heading:#f1f3f5;--accent:#b9dcff;--accent2:#7eb8ee;--code:#182029;--good:#93d7b5;--warn:#e4c27b}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.topbar{position:sticky;top:0;z-index:20;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#34445a;border-bottom:1px solid #435167;color:white}.topbar .title{font-size:19px;font-weight:650}.topbar .actions{display:flex;gap:10px;align-items:center}.topbar button{background:transparent;border:0;color:#c8d2df;font-size:18px;cursor:pointer;padding:5px 8px}.layout{display:grid;grid-template-columns:294px minmax(0,1fr);min-height:calc(100vh - 54px)}.sidebar{position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto;padding:30px 22px 40px 10px;border-right:1px solid var(--line);background:#242d38}.searchbox{display:flex;align-items:center;gap:8px;background:#344255;border:1px solid #3e4d60;border-radius:5px;padding:7px 10px;margin:0 0 22px}.searchbox input{width:100%;background:transparent;border:0;outline:0;color:#e6ebf2;font-size:14px}.searchbox input::placeholder{color:#8794a5}.nav a{display:block;padding:8px 10px;margin:2px 0;border-radius:4px;color:#c9e4ff;font-size:13.5px;font-weight:600}.nav a:hover,.nav a.active{background:#303c4b;text-decoration:none}.nav .sub{padding-left:22px;font-weight:500;color:#abc2d8}.main{padding:34px 44px 80px}.article{max-width:980px;margin:0 auto}h1,h2,h3{color:var(--heading);line-height:1.25}h1{font-size:34px;margin:0 0 22px}h2{font-size:25px;margin:38px 0 15px;padding-bottom:7px;border-bottom:1px solid var(--line)}h3{font-size:19px;margin:28px 0 8px}p{margin:0 0 16px}ul,ol{margin-top:7px}strong{color:#edf1f6}.callout{border-left:4px solid var(--accent2);background:var(--panel);padding:15px 18px;margin:20px 0;border-radius:4px}.callout.good{border-left-color:var(--good)}.callout.warn{border-left-color:var(--warn)}.modegrid,.linkgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:18px}.card h3{margin-top:0}.tag{display:inline-block;padding:2px 8px;border-radius:999px;background:#3b4a5d;color:#d9ebfb;font-size:12px;font-weight:700}.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:20px 0;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:7px}.flow .step{background:#303c4b;border:1px solid #435267;border-radius:5px;padding:7px 11px;font-weight:600}.flow .arrow{color:#91a7bc}code{font-family:Consolas,"Courier New",monospace;background:var(--code);color:#e1e9f1;padding:2px 5px;border-radius:4px}.filelink{display:block;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:9px 0}.filelink small{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}
@@ -128,7 +128,7 @@
 <body>
 
 <header class="topbar">
-    <div class="title">Findit6Agent</div>
+    <div class="title">FinditAgent</div>
 
     <button class="menu-toggle" id="menuToggle" type="button"
             aria-label="Open documentation menu"
@@ -198,7 +198,7 @@
 
 <div class="callout">
   <strong>This page is more than documentation.</strong><br>
-  It also serves as a direct reference to the instruction files that control Guided Mode. The linked Markdown files are the actual working instructions used by Findit6Agent during research. You can open them directly from this page and, where appropriate, adapt them to your own archive and workflow.<br><br>
+  It also serves as a direct reference to the instruction files that control Guided Mode. The linked Markdown files are the actual working instructions used by FinditAgent during research. You can open them directly from this page and, where appropriate, adapt them to your own archive and workflow.<br><br>
   Most core instruction files should normally remain unchanged; <code>Agent_User_Rules.md</code> is specifically intended for your own archive-specific rules and additions.
 </div>
 
@@ -224,27 +224,27 @@
           <p class="settings-title">Guided Mode settings</p>
           <p>When connecting a model, two preset values can be adjusted.</p>
           <p><strong>Maximum Excerpt Length</strong> defines the maximum amount of text that may be supplied to the model in an individual excerpt-processing step. Models with smaller context windows may require a lower value.</p>
-          <p><strong>Duplicate Threshold</strong> defines how similar two files must be according to Findit6Agent's internal similarity calculation before one of them is treated as a duplicate and excluded from further evaluation. The default value of 80 is tuned to identify very close duplicates while preserving documents with substantial differences. The value is a similarity score, not a literal percentage of identical text.</p>
+          <p><strong>Duplicate Threshold</strong> defines how similar two files must be according to FinditAgent's internal similarity calculation before one of them is treated as a duplicate and excluded from further evaluation. The default value of 80 is tuned to identify very close duplicates while preserving documents with substantial differences. The value is a similarity score, not a literal percentage of identical text.</p>
         </div>
 
         <h2>Moods: different settings for different tasks</h2>
 
-        <p>Local models can behave very differently depending on the task and on inference parameters. Findit6Agent calls these task-specific presets <strong>Moods</strong>.</p>
+        <p>Local models can behave very differently depending on the task and on inference parameters. FinditAgent calls these task-specific presets <strong>Moods</strong>.</p>
 
         <p>A narrowly defined logical task may work best with little or no reasoning, low temperature and tightly constrained sampling. A broader or more creative task may benefit from more reasoning and a wider range of possible continuations.</p>
 
-        <p>Each Guided Mode step therefore selects an appropriate Mood. The selected Mood is defined in the corresponding Markdown instruction. The Mood settings themselves can be adjusted in <code>Findit6Agent.ini</code>.</p>
+        <p>Each Guided Mode step therefore selects an appropriate Mood. The selected Mood is defined in the corresponding Markdown instruction. The Mood settings themselves can be adjusted in <code>FinditAgent.ini</code>.</p>
         <div style="clear:both"></div>
       </section>
 
       <section id="markdown">
         <h2>Markdown instructions</h2>
 
-        <p>For every processing step, the AI receives a dedicated Markdown instruction file into which Findit6Agent inserts the information required for that stage.</p>
+        <p>For every processing step, the AI receives a dedicated Markdown instruction file into which FinditAgent inserts the information required for that stage.</p>
 
         <p>These Markdown files can be edited directly and are the main way to fine-tune Guided Mode. Small wording changes can have unexpectedly large effects, so modifications should be made carefully.</p>
 
-        <p>A clean copy of the original Markdown files is kept in the Findit6Agent program directory so the default behaviour can always be restored.</p>
+        <p>A clean copy of the original Markdown files is kept in the FinditAgent program directory so the default behaviour can always be restored.</p>
       </section>
 
       <section id="step0">
@@ -350,7 +350,7 @@
 
         <p>Findit6 searches exact character sequences. A search for <code>battery</code> would not automatically find <code>batteries</code>. The AI therefore reduces suitable words to the shortest useful stem, for example <code>batter*</code>. An occasional false positive can later be removed by the semantic reranker.</p>
 
-        <p>This stage uses a hybrid linguistic truncation method developed independently for Findit6Agent by Michael Houben in 2026. It combines context-sensitive LLM-derived morphological and derivational word forms with deterministic common-prefix truncation, a minimum-prefix safety threshold and an OR fallback when no sufficiently safe common prefix exists.</p>
+        <p>This stage uses a hybrid linguistic truncation method developed independently for FinditAgent by Michael Houben in 2026. It combines context-sensitive LLM-derived morphological and derivational word forms with deterministic common-prefix truncation, a minimum-prefix safety threshold and an OR fallback when no sufficiently safe common prefix exists.</p>
       </section>
 
       <section id="step7">
@@ -441,7 +441,7 @@
 
         <p>At this point the Guided Mode workflow is complete. The final stages - reading relevant files and synthesizing the answer - may run several times when the original user question was split into multiple independent information needs.</p>
 
-        <p>The linked Markdown files allow the workflow to be fine-tuned in considerable detail. Please change them carefully: small modifications can sometimes have large and unexpected effects. The original versions remain available in the Findit6Agent program directory so the default configuration can always be restored.</p>
+        <p>The linked Markdown files allow the workflow to be fine-tuned in considerable detail. Please change them carefully: small modifications can sometimes have large and unexpected effects. The original versions remain available in the FinditAgent program directory so the default configuration can always be restored.</p>
       </section>
 
       <section id="statistics">
@@ -457,13 +457,13 @@
       <section id="license">
         <h2>Source and license</h2>
 
-        <p>Findit6Agent is source-available under the PolyForm Perimeter License 1.0.1., and the source code is available on GitHub.</p>
+        <p>FinditAgent is source-available under the PolyForm Perimeter License 1.0.1., and the source code is available on GitHub.</p>
 
         <p>The license permits study, modification and many forms of reuse, but intentionally restricts use for competing commercial products. Developers are welcome to experiment with specialized workflows or contribute improvements within the terms of the license.</p>
       </section>
 
       <div class="footer">
-        Findit6Agent Help - Guided Mode · HTML help
+        FinditAgent Help - Guided Mode · HTML help
       </div>
 
     </article>

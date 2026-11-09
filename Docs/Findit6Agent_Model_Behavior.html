@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Findit6Agent - Model behavior and practical notes</title>
+<title>FinditAgent - Model behavior and practical notes</title>
 <style>
 :root{--bg:#202730;--panel:#2c3745;--panel2:#344255;--line:#3c4857;--text:#d7dbe1;--muted:#aeb6c2;--heading:#f1f3f5;--accent:#b9dcff;--accent2:#7eb8ee;--code:#182029;--good:#93d7b5;--warn:#e4c27b}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.topbar{position:sticky;top:0;z-index:20;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#34445a;border-bottom:1px solid #435167;color:white}.topbar .title{font-size:19px;font-weight:650}.topbar .actions{display:flex;gap:10px;align-items:center}.topbar button{background:transparent;border:0;color:#c8d2df;font-size:18px;cursor:pointer;padding:5px 8px}.layout{display:grid;grid-template-columns:294px minmax(0,1fr);min-height:calc(100vh - 54px)}.sidebar{position:sticky;top:54px;height:calc(100vh - 54px);overflow:auto;padding:30px 22px 40px 10px;border-right:1px solid var(--line);background:#242d38}.searchbox{display:flex;align-items:center;gap:8px;background:#344255;border:1px solid #3e4d60;border-radius:5px;padding:7px 10px;margin:0 0 22px}.searchbox input{width:100%;background:transparent;border:0;outline:0;color:#e6ebf2;font-size:14px}.searchbox input::placeholder{color:#8794a5}.nav a{display:block;padding:8px 10px;margin:2px 0;border-radius:4px;color:#c9e4ff;font-size:13.5px;font-weight:600}.nav a:hover,.nav a.active{background:#303c4b;text-decoration:none}.nav .sub{padding-left:22px;font-weight:500;color:#abc2d8}.main{padding:34px 44px 80px}.article{max-width:980px;margin:0 auto}h1,h2,h3{color:var(--heading);line-height:1.25}h1{font-size:34px;margin:0 0 22px}h2{font-size:25px;margin:38px 0 15px;padding-bottom:7px;border-bottom:1px solid var(--line)}h3{font-size:19px;margin:28px 0 8px}p{margin:0 0 16px}ul,ol{margin-top:7px}strong{color:#edf1f6}.callout{border-left:4px solid var(--accent2);background:var(--panel);padding:15px 18px;margin:20px 0;border-radius:4px}.callout.good{border-left-color:var(--good)}.callout.warn{border-left-color:var(--warn)}.modegrid,.linkgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:18px}.card h3{margin-top:0}.tag{display:inline-block;padding:2px 8px;border-radius:999px;background:#3b4a5d;color:#d9ebfb;font-size:12px;font-weight:700}.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:20px 0;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:7px}.flow .step{background:#303c4b;border:1px solid #435267;border-radius:5px;padding:7px 11px;font-weight:600}.flow .arrow{color:#91a7bc}code{font-family:Consolas,"Courier New",monospace;background:var(--code);color:#e1e9f1;padding:2px 5px;border-radius:4px}.filelink{display:block;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:9px 0}.filelink small{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}
@@ -123,7 +123,7 @@
 <body>
 
 <header class="topbar">
-    <div class="title">Findit6Agent</div>
+    <div class="title">FinditAgent</div>
 
     <button class="menu-toggle" id="menuToggle" type="button"
             aria-label="Open documentation menu"
@@ -170,9 +170,9 @@
 <main class="main"><article class="article">
 
 <section id="intro">
-<h1>Model behavior in Findit6Agent</h1>
+<h1>Model behavior in FinditAgent</h1>
 <p><strong>This is deliberately not a benchmark table.</strong></p>
-<p>Findit6Agent can work with a growing number of AI providers, but the models do not behave like interchangeable engines. In practice they behave more like different researchers: some are fast and pragmatic, some are cautious, some are stubborn, some happily disappear into a rabbit hole and come back with things I had not even thought of asking for.</p>
+<p>FinditAgent can work with a growing number of AI providers, but the models do not behave like interchangeable engines. In practice they behave more like different researchers: some are fast and pragmatic, some are cautious, some are stubborn, some happily disappear into a rabbit hole and come back with things I had not even thought of asking for.</p>
 <p>The notes below are based on real searches in my own archive - roughly 50,000 files and about 55 GB of material collected over several decades. They are personal observations from development and repeated testing, not laboratory measurements and certainly not guarantees. Providers change models, prices and inference behavior all the time. I will update this page when my own experience changes.</p>
 <div class="callout"><strong>Technical compatibility is not the same as a recommendation.</strong><br>A provider may expose a perfectly compatible API while offering many models that are too small, too literal or simply not reliable enough for autonomous Agent Mode research.</div>
 </section>
@@ -221,7 +221,7 @@
 <div class="meta">Agent Mode: pragmatic, source-oriented and economical</div>
 <p>Perplexity has generally behaved more pragmatically than Grok. It likes concrete evidence, tends to get to useful source documents quickly and has produced strong answers at comparatively low cost.</p>
 <p>One early test exposed a useful weakness in our own Agent briefing: after receiving a hitlist that was too broad, Perplexity correctly stated that the list needed further refinement - and then stopped, waiting for the user. We changed the briefing to make the intended behavior explicit: decide on the next research action and execute it without asking for permission. In later runs Perplexity then refined the population autonomously and continued normally.</p>
-<p>I like it particularly for straightforward archive research where I want a capable model that does not automatically turn every question into an expedition. It has also been refreshingly sober when asked afterwards to evaluate Findit6Agent itself.</p>
+<p>I like it particularly for straightforward archive research where I want a capable model that does not automatically turn every question into an expedition. It has also been refreshingly sober when asked afterwards to evaluate FinditAgent itself.</p>
 <p><b>But Perplexity in Guided Mode – Bertie Botts Every Flavour Queries.</b> In my tests, Perplexity occasionally followed very explicit transformation instructions only approximately — for example by altering a required marker sequence or changing a prescribed logical operator. Most runs were correct, some almost perfect...But such small deviations can be enough to break a tightly controlled Guided Mode search pipeline. For that reason, Perplexity currently works very well for me in Agent Mode, but I do not recommend it for Guided Mode.</p>
 </section>
 
@@ -260,12 +260,12 @@ That depth comes at a price. The Sol run cost about €2.75, roughly the same or
 
 <p>This should not be read as a general verdict on local AI. My hardware currently limits practical testing largely to the 14B class. Once you move beyond that size - especially with more than 16 GB of VRAM and access to substantially larger models - the picture may change considerably. Larger local models may well become much stronger candidates, including for more autonomous workflows.</p>
 
-<p>For now, however, Qwen3 14B is the local model I can actually recommend from repeated practical use. Other models may work, but “popular”, “reasoning optimized” or “agentic” does not automatically mean suitable for the very specific sequence of logical and research tasks used by Findit6Agent.</p>
+<p>For now, however, Qwen3 14B is the local model I can actually recommend from repeated practical use. Other models may work, but “popular”, “reasoning optimized” or “agentic” does not automatically mean suitable for the very specific sequence of logical and research tasks used by FinditAgent.</p>
 
 <section id="compatible" class="provider">
 <h2>Groq, STACKIT, Scaleway and other OpenAI-compatible providers</h2>
 <div class="meta">Technically compatible does not mean individually validated</div>
-<p>Findit6Agent includes a general OpenAI-compatible provider path. This makes it possible to connect services such as Groq, STACKIT, Scaleway and others without writing a dedicated provider implementation for every API.</p>
+<p>FinditAgent includes a general OpenAI-compatible provider path. This makes it possible to connect services such as Groq, STACKIT, Scaleway and others without writing a dedicated provider implementation for every API.</p>
 <p>The important warning is that these services usually offer many different models. I have not tested every one of them, and I would not expect most smaller models in those catalogues to be suitable for autonomous Agent Mode research. Correct API responses and valid JSON are only the beginning; a useful Agent also needs strong instruction following, planning, source evaluation, context handling and the ability to continue a multi-step investigation without drifting or stopping too early.</p>
 <p>So please read “OpenAI-compatible” literally: the interface is compatible. It is not a blanket quality certificate for every model behind that interface. If you experiment with additional models, Guided Mode is often the safer place to start.</p>
 </section>
@@ -273,11 +273,11 @@ That depth comes at a price. The Sol run cost about €2.75, roughly the same or
 <section id="costs">
 <h2>Speed, cost and model versions</h2>
 <p>Any exact price or timing quoted on this page is only a snapshot from my own tests. API pricing changes, providers introduce new model versions and reasoning settings can change token consumption dramatically.</p>
-<p>The same is true for “character”. A model update can make a previously cautious model more adventurous, or vice versa. Findit6Agent itself also continues to evolve, and better research briefings can change model behavior without changing the model at all.</p>
-<div class="callout warn"><strong>My recommendation:</strong> treat these notes as field experience, not as a purchasing guide carved in stone. Try the same real question with two or three models and watch the protocol. Findit6Agent makes their research behavior unusually visible - and after a few runs you will probably develop your own preferences.</div>
+<p>The same is true for “character”. A model update can make a previously cautious model more adventurous, or vice versa. FinditAgent itself also continues to evolve, and better research briefings can change model behavior without changing the model at all.</p>
+<div class="callout warn"><strong>My recommendation:</strong> treat these notes as field experience, not as a purchasing guide carved in stone. Try the same real question with two or three models and watch the protocol. FinditAgent makes their research behavior unusually visible - and after a few runs you will probably develop your own preferences.</div>
 </section>
 
-<div class="footer">Findit6Agent Help - Model behavior and practical notes</div>
+<div class="footer">FinditAgent Help - Model behavior and practical notes</div>
 
 </article></main>
 </div>
