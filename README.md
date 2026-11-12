@@ -83,9 +83,6 @@ You can reopen and inspect the agent's search history at any time, making the re
 
 ---
 
-## Example Video
----
-
 ## Source-Available & License Terms
 
 This repository contains the **complete source code** for Findit6Agent. 
