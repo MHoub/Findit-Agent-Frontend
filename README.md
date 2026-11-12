@@ -7,7 +7,7 @@ Findit Agent brings advanced agentic AI research directly to your local files. I
 The research is performed by an AI agent using a wide range of supported LLMs (cloud providers or completely local models via Ollama). Instead of requiring a prepared AI knowledge base, Findit Agent uses **Findit6** as a "grep on steroids":
 
 * 🚫 **No indexing** **No vectorization** or embeddings required
-* 🚫 **No vector database**, **No preprocessing**  **No uploading * of your archives
+* 🚫 **No vector database**, **No preprocessing**  **No uploading** of your archives
 * 🚫 **No file access for AI** 
 * ⚡ **Immediate search** for newly added or changed files
 
